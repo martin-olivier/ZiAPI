@@ -16,8 +16,6 @@
 cmake-build-*/
 *build/
 *build_tests/
-binary
-unit_tests
 
 # Documentation Generation Files
 
