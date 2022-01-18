@@ -17,11 +17,15 @@ include(ExternalProject)
 
 ExternalProject_Add(
     ZiAPI
-    GIT_REPOSITORY  https://github.com/martin-olivier/ZiAPI
+    GIT_REPOSITORY  https://github.com/martin-olivier/ZiAPI.git
     GIT_TAG         origin/master
     INSTALL_COMMAND ""
     TEST_COMMAND    ""
 )
+
+add_dependencies(zia ZiAPI)
+ExternalProject_Get_Property(ZiAPI SOURCE_DIR)
+target_include_directories(zia PRIVATE ${SOURCE_DIR}/include)
 ```
 
 ### :white_check_mark: Build and run unit tests
