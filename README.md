@@ -11,7 +11,7 @@
 
 ### :rocket: Fetch ZiAPI using CMake
 
-Add the following content to your CMakeLists to fetch the project and include the API headers:
+Add the following content to your CMakeLists to fetch the API and include its header files in your project:
 ```cmake
 include(ExternalProject)
 
