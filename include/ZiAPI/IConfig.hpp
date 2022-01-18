@@ -3,6 +3,9 @@
 #include <any>
 
 namespace ziapi {
+/**
+ *  Class that manages the actual configuration data
+ */
 class IConfig {
 public:
     virtual ~IConfig() = default;
