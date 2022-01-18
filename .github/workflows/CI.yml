@@ -1,0 +1,39 @@
+name: CI
+
+on: [push]
+
+defaults:
+    run:
+        shell: bash
+
+jobs:
+    build_and_test:
+        strategy:
+            fail-fast: false
+            matrix:
+                os: [windows-latest, ubuntu-latest, macos-latest]
+                include:
+                  - os: windows-latest
+                    bin: unit_tests.exe
+                    dir: ./Debug/
+                  - os: ubuntu-latest
+                    bin: unit_tests
+                    dir: ./
+                  - os: macos-latest
+                    bin: unit_tests
+                    dir: ./
+
+        name: ${{ matrix.os }}
+        runs-on: ${{ matrix.os }}
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Generate Tests Build File
+              run: cmake . -B build
+
+            - name: Build Unit Tests
+              run: cmake --build build
+
+            - name: Run Unit Tests
+              run: ${{ matrix.dir }}${{ matrix.bin }}
