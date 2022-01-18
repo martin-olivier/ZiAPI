@@ -30,7 +30,7 @@ jobs:
             - uses: actions/checkout@v2
 
             - name: Generate Tests Build File
-              run: cmake . -B build
+              run: cmake . -B build -DUNIT_TESTS=ON
 
             - name: Build Unit Tests
               run: cmake --build build

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <any>
+#include <string>
 
 namespace ziapi {
 /**
