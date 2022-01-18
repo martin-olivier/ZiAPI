@@ -11,7 +11,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
 # The include path
-include_directories(include)
+include_directories(${PROJECT_SOURCE_DIR}/include)
 
 option(UNIT_TESTS "When sets to ON, build the unit tests" OFF)
 
