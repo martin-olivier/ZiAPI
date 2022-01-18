@@ -7,6 +7,9 @@
 #include "Color.hpp"
 
 namespace ziapi {
+/**
+ *  Set the log type to alter the print format
+ */
 enum class LogType : uint8_t
 {
     INFO,
@@ -15,6 +18,11 @@ enum class LogType : uint8_t
     DEBUG,
 };
 
+/**
+ *  Log a message in std::cout
+ *  @param message message to be logged
+ *  @param log_type set the log type to alter the print format
+ */
 inline void Logger(const std::string &message, LogType log_type = LogType::INFO)
 {
     static const std::map<LogType, std::string> log_type_map {
@@ -25,10 +33,10 @@ inline void Logger(const std::string &message, LogType log_type = LogType::INFO)
     };
 
     time_t actual_time = std::time(nullptr);
-    std::string str = std::ctime(&actual_time);
-    str.erase(remove_if(str.begin(), str.end(), [](char a) {return a == '\n';}), str.end());
+    std::string time_str = std::ctime(&actual_time);
+    time_str.erase(remove_if(time_str.begin(), time_str.end(), [](char a) {return a == '\n';}), time_str.end());
 
-    std::cout << '[' << str << ']';
+    std::cout << '[' << time_str << ']';
     std::cout << log_type_map.at(log_type) << message << Color::DEFAULT << std::endl;
 }
 }

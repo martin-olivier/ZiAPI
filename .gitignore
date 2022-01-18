@@ -15,7 +15,7 @@
 *.dylib
 cmake-build-*/
 *build/
-*build_tests/
+unit_tests
 
 # Documentation Generation Files
 
