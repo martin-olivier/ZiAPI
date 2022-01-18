@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <map>
+
 #include "ZiAPI/IConfig.hpp"
 
 struct position

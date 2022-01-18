@@ -4,9 +4,11 @@
 #include <iostream>
 #include <ctime>
 #include <map>
+
 #include "Color.hpp"
 
 namespace ziapi {
+
 /**
  *  Set the log type to alter the print format
  */
@@ -39,4 +41,5 @@ inline void Logger(const std::string &message, LogType log_type = LogType::INFO)
     std::cout << '[' << time_str << ']';
     std::cout << log_type_map.at(log_type) << message << Color::DEFAULT << std::endl;
 }
-}
+
+} // namespace ziapi
