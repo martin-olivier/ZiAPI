@@ -16,15 +16,15 @@ Add the following content to your CMakeLists to fetch the API and include its he
 include(ExternalProject)
 
 ExternalProject_Add(
-    ZiAPI
+    ziapi
     GIT_REPOSITORY  https://github.com/martin-olivier/ZiAPI.git
     GIT_TAG         origin/master
     INSTALL_COMMAND ""
     TEST_COMMAND    ""
 )
 
-add_dependencies(zia ZiAPI)
-ExternalProject_Get_Property(ZiAPI SOURCE_DIR)
+add_dependencies(zia ziapi)
+ExternalProject_Get_Property(ziapi SOURCE_DIR)
 target_include_directories(zia PRIVATE ${SOURCE_DIR}/include)
 ```
 

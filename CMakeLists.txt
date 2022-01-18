@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.17)
 
 # The name of the CMake project
-project(ZiAPI)
+project(ziapi)
 
 # The C++ standard you want to use for your project
 set(CMAKE_CXX_STANDARD 17)
