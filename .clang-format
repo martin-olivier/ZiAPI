@@ -1,0 +1,9 @@
+BasedOnStyle: Google
+IndentWidth: 4
+AccessModifierOffset: -4
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterClass: false
+  AfterFunction: true
+  AfterControlStatement: false
+AllowShortIfStatementsOnASingleLine: Never
