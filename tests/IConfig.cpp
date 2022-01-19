@@ -17,7 +17,7 @@ public:
     {
         m_config_map["mod_path"] = std::make_any<std::string>("./modules");
         m_config_map["std"] = std::make_any<int>(17);
-        m_config_map["position"] = std::make_any<position>(50, 100);
+        m_config_map["position"] = std::make_any<position>(position{50, 100});
     }
     ~Config() = default;
     std::any &operator[](const std::string &key) override { return m_config_map[key]; }
