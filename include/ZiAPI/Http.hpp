@@ -1,11 +1,23 @@
 #pragma once
 
-#include <string>
 #include <map>
+#include <string>
 
-namespace ziapi {
+namespace ziapi::http {
 
-struct HttpRequest {
+namespace method {
+
+static const char *GET = "GET";
+static const char *POST = "POST";
+static const char *PUT = "PUT";
+static const char *DELETE = "DELETE";
+static const char *PATCH = "PATCH";
+static const char *OPTIONS = "OPTIONS";
+static const char *HEAD = "HEAD";
+
+}  // namespace method
+
+struct Request {
     int version;
     std::string method;
     std::string target;
@@ -13,7 +25,7 @@ struct HttpRequest {
     std::string body;
 };
 
-struct HttpResponse {
+struct Response {
     int version;
     int status_code;
     std::string reason;
@@ -21,4 +33,4 @@ struct HttpResponse {
     std::string body;
 };
 
-}  // namespace ziapi
+}  // namespace ziapi::http
