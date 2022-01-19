@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+
 #include "ZiAPI/Logger.hpp"
 
 class OSRedirector {
