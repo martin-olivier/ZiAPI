@@ -1,4 +1,4 @@
-#include "ZiAPI/IConfig.hpp"
+#include "ziapi/IConfig.hpp"
 
 #include <gtest/gtest.h>
 

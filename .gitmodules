@@ -1,0 +1,3 @@
+[submodule "include/dylib"]
+	path = include/dylib
+	url = https://github.com/martin-olivier/dylib

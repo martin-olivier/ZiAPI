@@ -1,4 +1,4 @@
-#include "ZiAPI/Logger.hpp"
+#include "ziapi/Logger.hpp"
 
 #include <gtest/gtest.h>
 
