@@ -16,4 +16,4 @@ public:
     virtual const std::any &operator[](const std::string &key) const = 0;
 };
 
-} // namespace ziapi
+}  // namespace ziapi

@@ -7,3 +7,4 @@ BraceWrapping:
   AfterFunction: true
   AfterControlStatement: false
 AllowShortIfStatementsOnASingleLine: Never
+ColumnLimit: 120

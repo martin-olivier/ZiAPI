@@ -1,16 +1,17 @@
-#include <gtest/gtest.h>
-#include <map>
-
 #include "ZiAPI/IConfig.hpp"
 
-struct position
-{
+#include <gtest/gtest.h>
+
+#include <map>
+
+struct position {
     int x, y;
 };
 
 class Config : public ziapi::IConfig {
 private:
     std::map<std::string, std::any> m_config_map{};
+
 public:
     Config()
     {
@@ -19,14 +20,8 @@ public:
         m_config_map["position"] = position{50, 100};
     }
     ~Config() = default;
-    std::any &operator[](const std::string &key) override
-    {
-        return m_config_map[key];
-    }
-    const std::any &operator[](const std::string &key) const override
-    {
-        return m_config_map.at(key);
-    }
+    std::any &operator[](const std::string &key) override { return m_config_map[key]; }
+    const std::any &operator[](const std::string &key) const override { return m_config_map.at(key); }
 };
 
 TEST(IConfig, get_values)

@@ -2,23 +2,23 @@
 
 #include <ostream>
 
-#include "Api.hpp"
 #include "Http.hpp"
+#include "IConfig.hpp"
 #include "Utils.hpp"
 
 namespace ziapi {
 
 class IModule {
 public:
-    virtual void Init(IApi &api) = 0;
+    virtual ~IModule() = default;
 
-    virtual Version GetVersion() = 0;
+    virtual void Init(const IConfig &cfg) = 0;
 
-    virtual Version GetCompatibleApiVersion() = 0;
+    [[nodiscard]] virtual Version GetVersion() const noexcept = 0;
 
-    virtual std::string GetDescription() = 0;
+    [[nodiscard]] virtual Version GetCompatibleApiVersion() const noexcept = 0;
 
-    virtual void Dispose() = 0;
+    [[nodiscard]] virtual char *GetName() const noexcept = 0;
 };
 
 class ITransportModule : public IModule {

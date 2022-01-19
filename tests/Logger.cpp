@@ -1,30 +1,30 @@
-#include <gtest/gtest.h>
-
 #include "ZiAPI/Logger.hpp"
 
+#include <gtest/gtest.h>
+
 class OSRedirector {
-    private:
-        std::ostringstream _oss{};
-        std::streambuf *_backup{};
-        std::ostream &_c;
+private:
+    std::ostringstream _oss{};
+    std::streambuf *_backup{};
+    std::ostream &_c;
 
-    public:
-        OSRedirector(OSRedirector &) = delete;
-        OSRedirector &operator=(OSRedirector &) = delete;
+public:
+    OSRedirector(OSRedirector &) = delete;
+    OSRedirector &operator=(OSRedirector &) = delete;
 
-        OSRedirector(std::ostream &c) : _c(c) {
-            _backup = _c.rdbuf();
-            _c.rdbuf(_oss.rdbuf());
-        }
+    OSRedirector(std::ostream &c) : _c(c)
+    {
+        _backup = _c.rdbuf();
+        _c.rdbuf(_oss.rdbuf());
+    }
 
-        ~OSRedirector() {
-            _c.rdbuf(_backup);
-        }
+    ~OSRedirector() { _c.rdbuf(_backup); }
 
-        const std::string getContent() {
-            _oss << std::flush;
-            return _oss.str();
-        }
+    const std::string getContent()
+    {
+        _oss << std::flush;
+        return _oss.str();
+    }
 };
 
 TEST(Logger, info)

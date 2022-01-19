@@ -5,18 +5,6 @@
 
 namespace ziapi::http {
 
-namespace method {
-
-static const char *GET = "GET";
-static const char *POST = "POST";
-static const char *PUT = "PUT";
-static const char *DELETE = "DELETE";
-static const char *PATCH = "PATCH";
-static const char *OPTIONS = "OPTIONS";
-static const char *HEAD = "HEAD";
-
-}  // namespace method
-
 struct Request {
     int version;
     std::string method;
@@ -32,5 +20,17 @@ struct Response {
     std::map<std::string, std::string> fields;
     std::string body;
 };
+
+namespace method {
+
+static const char *GET = "GET";
+static const char *POST = "POST";
+static const char *PUT = "PUT";
+static const char *DELETE = "DELETE";
+static const char *PATCH = "PATCH";
+static const char *OPTIONS = "OPTIONS";
+static const char *HEAD = "HEAD";
+
+}  // namespace method
 
 }  // namespace ziapi::http
