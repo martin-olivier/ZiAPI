@@ -1,4 +1,4 @@
-#include "ZiAPI/IConfig.hpp"
+#include "ziapi/IConfig.hpp"
 
 #include <gtest/gtest.h>
 
@@ -15,9 +15,9 @@ private:
 public:
     Config()
     {
-        m_config_map["mod_path"] = std::string("./modules");
-        m_config_map["std"] = 17;
-        m_config_map["position"] = position{50, 100};
+        m_config_map["mod_path"] = std::make_any<std::string>("./modules");
+        m_config_map["std"] = std::make_any<int>(17);
+        m_config_map["position"] = std::make_any<position>(position{50, 100});
     }
     ~Config() = default;
     std::any &operator[](const std::string &key) override { return m_config_map[key]; }
@@ -39,10 +39,10 @@ TEST(IConfig, set_values)
 {
     Config conf;
 
-    conf["mod_path"] = std::string("/usr/local/mod");
+    conf["mod_path"] = std::make_any<std::string>("/usr/local/mod");
     ASSERT_EQ(std::any_cast<std::string>(conf["mod_path"]), "/usr/local/mod");
 
-    conf["std"] = 20;
+    conf["std"] = std::make_any<int>(20);
     ASSERT_EQ(std::any_cast<int>(conf["std"]), 20);
 }
 

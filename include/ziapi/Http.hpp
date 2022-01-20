@@ -27,13 +27,13 @@ struct Connection {
 
 namespace method {
 
-static const char *GET = "GET";
-static const char *POST = "POST";
-static const char *PUT = "PUT";
-static const char *DELETE = "DELETE";
-static const char *PATCH = "PATCH";
-static const char *OPTIONS = "OPTIONS";
-static const char *HEAD = "HEAD";
+constexpr auto GET = "GET";
+constexpr auto POST = "POST";
+constexpr auto PUT = "PUT";
+constexpr auto DELETE = "DELETE";
+constexpr auto PATCH = "PATCH";
+constexpr auto OPTIONS = "OPTIONS";
+constexpr auto HEAD = "HEAD";
 
 }  // namespace method
 

@@ -1,11 +1,12 @@
 #pragma once
 
+#include <algorithm>
 #include <ctime>
 #include <iostream>
 #include <map>
 #include <string>
 
-#include "Color.hpp"
+#include "tools/Color.hpp"
 
 namespace ziapi {
 
