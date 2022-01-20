@@ -28,30 +28,43 @@ public:
 // server module, etc...
 class IHandlerModule : public IModule {
 public:
-    virtual void GetHandlerPriority() = 0;
-
+    // Handler invoked as the response-generation step for the request. For a
+    // single HTTP request, only one handler will be invoked. If multiple
+    // handler modules try to handle the same request, only one will be invoked.
     virtual void Handle(http::Request &req, http::Response &res) = 0;
+
+    // Whether this module's Handle method should be called on the request.
+    virtual bool ShouldHandle(const http::Request &req) = 0;
 };
 
-// Post processor modules are invoked after the generation of the body of the
-// response by the handler modules. They can be used for logging, cors, etc.
+// Post processor modules are invoked after the generation of the response
+// by the handler module. They can be used for logging, cors, compression,
+// etc.
 class IPostProcessorModule : public IModule {
-    virtual void GetPostProcessorPriority() = 0;
+    // Value between zero and one which states the module's priority of
+    // execution in the pipeline. Higher values are prioritized.
+    [[nodiscard]] virtual void GetPostProcessorPriority() const noexcept = 0;
 
-    virtual void PostProcess(http::Request &req) = 0;
+    // Handler invoked during the post-processing pipeline after the handler.
+    virtual void PostProcess(http::Response &res) = 0;
+
+    // Whether this module's PostProcess should be called on the response.
+    virtual bool ShouldPostProcess(const http::Response &res) = 0;
 };
 
-// Pre
+// Pre processor modules are invoked before the generation of the response by
+// the handler module. They can be used for url rewriting, authentication,
+// logging, etc.
 class IPreProcessorModule : public IModule {
-    virtual void GetPreProcessorPriority() = 0;
+    // Value between zero and one which states the module's priority of
+    // execution in the pipeline. Higher values are prioritized.
+    [[nodiscard]] virtual double GetPreProcessorPriority() const noexcept = 0;
 
-    virtual void PreProcess(http::Response &res) = 0;
-};
+    // Handler invoked during the pre-processing pipeline before the handler.
+    virtual void PreProcess(http::Request &req) = 0;
 
-class IReaderModule : public IModule {
-};
-
-class IWriterModule : public IModule {
+    // Whether this module's PreProcess method should be called on the request.
+    virtual bool ShouldPreProcess(const http::Request &req) = 0;
 };
 
 }  // namespace ziapi
