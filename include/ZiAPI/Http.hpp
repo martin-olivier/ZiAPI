@@ -21,6 +21,10 @@ struct Response {
     std::string body;
 };
 
+struct Connection {
+    std::string address;
+};
+
 namespace method {
 
 static const char *GET = "GET";
