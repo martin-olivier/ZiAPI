@@ -23,35 +23,35 @@ public:
     [[nodiscard]] virtual char *GetDescription() const noexcept = 0;
 };
 
-class ITransportMediator {
+// Handler modules handle HTTP requests and are responsible for generating
+// the contents of the response such as a directory listing module, a web
+// server module, etc...
+class IHandlerModule : public IModule {
 public:
-    virtual void SendDataReceived(http::Connection &c, std::string data) = 0;
+    virtual void GetHandlerPriority() = 0;
+
+    virtual void Handle(http::Request &req, http::Response &res) = 0;
 };
 
-class ITransportModule : public IModule {
-public:
-    virtual void Run(ITransportMediator &mediator) { mediator.SendDataReceived(conn, data); }
+// Post processor modules are invoked after the generation of the body of the
+// response by the handler modules. They can be used for logging, cors, etc.
+class IPostProcessorModule : public IModule {
+    virtual void GetPostProcessorPriority() = 0;
+
+    virtual void PostProcess(http::Request &req) = 0;
 };
 
-class ISessionMediator {
-public:
+// Pre
+class IPreProcessorModule : public IModule {
+    virtual void GetPreProcessorPriority() = 0;
+
+    virtual void PreProcess(http::Response &res) = 0;
 };
 
-class ISessionModule : public IModule {
-public:
-    virtual void OnDataReceived(ISessionMediator &mediator, http::Connection &conn, std::string &data) {}
+class IReaderModule : public IModule {
 };
 
-class IPresentationModule : public IModule {
-public:
-};
-
-class IApplicationParserModule : public IModule {
-public:
-};
-
-class IApplicationHandlerModule : public IModule {
-public:
+class IWriterModule : public IModule {
 };
 
 }  // namespace ziapi
