@@ -30,11 +30,12 @@ class IHandlerModule : public IModule {
 public:
     // Handler invoked as the response-generation step for the request. For a
     // single HTTP request, only one handler will be invoked. If multiple
-    // handler modules try to handle the same request, only one will be invoked.
+    // handler modules try to handle the same request through the ShouldHandle
+    // method, only one handler will be invoked.
     virtual void Handle(http::Request &req, http::Response &res) = 0;
 
     // Whether this module's Handle method should be called on the request.
-    virtual bool ShouldHandle(const http::Request &req) = 0;
+    [[nodiscard]] virtual bool ShouldHandle(const http::Request &req) = 0;
 };
 
 // Post processor modules are invoked after the generation of the response
@@ -43,13 +44,13 @@ public:
 class IPostProcessorModule : public IModule {
     // Value between zero and one which states the module's priority of
     // execution in the pipeline. Higher values are prioritized.
-    [[nodiscard]] virtual void GetPostProcessorPriority() const noexcept = 0;
+    [[nodiscard]] virtual double GetPostProcessorPriority() const noexcept = 0;
 
     // Handler invoked during the post-processing pipeline after the handler.
     virtual void PostProcess(http::Response &res) = 0;
 
     // Whether this module's PostProcess should be called on the response.
-    virtual bool ShouldPostProcess(const http::Response &res) = 0;
+    [[nodiscard]] virtual bool ShouldPostProcess(const http::Response &res) = 0;
 };
 
 // Pre processor modules are invoked before the generation of the response by
@@ -64,7 +65,16 @@ class IPreProcessorModule : public IModule {
     virtual void PreProcess(http::Request &req) = 0;
 
     // Whether this module's PreProcess method should be called on the request.
-    virtual bool ShouldPreProcess(const http::Request &req) = 0;
+    [[nodiscard]] virtual bool ShouldPreProcess(const http::Request &req) = 0;
+};
+
+class IPostReceiveModule : public IModule {
+};
+
+class IreModule : public IModule {
+};
+
+class IParsingModule : public IModule {
 };
 
 }  // namespace ziapi
