@@ -13,13 +13,13 @@ The 4 layers which we link the API to are (in order) :
 
 ![Network implementation](layers.png "Examples of modules based on layers")
 
-In our implementation, the `Presentation` layer is contained inside the `Application` one. We'll consider that data usability check modules and  security ones belongs in the Application layer.
+In our implementation, the `Presentation` layer is contained inside the `Application` one. We consider that data usability check modules and security ones belongs in the Application layer.
 
 With this implementation, you are able to plug any module at any step of the network processing.
 
 ## Core achitecture
 
-Here is how the connection with someone handled.
+Here is how the connection with someone is handled.
 
 ![Core workflow](core_workflow.png "Core workflow")
 
@@ -40,15 +40,15 @@ The module interface (`IModule`) defines a function `shouldBeCalled()` telling i
 There are currently 3 types of module interface that inherits from `IModule`: 
 - `IPreProcessor` : 
     - Will only have access to the request
-    - There can be multiple preprocessor called for the same request
+    - There can be multiple preprocessor per request
     - Example : Authentification module 
 - `IHandler` : 
     - Will have access to the request and response
-    - There can be only ONE hander for request
+    - There can be only ONE handler per request
     - Example : php-cgi module
 - `IPostProcessor` : 
     - Will only have access to the response
-    - There can be multiple postprocessor called for the same request
+    - There can be multiple postprocessor called per request
     - Example : CORS module 
 
 <details>
@@ -60,7 +60,7 @@ There are currently 3 types of module interface that inherits from `IModule`:
 Here is the list of features modules are able to do:
 
 - If the layer has multiple modules, you need to specify the order of process by setting the priority variable.
-- The module are able to be loaded using shared libraries so that they could be reloaded or changed at runtime.
+- The module are able to be loaded using shared libraries so that they can be reloaded or changed at runtime.
 
 Check examples if you want to have implementations or want to know about how modules are constructed and linked together.
 
