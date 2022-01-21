@@ -21,8 +21,21 @@ struct Response {
     std::string body;
 };
 
-struct Connection {
-    std::string address;
+class IResponseInputQueue {
+public:
+    virtual Response Pop() = 0;
+
+    virtual std::size_t Size() = 0;
+
+    /// Wait for content to be available to be popped from the queue.
+    virtual void Wait() = 0;
+};
+
+class IRequestOutputQueue {
+public:
+    virtual void Push(Request &&req) = 0;
+
+    virtual std::size_t Size() = 0;
 };
 
 namespace method {
