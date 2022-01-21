@@ -11,11 +11,27 @@ The 4 layers which we link the API to are (in order) :
 - `Presentation` : Ensures data usability and translate (encrypts/decrypts) data if needed.
 - `Application` : Where basic modules go. Human-computer operations happen here.
 
-![Network implementation](schema.png "Examples of modules based on layers")
+![Network implementation](layers.png "Examples of modules based on layers")
 
 In our implementation, the `Presentation` layer is contained inside the `Application` one. We'll consider that data usability check modules and  security ones belongs in the Application layer.
 
 With this implementation, you are able to plug any module at any step of the network processing.
+
+## Core achitecture
+
+Here is how the connection with someone handled.
+
+![Core workflow](core_workflow.png "Core workflow")
+
+- Network corresponds to your network implementation (here TCP)
+    - Network should only send bytes to the preparsing list only once a full HTTP request is received.
+- You need to send the bytes that are read to the preparsing list
+    - For instance, TLS decryption should be done before parsing HTTP request
+- Then it is sent to the HTTP parser, which is responsible for parsing and checking the integrity of the HTTP packet.
+- Once confirmed and parsed, it will send a request object to the module pipeline.
+- When the module pipeline is done, it will give a response object back.
+- It will be computed into HTTP using the parser, then passed to the postparsing modules (ex: TLS encryption) and sent back through the network
+
 
 ## Modules
 
