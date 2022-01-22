@@ -40,7 +40,7 @@ ExternalProject_Add(
 
 add_dependencies(zia ziapi)
 ExternalProject_Get_Property(ziapi SOURCE_DIR)
-target_include_directories(zia PRIVATE ${SOURCE_DIR}/include)
+include_directories(${SOURCE_DIR}/include)
 ```
 
 > :bulb: Don't forget to link with `libdl` on Unix is you use `dylib`:
