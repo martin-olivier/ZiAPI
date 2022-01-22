@@ -45,7 +45,7 @@ Let's see how all these different steps translate into modules!
 As we saw earlier, the ZiAPI features multiple **module types**.
 - `INetworkModule`
 - `IPreProcessingModule`
-- `IHandlerkModule`
+- `IHandlerModule`
 - `IPostProcessingModule`
 
 Let's take a look at each of them but first let's check the `IModule` interface.
@@ -70,6 +70,6 @@ const char *IModule::GetDescription() const;
 
 #### `IPreProcessingModule`
 
-#### `IHandlerkModule`
+#### `IHandlerModule`
 
 #### `IPostProcessingModule`
