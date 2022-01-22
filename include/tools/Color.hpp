@@ -3,7 +3,7 @@
 /**
  *  This namespace contains every color that you can display on the shell
  */
-namespace Color {
+namespace color {
 
 constexpr auto DEFAULT = "\x1B[0m";
 constexpr auto RED = "\x1B[31m";
