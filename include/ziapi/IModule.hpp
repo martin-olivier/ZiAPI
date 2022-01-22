@@ -19,9 +19,9 @@ public:
 
     [[nodiscard]] virtual Version GetCompatibleApiVersion() const noexcept = 0;
 
-    [[nodiscard]] virtual char *GetName() const noexcept = 0;
+    [[nodiscard]] virtual const char *GetName() const noexcept = 0;
 
-    [[nodiscard]] virtual char *GetDescription() const noexcept = 0;
+    [[nodiscard]] virtual const char *GetDescription() const noexcept = 0;
 };
 
 /// Handler modules handle HTTP requests and are responsible for generating
