@@ -6,7 +6,7 @@
 #include <map>
 #include <string>
 
-#include "tools/Color.hpp"
+#include "Color.hpp"
 
 namespace ziapi {
 
