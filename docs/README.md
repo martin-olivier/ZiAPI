@@ -2,7 +2,7 @@
 
 Welcome to the main documentation page of the ZiAPI. The ZiAPI is a set of interfaces and concrete implementations to help you manage module implementation for the Zia project.
 
-## Introduction
+## Introduction 👀
 
 ZiAPI aims at making your life easier as a developper. It features different type of modules that you can implement to customize parts of your Zia project.
 
