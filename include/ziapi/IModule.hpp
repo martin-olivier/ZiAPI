@@ -32,10 +32,14 @@ public:
     /// Handler invoked as the response-generation step for the request. For a
     /// single HTTP request, only one handler will be invoked. If multiple
     /// handler modules try to handle the same request through the ShouldHandle
-    /// method, only one handler will be invoked.
+    /// method, only one handler with the highest priority will be invoked.
     virtual void Handle(http::Request &req, http::Response &res) = 0;
 
-    // Whether this module's Handle method should be called on the request.
+    /// Value between zero and one which states the module's priority. Higher
+    /// values are prioritized.
+    [[nodiscard]] virtual double GetHandlerPriority() const = 0;
+
+    /// Whether this module's Handle method should be called on the request.
     [[nodiscard]] virtual bool ShouldHandle(const http::Request &req) = 0;
 };
 
@@ -43,30 +47,30 @@ public:
 /// by the handler module. They can be used for logging, cors, compression,
 /// etc.
 class IPostProcessorModule : public IModule {
+    /// Handler invoked during the post-processing pipeline after the handler.
+    virtual void PostProcess(http::IContext &ctx, http::Response &res) = 0;
+
     /// Value between zero and one which states the module's priority of
     /// execution in the pipeline. Higher values are prioritized.
     [[nodiscard]] virtual double GetPostProcessorPriority() const noexcept = 0;
 
-    /// Handler invoked during the post-processing pipeline after the handler.
-    virtual void PostProcess(http::Response &res) = 0;
-
     /// Whether this module's PostProcess should be called on the response.
-    [[nodiscard]] virtual bool ShouldPostProcess(const http::Response &res) = 0;
+    [[nodiscard]] virtual bool ShouldPostProcess(const http::IContext &ctx, const http::Response &res) = 0;
 };
 
 /// Pre processor modules are invoked before the generation of the response by
 /// the handler module. They can be used for url rewriting, authentication,
 /// logging, etc.
 class IPreProcessorModule : public IModule {
+    /// Handler invoked during the pre-processing pipeline before the handler.
+    virtual void PreProcess(http::IContext &ctx, http::Request &req) = 0;
+
     /// Value between zero and one which states the module's priority of
     /// execution in the pipeline. Higher values are prioritized.
     [[nodiscard]] virtual double GetPreProcessorPriority() const noexcept = 0;
 
-    /// Handler invoked during the pre-processing pipeline before the handler.
-    virtual void PreProcess(http::Request &req) = 0;
-
     /// Whether this module's PreProcess method should be called on the request.
-    [[nodiscard]] virtual bool ShouldPreProcess(const http::Request &req) = 0;
+    [[nodiscard]] virtual bool ShouldPreProcess(const http::IContext &ctx, const http::Request &req) = 0;
 };
 
 class INetworkModule {
