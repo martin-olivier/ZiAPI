@@ -19,8 +19,8 @@
 
 ## :speech_balloon: Introduction
 
-- ziapi documentation is available [HERE](https://github.com/martin-olivier/ZiAPI/tree/main/docs)  
-- dylib documentation is available [HERE](https://github.com/martin-olivier/dylib)
+- `ziapi` documentation is available [HERE](https://github.com/martin-olivier/ZiAPI/tree/main/docs)  
+- `dylib` documentation is available [HERE](https://github.com/martin-olivier/dylib)
 
 ## :computer: Usage
 
