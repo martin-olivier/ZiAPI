@@ -28,7 +28,7 @@ endif()
 # The list of tests source files
 set(TEST_SOURCES
     tests/Logger.cpp
-    tests/IConfig.cpp
+    tests/Config.cpp
 )
 
 add_executable(${BIN}

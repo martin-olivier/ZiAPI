@@ -6,7 +6,7 @@
 #include <map>
 #include <string>
 
-#include "tools/Color.hpp"
+#include "Color.hpp"
 
 namespace ziapi {
 
@@ -21,25 +21,26 @@ enum class LogType : uint8_t {
 };
 
 /**
- *  Log a message in std::cout
+ *  Log a message in a stream
  *  @param message message to be logged
- *  @param log_type set the log type to alter the print format
+ *  @param log_type set the log type to alter the print format (default: LogType::INFO)
+ *  @param stream the stream where the message will be logged (default: std::cout)
  */
-inline void Logger(const std::string &message, LogType log_type = LogType::INFO)
+inline void Logger(const std::string &message, LogType log_type = LogType::INFO, std::ostream &stream = std::cout)
 {
     static const std::map<LogType, std::string> log_type_map{
-        {LogType::INFO, Color::BLUE + std::string("[i] ") + Color::DEFAULT},
-        {LogType::WARNING, Color::YELLOW + std::string("[!] ") + Color::DEFAULT},
-        {LogType::ERROR, Color::RED + std::string("[X] ") + Color::DEFAULT},
-        {LogType::DEBUG, Color::GREEN + std::string("[&] ") + Color::DEFAULT},
+        {LogType::INFO, color::BLUE + std::string("[i] ") + color::DEFAULT},
+        {LogType::WARNING, color::YELLOW + std::string("[!] ") + color::DEFAULT},
+        {LogType::ERROR, color::RED + std::string("[X] ") + color::DEFAULT},
+        {LogType::DEBUG, color::GREEN + std::string("[&] ") + color::DEFAULT},
     };
 
     time_t actual_time = std::time(nullptr);
     std::string time_str = std::ctime(&actual_time);
     time_str.erase(std::remove_if(time_str.begin(), time_str.end(), [](char a) { return a == '\n'; }), time_str.end());
 
-    std::cout << '[' << time_str << ']';
-    std::cout << log_type_map.at(log_type) << message << Color::DEFAULT << std::endl;
+    stream << '[' << time_str << ']';
+    stream << log_type_map.at(log_type) << message << color::DEFAULT << std::endl;
 }
 
 }  // namespace ziapi

@@ -28,6 +28,13 @@ ExternalProject_Get_Property(ziapi SOURCE_DIR)
 target_include_directories(zia PRIVATE ${SOURCE_DIR}/include)
 ```
 
+> :bulb: Don't forget to link with `libdl` on Unix is you use `dylib`:
+```cmake
+if(UNIX)
+    target_link_libraries(zia PRIVATE dl)
+endif()
+```
+
 ### :white_check_mark: Build and run unit tests
 
 After cloning the repository, run the following commands:
