@@ -28,7 +28,7 @@ ExternalProject_Get_Property(ziapi SOURCE_DIR)
 target_include_directories(zia PRIVATE ${SOURCE_DIR}/include)
 ```
 
-Don't forget to link with `libdl` on Unix is you use `dylib`:
+> :bulb: Don't forget to link with `libdl` on Unix is you use `dylib`:
 ```cmake
 if(UNIX)
     target_link_libraries(zia PRIVATE dl)
