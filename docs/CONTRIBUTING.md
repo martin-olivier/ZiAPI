@@ -21,3 +21,5 @@ fix/module-loader-12
 Some branches like `main`, `dev`, `hotfix` do not follow that convention.
 
 **C++**
+
+We use the [Google C++ style guide](https://google.github.io/styleguide/cppguide.html).
