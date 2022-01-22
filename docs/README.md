@@ -1,8 +1,8 @@
-# ZiAPI Documentation
+# ZiAPI Documentation 📚
 
 Welcome to the main documentation page of the ZiAPI. The ZiAPI is a set of interfaces and concrete implementations to help you manage module implementation for the Zia project.
 
-## Introduction
+## Introduction 👀
 
 ZiAPI aims at making your life easier as a developper. It features different type of modules that you can implement to customize parts of your Zia project.
 
@@ -12,7 +12,7 @@ Here is an overview of what you can do using the ZiAPI module interfaces:
 - Change the behaviour of your HTTP server (Directory Listing, PHP CGI)
 - Manage multiple sites and conditional module execution (e.g. only execute a module on a request if it is a `GET` request)
 
-## Architecture
+## Architecture 🏦
 
 To understand how the ZiAPI works, lets take a look at how requests are handled from start to finish.
 
@@ -38,7 +38,7 @@ Once the post-processing pipeline has been applied on the response, it is forwar
 
 And boom! Request handled!
 
-## Modules
+## Modules 💾
 
 Let's see how all these different steps translate into modules!
 
