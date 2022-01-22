@@ -39,6 +39,8 @@ using Context = std::map<std::string, std::any>;
  */
 class IResponseInputQueue {
 public:
+    virtual ~IResponseInputQueue() = default;
+
     virtual std::pair<Request, Context> Pop() = 0;
 
     virtual std::size_t Size() const noexcept = 0;
@@ -49,6 +51,8 @@ public:
  */
 class IRequestOutputQueue {
 public:
+    virtual ~IRequestOutputQueue() = default;
+
     virtual void Push(std::pair<Request, Context> &&req) = 0;
 
     virtual std::size_t Size() const noexcept = 0;

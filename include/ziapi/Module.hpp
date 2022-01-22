@@ -31,6 +31,7 @@ public:
  */
 class IHandlerModule : public IModule {
 public:
+    virtual ~IHandlerModule() = default;
     /**
      *  Handler invoked as the response-generation step for the request. For a
      *  single HTTP request, only one handler will be invoked. If multiple
@@ -56,6 +57,8 @@ public:
  *  by the handler module. They can be used for logging, cors, compression, etc...
  */
 class IPostProcessorModule : public IModule {
+public:
+    virtual ~IPostProcessorModule() = default;
     /**
      *  Handler invoked during the post-processing pipeline after the handler.
      */
@@ -78,6 +81,8 @@ class IPostProcessorModule : public IModule {
  *  the handler module. They can be used for url rewriting, authentication, logging, etc...
  */
 class IPreProcessorModule : public IModule {
+public:
+    virtual ~IPreProcessorModule() = default;
     /**
      *  Handler invoked during the pre-processing pipeline before the handler
      */
@@ -97,6 +102,7 @@ class IPreProcessorModule : public IModule {
 
 class INetworkModule {
 public:
+    virtual ~INetworkModule() = default;
     /**
      *  Run starts the module providing it with an output queue in which it
      *  shall push incoming requests and an input queue from which it should
