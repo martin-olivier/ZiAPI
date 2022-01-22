@@ -1,11 +1,26 @@
 # ZiAPI
 
+[![ZiAPI](https://img.shields.io/badge/ZiAPI-v1.0.0-blue.svg)](https://github.com/martin-olivier/ZiAPI/releases/tag/v1.0.0)
+[![CPP Version](https://img.shields.io/badge/C++-17_and_above-darkgreen.svg)](https://isocpp.org/)
+
+[![GitHub watchers](https://img.shields.io/github/watchers/martin-olivier/ZiAPI?style=social)](https://github.com/martin-olivier/ZiAPI/watchers/)
+[![GitHub forks](https://img.shields.io/github/forks/martin-olivier/ZiAPI?style=social)](https://github.com/martin-olivier/ZiAPI/network/members/)
+[![GitHub stars](https://img.shields.io/github/stars/martin-olivier/ZiAPI?style=social)](https://github.com/martin-olivier/ZiAPI/stargazers/)
+
+[![workflow](https://github.com/martin-olivier/ZiAPI/actions/workflows/CI.yml/badge.svg)](https://github.com/martin-olivier/ZiAPI/actions/workflows/CI.yml)
+
 ## :book: Summary
   - [:book: Summary](#book-summary)
+  - [:speech_balloon: Introduction](#speech_balloon-introduction)
   - [:computer: Usage](#computer-usage)
     - [:rocket: Fetch ZiAPI using CMake](#rocket-fetch-ziapi-using-cmake)
     - [:white_check_mark: Build and run unit tests](#white_check_mark-build-and-run-unit-tests)
   - [:bust_in_silhouette: Authors](#bust_in_silhouette-authors)
+
+## :speech_balloon: Introduction
+
+- ziapi documentation is available [HERE](https://github.com/martin-olivier/ZiAPI/tree/main/docs)  
+- dylib documentation is available [HERE](https://github.com/martin-olivier/dylib)
 
 ## :computer: Usage
 
