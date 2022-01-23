@@ -18,8 +18,8 @@ You can find the documentation for the **ZIAPI** in our [documentation section](
 
 Here are the most useful doc pages for starting out:
 - [Getting started](docs/general/GETTING_STARTED.md)
-- [Install and build guide](docs/guides/INSTALL_AND_BUILD.md.md)
-- [Module interfaces](docs/general/MODULES.md.md)
+- [Install and build guide](docs/guides/INSTALL_AND_BUILD.md)
+- [Module interfaces](docs/general/MODULES.md)
 
 ## Usage
 
@@ -32,7 +32,7 @@ include(ExternalProject)
 ExternalProject_Add(
     ziapi
     GIT_REPOSITORY  https://github.com/martin-olivier/ZiAPI.git
-    GIT_TAG         origin/main
+    GIT_TAG         v1.0.0
     INSTALL_COMMAND ""
     TEST_COMMAND    ""
 )
@@ -47,15 +47,6 @@ include_directories(${SOURCE_DIR}/include)
 if(UNIX)
     target_link_libraries(zia PRIVATE dl)
 endif()
-```
-
-### Build and run unit tests
-
-After cloning the repository, run the following commands:
-```sh
-cmake . -B build -DUNIT_TESTS=ON
-cmake --build build
-./unit_tests
 ```
 
 ## Authors
