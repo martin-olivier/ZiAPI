@@ -14,7 +14,7 @@ public:
 
     [[nodiscard]] virtual const char *GetDescription() const noexcept override
     {
-        return "A module implementation example !";
+        return "A module implementation example";
     }
 };
 
