@@ -35,8 +35,26 @@ There's not much to say about this interface. Every module must implement it so 
 
 ## `INetworkModule`
 
-## `IPreProcesserModule`
+## `IPreProcessorModule`
 
 ## `IHandlerModule`
 
-## `IPostProcesserModule`
+The `Handle()` method is invoked on a request in order to generate a response. It's like any typical web framework you can find: you get access to the incoming request and you're in charge of generating a response!
+
+```c++
+virtual void Handle(http::Context &ctx, const http::Request &req, http::Response &res) = 0;
+```
+
+The `GetHandlerPriority()` sets the module's priority of execution. If you have two handlers in your API which both want to handle a particular request, only the handler with the highest priority will be called.
+
+```c++
+[[nodiscard]] virtual double GetHandlerPriority() const noexcept = 0;
+```
+
+The `ShouldHandle()` is used to determin if your module **wants** to handle a specific request. For example, you may have a module which only handles `GET` requests, or requests with a specific header, etc...
+
+```c++
+[[nodiscard]] virtual bool ShouldHandle(const http::Context &ctx, const http::Request &req) const = 0;
+```
+
+## `IPostProcessorModule`
