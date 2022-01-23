@@ -9,6 +9,7 @@ This document lists all the documentation pages for the API separated by categor
 General documentation pages will help you understand the general concepts of the ZIAPI better.
 
 - [Getting started](general/GETTING_STARTED.md)
+- [Why choose ZIAPI](general/MODULES.md)
 - [Modules](general/MODULES.md)
 - [Contributing](general/CONTRIBUTING.md)
 
