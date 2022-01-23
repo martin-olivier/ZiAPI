@@ -26,7 +26,7 @@ Check the module associated with this step [here](../guides/IMPLEMENT_NETWORK.md
 
 #### Step 2. Pre-process
 
-Okay, so our request has been received and parsed by the network layer. Once it request lands in the pre-processing layer, a pipeline of request pre-processing modules will be invoked. This is where you can route the request, log it, rewrite its URL, add / remove some headers, etc.
+Okay, so our request has been received and parsed by the network layer. Once it lands in the pre-processing layer, a pipeline of request pre-processing modules will be invoked. This is where you can route the request, log it, rewrite its URL, add / remove some headers, etc.
 
 Check the module associated with this step [here](../guides/IMPLEMENT_PREPROCESSOR.md)
 
