@@ -27,3 +27,9 @@ We have documented each and every one of our source files and added additional i
 - Build and compile the project
 - Create modules (Numerous code examples of different common module and one in-depth guide per module type)
 - Contributing
+
+## Additional tools
+
+We've built an amazing [website](https://ziapi.vercel.app) for you to navigate the docs more easily.
+
+With the API, we also included our own Open-Source and unit-tested [dynamic library loader](https://github.com/martin-olivier/dylib) developped by [Martin Olivier](https://github.com/martin-olivier).
