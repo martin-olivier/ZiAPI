@@ -129,12 +129,12 @@ int main()
         // Call the function to get a module instance
         auto mod = entry_point_fn();
         // Print information about the module using the logger
-        ziapi::Logger("Module loaded: " + std::string(mod->GetName()) + " - " + mod->GetDescription(), ziapi::LogType::INFO);
+        ziapi::Logger::Info("Module loaded: " + std::string(mod->GetName()) + " - " + mod->GetDescription());
     }
     catch (const dylib::exception &e)
     {
         // Catch exceptions around a dynamic lib (handle or symbol errors) and print them using the logger
-        ziapi::Logger(e.what(), ziapi::LogType::ERROR, std::cerr);
+        ziapi::Logger::Error(e.what());
     }
     return 0;
 }
