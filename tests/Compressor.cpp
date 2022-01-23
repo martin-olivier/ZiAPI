@@ -6,8 +6,9 @@ TEST(Compressor, UtilsInfo)
 {
     CompressorModule compressor;
 
-    ASSERT_EQ(compressor.GetName(), "CompressorModule");
-    ASSERT_EQ(compressor.GetDescription(), "Compress the response body before sending it back to the network");
+    ASSERT_EQ(std::string(compressor.GetName()), std::string("CompressorModule"));
+    ASSERT_EQ(std::string(compressor.GetDescription()),
+              std::string("Compress the response body before sending it back to the network"));
     ASSERT_EQ(compressor.GetCompatibleApiVersion(), (ziapi::Version{1, 0}));
     ASSERT_EQ(compressor.GetVersion(), (ziapi::Version{1, 0}));
 }
