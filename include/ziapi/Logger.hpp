@@ -18,7 +18,7 @@ namespace ziapi {
  */
 class Logger {
 private:
-    enum class LogType { DEBUG, INFO, WARNING, ERROR };
+    enum LogType { DEBUG, INFO, WARNING, ERROR };
     static void Log(const std::string &message, std::ostream &stream, LogType log_type)
     {
         static const std::map<LogType, std::string> log_type_map{
