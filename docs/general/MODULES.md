@@ -65,7 +65,7 @@ The `GetPreProcessorPriority()` method returns the priority of the module betwee
 [[nodiscard]] virtual double GetPreProcessorPriority() const noexcept = 0;
 ```
 
-The `ShouldPreProcess()` method returns true if this module's PreProcess method should be called on the request
+The `ShouldPreProcess()` method returns `true` if this module's PreProcess method should be called on the request
 
 ```c++
 [[nodiscard]] virtual bool ShouldPreProcess(const http::Context &ctx, const http::Request &req) const = 0;
@@ -85,7 +85,7 @@ The `GetPostProcessorPriority()` method returns the priority of the module betwe
 [[nodiscard]] virtual double GetPostProcessorPriority() const noexcept = 0;
 ```
 
-The `ShouldPostProcess()` method returns true if this module's PostProcess should be called on the response
+The `ShouldPostProcess()` method returns `true` if this module's PostProcess should be called on the response
 
 ```c++
 [[nodiscard]] virtual bool ShouldPostProcess(const http::Context &ctx, const http::Response &res) const = 0;
