@@ -16,12 +16,12 @@ General documentation pages will help you understand the general concepts of the
 
 Guides are step by step instructions on how to do pretty much anything with the ZIAPI.
 
-- [Compilation guide](guides/COMPILATION_GUIDE.md)
-- [Module 101]()
-- [Implementing a handler module]()
-- [Implementing a pre-processor module]()
-- [Implementing a post-processor module]()
-- [Implementing a network module]()
+- [Install and build](guides/INSTALL_AND_BUILD.md.md)
+- [Module 101](guides/MODULES_101.md)
+- [Implementing a handler module](guides/IMPLEMENT_HANDLER.md)
+- [Implementing a pre-processor module](guides/IMPLEMENT_PREPROCESSOR.md)
+- [Implementing a post-processor module](guides/IMPLEMENT_POSTPROCESSOR.md)
+- [Implementing a network module](guides/IMPLEMENT_NETWORK.md)
 
 ## Module Examples
 

@@ -10,9 +10,9 @@ Welcome to the **ZIAPI** repository which contains the interfaces and concrete i
 
 You can find the documentation for the **ZIAPI** in our [documentation section](docs/README.md).
 
-Here are the useful doc pages for starting out:
+Here are the most useful doc pages for starting out:
 - [Getting started](docs/GETTING_STARTED.md)
-- [Compilation guide](docs/GETTING_STARTED.md)
+- [Install and Build guide](docs/GETTING_STARTED.md)
 - [Module interfaces](docs/GETTING_STARTED.md)
 
 ## :computer: Usage
