@@ -18,14 +18,14 @@ namespace ziapi {
  */
 class Logger {
 private:
-    enum LogType { DEBUG, INFO, WARNING, ERROR };
+    enum LogType { debug, info, warning, error };
     static void Log(const std::string &message, std::ostream &stream, LogType log_type)
     {
         static const std::map<LogType, std::string> log_type_map{
-            {LogType::INFO, color::BLUE + std::string(" [i] ") + color::DEFAULT},
-            {LogType::WARNING, color::YELLOW + std::string(" [!] ") + color::DEFAULT},
-            {LogType::ERROR, color::RED + std::string(" [X] ") + color::DEFAULT},
-            {LogType::DEBUG, color::GREEN + std::string(" [&] ") + color::DEFAULT},
+            {LogType::info, color::BLUE + std::string(" [i] ") + color::DEFAULT},
+            {LogType::warning, color::YELLOW + std::string(" [!] ") + color::DEFAULT},
+            {LogType::error, color::RED + std::string(" [X] ") + color::DEFAULT},
+            {LogType::debug, color::GREEN + std::string(" [&] ") + color::DEFAULT},
         };
         time_t actual_time = std::time(nullptr);
         std::string time_str = std::ctime(&actual_time);
@@ -39,19 +39,19 @@ private:
 public:
     static void Debug(const std::string &message, std::ostream &stream = std::cout)
     {
-        Log(message, stream, LogType::DEBUG);
+        Log(message, stream, LogType::debug);
     }
     static void Info(const std::string &message, std::ostream &stream = std::cout)
     {
-        Log(message, stream, LogType::INFO);
+        Log(message, stream, LogType::info);
     }
     static void Warning(const std::string &message, std::ostream &stream = std::cout)
     {
-        Log(message, stream, LogType::WARNING);
+        Log(message, stream, LogType::warning);
     }
     static void Error(const std::string &message, std::ostream &stream = std::cerr)
     {
-        Log(message, stream, LogType::ERROR);
+        Log(message, stream, LogType::error);
     }
 };
 
