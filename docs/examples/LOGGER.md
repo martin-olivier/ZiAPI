@@ -18,8 +18,10 @@ Our module will log the status code, the time the request took, the reason and t
 
 ## Tutorial
 
-First, let's implement the `IPreProcessorModule` and the `IPostProcessorModule` interface
-We specify that it handle every requests by returning `true` to `ShouldPreProcess` and to `ShouldPostProcess` methods.
+This module is going to be a little special. It's going to have **two types**, it's going to be a post-processor **and** a pre-processor. We'll use diamond heritage for this!
+
+Let's implement the `IPreProcessorModule` and the `IPostProcessorModule` interfaces.
+We want it to log every request, so we'll return `true` in `ShouldPreProcess` and `ShouldPostProcess`.
 We set the pre-processing priority to 0 so it is the first module called.
 We set the post-processing priority to 1 so it is also the last module called.
 ```cpp
@@ -56,33 +58,41 @@ public:
     // ...
 }
 ```
-Then, first thing we want is to store the timestamp when the request is done so we can make the difference with the moment the request is resolved. So we know that our module is the first and last called thanks to its priority.
-How can we do that ? We have access to the context variable where we can store whatever we want. We do this like so:
+Then, first thing we want is to store the timestamp when the request is received so we can time it. We'll store that timestamp in the request context to fetch it later.
+
 ```cpp
-    void PreProcess(ziapi::http::Context &ctx, ziapi::http::Request &req) override
-    {
-        ctx["timestamp"] = std::time(nullptr);
-        ctx["target"] = req.target;
-        ctx["method"] = req.method;
-    }
+...
+
+void PreProcess(ziapi::http::Context &ctx, ziapi::http::Request &req) override
+{
+    ctx["timestamp"] = std::time(nullptr);
+    ctx["target"] = req.target;
+    ctx["method"] = req.method;
+}
+
+...
 ```
 And now in the post-process we can just simply access our variables and use them :smile:
 ```cpp
+...
 
-    void PostProcess(ziapi::http::Context &ctx, ziapi::http::Response &res) override
-    {
-        std::stringstream ss;
+void PostProcess(ziapi::http::Context &ctx, ziapi::http::Response &res) override
+{
+    std::stringstream ss;
 
-        // Example: ` [X] 404: Not found (GET /test, 2.02s)`
-        ss << std::to_string(res.status_code) << ": " << res.reason << " (" << std::any_cast<std::string>(ctx["method"])
-           << " " << std::any_cast<std::string>(ctx["target"]) << ", " << std::setprecision(2)
-           << difftime(std::time(nullptr), std::any_cast<time_t>(ctx["timestamp"])) << "s)";
-        if (res.status_code < 300) {
-            ziapi::Logger::Info(ss.str());
-        } else if (res.status_code < 400) {
-            ziapi::Logger::Warning(ss.str());
-        } else {
-            ziapi::Logger::Error(ss.str());
-        }
+    // Example: ` [X] 404: Not found (GET /test, 2.02s)`
+    ss << std::to_string(res.status_code) << ": " << res.reason << " (" << std::any_cast<std::string>(ctx["method"])
+        << " " << std::any_cast<std::string>(ctx["target"]) << ", " << std::setprecision(2)
+        << difftime(std::time(nullptr), std::any_cast<time_t>(ctx["timestamp"])) << "s)";
+    if (res.status_code < 300) {
+        ziapi::Logger::Info(ss.str());
+    } else if (res.status_code < 400) {
+        ziapi::Logger::Warning(ss.str());
+    } else {
+        ziapi::Logger::Error(ss.str());
     }
+}
+
+...
 ```
+You can check the full source code for this example [here](/examples/modules/logger/LoggerModule.hpp).
