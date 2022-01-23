@@ -4,7 +4,7 @@ Let's implement a simple php-cgi module.
 
 ## Purpose
 
-This module will handle incoming http requests and serve the file contained in the request's target field and will then execute any PHP code contained in it. Headers modification are taken into account aswell.
+This module will handle incoming http requests and serve the file contained in the request's target field and will then execute any PHP code contained in it. Headers modifications are taken into account aswell.
 For example purposes, the handler will be called on every HTTP request made to the server.
 
 For example, for the following request:
@@ -29,9 +29,9 @@ public:
 
     [[nodiscard]] ziapi::Version GetCompatibleApiVersion() const noexcept override { return {1, 0}; }
 
-    [[nodiscard]] const char *GetName() const noexcept override { return "DirectoryListing"; }
+    [[nodiscard]] const char *GetName() const noexcept override { return "PHP-CGI"; }
 
-    [[nodiscard]] const char *GetDescription() const noexcept override { return "Give access to a filesystem over HTTP"; }
+    [[nodiscard]] const char *GetDescription() const noexcept override { return "Executes PHP"; }
 
     [[nodiscard]] double GetHandlerPriority() const noexcept override
     {
