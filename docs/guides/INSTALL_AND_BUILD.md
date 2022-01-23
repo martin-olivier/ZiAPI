@@ -30,7 +30,7 @@ endif()
 
 ## Build and run unit tests
 
-If you want to run unit tests on `ZiAPI, do the following steps:
+If you want to run unit tests on `ZiAPI`, do the following steps:
 - Clone the ZiAPI repository
 - Execute the following commands:
 ```
