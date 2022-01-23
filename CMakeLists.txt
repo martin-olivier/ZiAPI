@@ -51,7 +51,6 @@ include_directories(
 )
 
 add_library(module SHARED examples/dylib/Module.cpp)
-target_include_directories(module PRIVATE ${PROJECT_SOURCE_DIR}/include)
 set_target_properties(module PROPERTIES PREFIX "")
 
 add_dependencies(${BIN} module)
