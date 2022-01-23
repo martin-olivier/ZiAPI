@@ -21,4 +21,4 @@ public:
     }
 };
 
-DYLIB_API ziapi::IModule *LoadModule() { return new Module; }
+DYLIB_API ziapi::IModule *LoadZiaModule() { return new Module; }
