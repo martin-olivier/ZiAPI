@@ -6,7 +6,7 @@
 
 Welcome to the **ZIAPI** repository which contains the interfaces and concrete implementations that make up our API.
 
-[**ZIAPI Official Website**](ziapi.vercel.app)
+[**ZIAPI Official Website**](https://ziapi.vercel.app)
 
 ## Documentation
 
