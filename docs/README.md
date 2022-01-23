@@ -26,4 +26,7 @@ Guides are step by step instructions on how to do pretty much anything with the 
 
 ## Module Examples
 
+- [Logger Module Tutorial](examples/LOGGER.md)
+- [Directory Listing Module Tutorial](examples/DIRECTORY_LISTING.md)
+
 Module examples are code tutorials on how to build a variety of modules.
