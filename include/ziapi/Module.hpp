@@ -38,7 +38,7 @@ public:
      *  handler modules try to handle the same request through the ShouldHandle
      *  method, only one handler with the highest priority will be invoked
      */
-    virtual void Handle(http::Request &req, http::Response &res) = 0;
+    virtual void Handle(http::Context &ctx, const http::Request &req, http::Response &res) = 0;
 
     /**
      *  Value between zero and one which states the module's priority. Higher
@@ -49,7 +49,7 @@ public:
     /**
      *  Whether this module's Handle method should be called on the request
      */
-    [[nodiscard]] virtual bool ShouldHandle(const http::Request &req) = 0;
+    [[nodiscard]] virtual bool ShouldHandle(const http::Context &ctx, const http::Request &req) = 0;
 };
 
 /**
