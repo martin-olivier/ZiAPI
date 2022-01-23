@@ -18,8 +18,8 @@ You can find the documentation for the **ZIAPI** in our [documentation section](
 
 Here are the most useful doc pages for starting out:
 - [Getting started](docs/general/GETTING_STARTED.md)
-- [Install and build guide](docs/guides/INSTALL_AND_BUILD.md.md)
-- [Module interfaces](docs/general/MODULES.md.md)
+- [Install and build guide](docs/guides/INSTALL_AND_BUILD.md)
+- [Module interfaces](docs/general/MODULES.md)
 
 ## Usage
 
