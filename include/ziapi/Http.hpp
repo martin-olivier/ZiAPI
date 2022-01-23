@@ -4,16 +4,31 @@
 #include <map>
 #include <string>
 
+#include "Constants.hpp"
+
 namespace ziapi::http {
 
 /**
  *  Struct that represents an HTTP request message
  */
 struct Request {
+    /// Versions are described using an integer as per the boost implemetation
+    /// of HTTP.
+    /// 1.0 => 10
+    /// 1.1 => 11
+    /// 2.0 => 20
+    /// 3.0 => 20
     int version;
+
+    /// The HTTP request's method (GET, PUT, PATCH, OPTIONS, DELETE, HEAD)
     std::string method;
+
+    /// The requests' headers fields.
     std::string target;
+
+    /// The requests' headers.
     std::map<std::string, std::string> fields;
+
     std::string body;
 };
 
@@ -57,17 +72,5 @@ public:
 
     [[nodiscard]] virtual std::size_t Size() const noexcept = 0;
 };
-
-namespace method {
-
-constexpr auto GET = "GET";
-constexpr auto POST = "POST";
-constexpr auto PUT = "PUT";
-constexpr auto DELETE = "DELETE";
-constexpr auto PATCH = "PATCH";
-constexpr auto OPTIONS = "OPTIONS";
-constexpr auto HEAD = "HEAD";
-
-}  // namespace method
 
 }  // namespace ziapi::http
