@@ -8,7 +8,7 @@
 TEST(Module, example)
 {
     try {
-        dylib lib("module", dylib::extension);
+        dylib lib("./module", dylib::extension);
         auto entry_point_fn = lib.get_function<std::unique_ptr<ziapi::IModule>()>("LoadModule");
         auto module = entry_point_fn();
         ziapi::Logger::Info("Module loaded: " + std::string(module->GetName()) + " - " + module->GetDescription());
