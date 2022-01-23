@@ -86,7 +86,7 @@ public:
 
     [[nodiscard]] virtual const char *GetDescription() const noexcept override
     {
-        return "A module implementation example !";
+        return "A module implementation example";
     }
 };
 
@@ -102,8 +102,7 @@ And then let's implement our `main.cpp` that will load the dynamic lib:
 
 int main()
 {
-    try
-    {
+    try {
         // Create a dynamic lib object that will load the module
         dylib lib("./module", dylib::extension);
         // Get the function that will generate our module when called
@@ -113,8 +112,7 @@ int main()
         // Print information about the module using the logger
         ziapi::Logger::Info("Module loaded: " + std::string(mod->GetName()) + " - " + mod->GetDescription());
     }
-    catch (const dylib::exception &e)
-    {
+    catch (const dylib::exception &e) {
         // Catch exceptions around a dynamic lib (handle or symbol errors) and print them using the logger
         ziapi::Logger::Error(e.what());
     }
@@ -125,5 +123,5 @@ int main()
 Let's run our binary:
 ```sh
 > ./zia
-Sun Jan 23 16:07:41 2022 [i] Module loaded: module_name - A module implementation example !
+Sun Jan 23 16:07:41 2022 [i] Module loaded: module_name - A module implementation example
 ```
