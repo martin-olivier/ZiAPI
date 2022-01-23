@@ -26,21 +26,21 @@ class DirectoryListingModule : public ziapi::IHandlerModule {
 public:
     void Init(const ziapi::Config &cfg) {}
 
-    ziapi::Version GetVersion() const noexcept { return {1, 0}; }
+    [[nodiscard]] ziapi::Version GetVersion() const noexcept { return {1, 0}; }
 
-    ziapi::Version GetCompatibleApiVersion() const noexcept { return {1, 0}; }
+    [[nodiscard]] ziapi::Version GetCompatibleApiVersion() const noexcept { return {1, 0}; }
 
-    const char *GetName() const noexcept { return "DirectoryListing"; }
+    [[nodiscard]] const char *GetName() const noexcept { return "DirectoryListing"; }
 
-    const char *GetDescription() const noexcept { return "Give access to a filesystem over HTTP"; }
+    [[nodiscard]] const char *GetDescription() const noexcept { return "Give access to a filesystem over HTTP"; }
 
-    double GetHandlerPriority() const noexcept
+    [[nodiscard]] double GetHandlerPriority() const noexcept
     {
         /// Our module doesn't have any specific priority requirements.
         return 0.5f;
     }
 
-    bool ShouldHandle(const ziapi::http::Context &ctx, const ziapi::http::Request &req) const
+    [[nodiscard]] bool ShouldHandle(const ziapi::http::Context &ctx, const ziapi::http::Request &req) const
     {
         /// We only want to handle GET requests.
         return req.method == ziapi::http::method::GET;
