@@ -24,29 +24,29 @@ First, let's implement the `IHandlerModule` interface. We give it a basic priori
 
 class DirectoryListingModule : public ziapi::IHandlerModule {
 public:
-    void Init(const ziapi::Config &cfg) {}
+    void Init(const ziapi::Config &cfg) override {}
 
-    [[nodiscard]] ziapi::Version GetVersion() const noexcept { return {1, 0}; }
+    [[nodiscard]] ziapi::Version GetVersion() const noexcept override { return {1, 0}; }
 
-    [[nodiscard]] ziapi::Version GetCompatibleApiVersion() const noexcept { return {1, 0}; }
+    [[nodiscard]] ziapi::Version GetCompatibleApiVersion() const noexcept override { return {1, 0}; }
 
-    [[nodiscard]] const char *GetName() const noexcept { return "DirectoryListing"; }
+    [[nodiscard]] const char *GetName() const noexcept override { return "DirectoryListing"; }
 
-    [[nodiscard]] const char *GetDescription() const noexcept { return "Give access to a filesystem over HTTP"; }
+    [[nodiscard]] const char *GetDescription() const noexcept override { return "Give access to a filesystem over HTTP"; }
 
-    [[nodiscard]] double GetHandlerPriority() const noexcept
+    [[nodiscard]] double GetHandlerPriority() const noexcept override
     {
         /// Our module doesn't have any specific priority requirements.
         return 0.5f;
     }
 
-    [[nodiscard]] bool ShouldHandle(const ziapi::http::Context &ctx, const ziapi::http::Request &req) const
+    [[nodiscard]] bool ShouldHandle(const ziapi::http::Context &ctx, const ziapi::http::Request &req) const override
     {
         /// We only want to handle GET requests.
         return req.method == ziapi::http::method::GET;
     }
 
-    void Handle(ziapi::http::Context &ctx, const ziapi::http::Request &req, ziapi::http::Response &res) {}
+    void Handle(ziapi::http::Context &ctx, const ziapi::http::Request &req, ziapi::http::Response &res) override {}
 };
 ```
 
@@ -57,7 +57,7 @@ Well, we can add the path to this directory as a variable of our config file and
 ```c++
 ...
 
-void Init(const ziapi::Config &cfg)
+void Init(const ziapi::Config &cfg) override
 {
     /// In our config, we can specify which folder our module serves.
     root_ = std::any_cast<std::string>(cfg.at("modules.directory_listing.path"));
@@ -71,7 +71,7 @@ Let's now code the `Handle()` method. We first obtain the path of the file we wa
 ```c++
 ...
 
-void Handle(ziapi::http::Context &ctx, const ziapi::http::Request &req, ziapi::http::Response &res)
+void Handle(ziapi::http::Context &ctx, const ziapi::http::Request &req, ziapi::http::Response &res) override
 {
         auto filepath = std::filesystem::path(root_) / std::filesystem::path(req.target);
         std::error_code ec;
