@@ -21,4 +21,4 @@ public:
     }
 };
 
-DYLIB_API std::unique_ptr<ziapi::IModule> LoadModule() { return std::make_unique<Module>(); }
+DYLIB_API ziapi::IModule *LoadModule() { return new Module; }
