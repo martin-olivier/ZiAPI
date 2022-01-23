@@ -50,7 +50,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/examples/modules
 )
 
-add_library(module SHARED examples/dylib/module.cpp)
+add_library(module SHARED examples/dylib/Module.cpp)
 set_target_properties(module PROPERTIES PREFIX "")
 
 add_dependencies(${BIN} module)
