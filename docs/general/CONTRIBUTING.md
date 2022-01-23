@@ -1,4 +1,4 @@
-# Contributing to ZiAPI
+# Contributing to ZIAPI
 
 ## Issues
 
@@ -8,7 +8,7 @@ Issues are more than welcome. When submitting an issue make you sure to select t
 
 Submit a bug report when an implemented feature isn't working properly (e.g. the CMake intergation refuses to build).
 
-### Feature Requests**
+### Feature Requests
 
 If you feel like something is missing from the ZIAPI, like a new feature or a tweak to an existing one, submit a feature request describing your feature and some justification on why it should be implemented.
 
