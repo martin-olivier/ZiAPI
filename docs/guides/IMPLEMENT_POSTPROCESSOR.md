@@ -4,20 +4,22 @@ In this guide we will learn how to implement a PostProcessor module which is a t
 
 ## `IPostProcessorModule` interface
 
-Let's look at the definition of the `IPostProcessorModule` interface (simplified).
+Let's look at the definition of the `IPostProcessorModule` interface.
 
 ```c++
 class IPostProcessorModule : public IModule {
 public:
-    void PostProcess(http::Context &ctx, http::Response &res);
+    virtual void PostProcess(http::Context &ctx, http::Response &res) = 0;
 
-    double GetPostProcessorPriority() const;
+    [[nodiscard]] virtual double GetPostProcessorPriority() const noexcept = 0;
 
-    bool ShouldPostProcess(const http::Context &ctx, const http::Response &res) const;
+    [[nodiscard]] virtual bool ShouldPostProcess(const http::Context &ctx, const http::Response &res) const = 0;
 };
 ```
 
 We have three methods to implement, let's go!
+
+> :exclamation: Don't forget to implement the `IModule` methods
 
 ## Create a post-processor
 
@@ -28,36 +30,36 @@ Okay, let's create our own class which inherits from `IPostProcessorModule`.
 
 class MyPostProcessor : public ziapi::IPostProcessorModule {
 public:
+    void PostProcess(http::Context &ctx, http::Response &res) override;
+
     [[nodiscard]] double GetPostProcessorPriority() const noexcept override;
 
-    [[nodiscard]] bool ShouldHandle(const http::Context &ctx, const ziapi::http::Request &req);
-
-    void Handle(http::Context &ctx, const ziapi::http::Request &req, ziapi::http::Response &res);
-}
+    [[nodiscard]] bool ShouldPostProcess(const http::Context &ctx, const http::Response &res) const override;
+};
 ```
 
 Then, let's implement the `GetPostProcessorPriority()`. Our module doesn't have specific priority requirements so we'll put it at `0.5f`.
 
 ```c++
-double MyPostProcessor::GetPostProcessorPriority() const noexcept
+[[nodiscard]] double MyPostProcessor::GetPostProcessorPriority() const noexcept
 {
     return 0.5f;
 }
 ```
 
-Then, let's implement the `ShouldHandle()`. This method is invoked to know if our post-processor should be called for a specific request. We can return `true` if we want all requests to go through this post-processor but let's just say our post-processor only handles `GET` request for the sake of the example.
+Then, let's implement the `ShouldPostProcess()`. This method is invoked to know if our post-processor should be called for a specific request. We can return `true` if we want all requests to go through this post-processor but let's just say our post-processor only handles `status code` inferior to 400 for the sake of the example.
 
 ```c++
-bool MyPostProcessor::ShouldHandle(const http::Context &ctx, const ziapi::http::Request &req)
+[[nodiscard]] bool ShouldPostProcess(const http::Context &ctx, const http::Response &res) const
 {
-    return req.method == ziapi::http::method::GET;
+    return res.status_code < 400;
 }
 ```
 
-Great! Now our post-processor will be called on all GET requests! Now let's add the `Handle()`.
+Great! Now our post-processor will be called on all GET requests! Now let's add the `PostProcess()`.
 
 ```c++
-void MyPostProcessor::Handle(http::Context &ctx, const ziapi::http::Request &req, ziapi::http::Response &res)
+void MyPostProcessor::PostProcess(http::Context &ctx, http::Response &res)
 {
     res.status_code = 200;
     res.body = "Hello guys!";
