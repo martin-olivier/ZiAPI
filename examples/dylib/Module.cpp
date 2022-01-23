@@ -1,8 +1,5 @@
 #include "ziapi/Module.hpp"
 
-#include <iostream>
-#include <memory>
-
 #include "dylib/dylib.hpp"
 
 class Module : public ziapi::IModule {
