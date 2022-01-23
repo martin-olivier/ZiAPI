@@ -52,7 +52,7 @@ cmake --build build
 ./unit_tests
 ```
 
-## :bust_in_silhouette: Authors
+## Authors
 
  - [Martin Olivier](https://github.com/martin-olivier)
  - [Diego Rojas](https://github.com/rojasdiegopro)
