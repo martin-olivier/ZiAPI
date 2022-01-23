@@ -9,6 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_BINARY_DIR})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 
 option(UNIT_TESTS "When sets to ON, build the unit tests" OFF)
 
@@ -31,6 +32,7 @@ set(TEST_SOURCES
     tests/Config.cpp
     tests/Compressor.cpp
     tests/Decompressor.cpp
+    tests/Module.cpp
 )
 
 add_executable(${BIN}
@@ -47,5 +49,10 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/include
     ${PROJECT_SOURCE_DIR}/examples/modules
 )
+
+add_library(module SHARED examples/dylib/module.cpp)
+set_target_properties(module PROPERTIES PREFIX "")
+
+add_dependencies(${BIN} module)
 
 endif()
