@@ -4,7 +4,7 @@ Let's take a look at how to build the project.
 
 ## Fetch ZiAPI using CMake
 
-Add the following content to your CMakeLists to fetch the ZiAPI and include its header files in your project:
+Add the following content to your `CMakeLists` to fetch the `ZiAPI` and include its header files in your project:
 ```cmake
 include(ExternalProject)
 
@@ -30,7 +30,7 @@ endif()
 
 ## Build and run unit tests
 
-If you want to run unit tests on ZiAPI, do the following steps:
+If you want to run unit tests on `ZiAPI`, do the following steps:
 - Clone the ZiAPI repository
 - Execute the following commands:
 ```
