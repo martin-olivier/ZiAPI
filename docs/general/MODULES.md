@@ -49,7 +49,7 @@ virtual void Terminate() = 0;
 
 ## `IPreProcessorModule`
 
-The `PreProcess()` is the method invoked on a request. You can use pre-processor to modify the request's data (add / remove headers, etc...)
+The `PreProcess()` is the method invoked on a request before the handler is called. You can use pre-processor to modify the request's data (add / remove headers, etc...)
 
 ```c++
 virtual void PreProcess(http::Context &ctx, http::Request &req) = 0;
@@ -69,7 +69,7 @@ The `ShouldPreProcess()` method returns `true` if this module's PreProcess metho
 
 ## `IPostProcesserModule`
 
-The `PostProcess()` is the method invoked on a response. You can use post-processors to modify the response after it is generated (serializing the body, logging the response, etc...).
+The `PostProcess()` is the method invoked on a response after the handler is called. You can use post-processors to modify the response after it is generated (serializing the body, logging the response, etc...).
 
 ```c++
 virtual void PostProcess(http::Context &ctx, http::Response &res) = 0;
