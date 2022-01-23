@@ -31,7 +31,7 @@ TEST(Logger, info)
 {
     OSRedirector os(std::cout);
 
-    ziapi::Logger("infos");
+    ziapi::Logger::Info("infos");
     auto out = os.getContent();
     EXPECT_TRUE(out.find(ziapi::color::BLUE + std::string(" [i] ") + ziapi::color::DEFAULT + "infos") !=
                 std::string::npos);
@@ -41,7 +41,7 @@ TEST(Logger, warning)
 {
     OSRedirector os(std::cout);
 
-    ziapi::Logger("warning", ziapi::LogType::WARNING);
+    ziapi::Logger::Warning("warning");
     auto out = os.getContent();
     EXPECT_TRUE(out.find(ziapi::color::YELLOW + std::string(" [!] ") + ziapi::color::DEFAULT + "warning") !=
                 std::string::npos);
@@ -49,9 +49,9 @@ TEST(Logger, warning)
 
 TEST(Logger, error)
 {
-    OSRedirector os(std::cout);
+    OSRedirector os(std::cerr);
 
-    ziapi::Logger("error", ziapi::LogType::ERROR);
+    ziapi::Logger::Error("error");
     auto out = os.getContent();
     EXPECT_TRUE(out.find(ziapi::color::RED + std::string(" [X] ") + ziapi::color::DEFAULT + "error") !=
                 std::string::npos);
@@ -61,7 +61,7 @@ TEST(Logger, debug)
 {
     OSRedirector os(std::cout);
 
-    ziapi::Logger("debug", ziapi::LogType::DEBUG);
+    ziapi::Logger::Debug("debug");
     auto out = os.getContent();
     EXPECT_TRUE(out.find(ziapi::color::GREEN + std::string(" [&] ") + ziapi::color::DEFAULT + "debug") !=
                 std::string::npos);
@@ -71,7 +71,7 @@ TEST(Logger, stream)
 {
     OSRedirector os(std::cerr);
 
-    ziapi::Logger("debug on cerr", ziapi::LogType::DEBUG, std::cerr);
+    ziapi::Logger::Debug("debug on cerr", std::cerr);
     auto out = os.getContent();
     EXPECT_TRUE(out.find(ziapi::color::GREEN + std::string(" [&] ") + ziapi::color::DEFAULT + "debug on cerr") !=
                 std::string::npos);
