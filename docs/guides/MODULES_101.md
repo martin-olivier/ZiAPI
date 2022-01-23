@@ -42,7 +42,7 @@ include(ExternalProject)
 ExternalProject_Add(
     ziapi
     GIT_REPOSITORY  https://github.com/martin-olivier/ZiAPI.git
-    GIT_TAG         origin/main
+    GIT_TAG         v1.0.0
     INSTALL_COMMAND ""
     TEST_COMMAND    ""
 )
@@ -71,44 +71,26 @@ add_dependencies(module ziapi)
 
 After that lets implement `module.cpp` that will be build into a dynamic lib:
 ```c++
-#include <iostream>
-#include <memory>
-
 #include "dylib/dylib.hpp"
 #include "ziapi/Module.hpp"
 
-class module : public ziapi::IModule
-{
+class Module : public ziapi::IModule {
 public:
-    module() = default;
-    ~module() override = default;
-    void Init(const ziapi::Config &) override
-    {
-    }
-    ziapi::Version GetVersion() const noexcept override
-    {
-        return {1, 0};
-    }
-    ziapi::Version GetCompatibleApiVersion() const noexcept override
-    {
-        return {1, 0};
-    }
+    Module() = default;
+    ~Module() override = default;
+    void Init(const ziapi::Config &) override {}
+    ziapi::Version GetVersion() const noexcept override { return {1, 0}; }
+    ziapi::Version GetCompatibleApiVersion() const noexcept override { return {1, 0}; }
 
-    [[nodiscard]] const char *GetName() const noexcept override
-    {
-        return "module_name";
-    }
+    [[nodiscard]] virtual const char *GetName() const noexcept override { return "module_name"; }
 
-    [[nodiscard]] const char *GetDescription() const noexcept override
+    [[nodiscard]] virtual const char *GetDescription() const noexcept override
     {
         return "A module implementation example !";
     }
 };
 
-DYLIB_API std::unique_ptr<ziapi::IModule> LoadModule()
-{
-    return std::make_unique<module>();
-}
+DYLIB_API ziapi::IModule *LoadZiaModule() { return new Module; }
 ```
 
 And then let's implement our `main.cpp` that will load the dynamic lib:
@@ -123,11 +105,11 @@ int main()
     try
     {
         // Create a dynamic lib object that will load the module
-        dylib lib("module", dylib::extension);
+        dylib lib("./module", dylib::extension);
         // Get the function that will generate our module when called
-        auto entry_point_fn = lib.get_function<std::unique_ptr<ziapi::IModule>()>("LoadModule");
+        auto entry_point_fn = lib.get_function<ziapi::IModule *()>("LoadZiaModule");
         // Call the function to get a module instance
-        auto mod = entry_point_fn();
+        std::unique_ptr<ziapi::IModule> mod(entry_point_fn());
         // Print information about the module using the logger
         ziapi::Logger::Info("Module loaded: " + std::string(mod->GetName()) + " - " + mod->GetDescription());
     }
