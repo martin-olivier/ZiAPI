@@ -1,16 +1,21 @@
 # Modules Documentation
 
-Let's see how all these different steps translate into modules!
-
-The **ZIAPI** features multiple **module types**.
+The ZIAPI features 4 different types of modules:
 - `INetworkModule`
-- `IPreProcessingModule`
+- `IPreProcessorModule`
 - `IHandlerModule`
-- `IPostProcessingModule`
+- `IPostProcessorModule`
 
-Let's take a look at each of them but first let's check the `IModule` interface.
+Each module is invoked at a different stage in the request lifecycle. If you remember from the [Getting started](GETTING_STARTED.md) page of the documentation, a goes through 5 different steps when received by our HTTP server. Let's see which steps correspond to which module.
+- **1. Receive** step is handled by `INetworkModule`.
+- **2. Pre-process** step is handled by `IPreProcessorModule`.
+- **3. Handle** step is handled by `IHandlerModule`.
+- **4. Post-process** step is handled by `IPostProcessorModule`.
+- **5. Send** step is handled by `INetworkModule`.
 
-## `IModule`
+We'll see each of these modules types detail, but first, let's look at the `IModule` interface.
+
+## The `IModule` interface
 
 Each **ZIAPI** module type inherits from `IModule`. It features very basic methods to make it easier to manage modules.
 
@@ -25,6 +30,8 @@ const char *IModule::GetName() const;
 
 const char *IModule::GetDescription() const;
 ```
+
+There's not much to say about this interface. Every module must implement it so we can have access to its version, name, description...
 
 ## `INetworkModule`
 
