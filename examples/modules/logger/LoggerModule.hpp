@@ -8,6 +8,17 @@ class LoggerModule : virtual public ziapi::IPreProcessorModule, public ziapi::IP
 public:
     void Init(const ziapi::Config &config) {}
 
+    [[nodiscard]] ziapi::Version GetVersion() const noexcept override { return {1, 0}; }
+
+    [[nodiscard]] ziapi::Version GetCompatibleApiVersion() const noexcept override { return {1, 0}; }
+
+    [[nodiscard]] const char *GetName() const noexcept override { return "LoggerModule"; }
+
+    [[nodiscard]] const char *GetDescription() const noexcept override
+    {
+        return "Log all responses from HTTP requests";
+    }
+
     virtual void PostProcess(ziapi::http::Context &ctx, ziapi::http::Response &res)
     {
         std::stringstream ss;
