@@ -19,7 +19,22 @@ public:
         return "Log all responses from HTTP requests";
     }
 
-    virtual void PostProcess(ziapi::http::Context &ctx, ziapi::http::Response &res)
+    [[nodiscard]] double GetPostProcessorPriority() const noexcept override { return 1; }
+
+    [[nodiscard]] bool ShouldPostProcess(const ziapi::http::Context &ctx,
+                                         const ziapi::http::Response &res) const override
+    {
+        return true;
+    }
+
+    [[nodiscard]] double GetPreProcessorPriority() const noexcept override { return 0; }
+
+    [[nodiscard]] bool ShouldPreProcess(const ziapi::http::Context &ctx, const ziapi::http::Request &req) const override
+    {
+        return true;
+    }
+
+    void PostProcess(ziapi::http::Context &ctx, ziapi::http::Response &res) override
     {
         std::stringstream ss;
 
@@ -36,25 +51,10 @@ public:
         }
     }
 
-    [[nodiscard]] virtual double GetPostProcessorPriority() const noexcept { return 1; }
-
-    [[nodiscard]] virtual bool ShouldPostProcess(const ziapi::http::Context &ctx,
-                                                 const ziapi::http::Response &res) const
-    {
-        return true;
-    }
-
-    virtual void PreProcess(ziapi::http::Context &ctx, ziapi::http::Request &req)
+    void PreProcess(ziapi::http::Context &ctx, ziapi::http::Request &req) override
     {
         ctx["timestamp"] = std::time(nullptr);
         ctx["target"] = req.target;
         ctx["method"] = req.method;
-    }
-
-    [[nodiscard]] virtual double GetPreProcessorPriority() const noexcept { return 0; }
-
-    [[nodiscard]] virtual bool ShouldPreProcess(const ziapi::http::Context &ctx, const ziapi::http::Request &req) const
-    {
-        return true;
     }
 };

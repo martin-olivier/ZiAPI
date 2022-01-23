@@ -15,7 +15,7 @@ Our module will open the `index.html` and serve it back to the user.
 
 ## Tutorial
 
-First, let's declare a `IHandlerModule`. We give it a basic priority and we specify that it only handles GET requests.
+First, let's implement the `IHandlerModule` interface. We give it a basic priority and we specify that it only handles GET requests.
 
 ```c++
 #include <fstream>
