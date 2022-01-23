@@ -65,4 +65,4 @@ void MyPreProcessor::PreProcess(http::Context &ctx, http::Request &req)
 }
 ```
 
-And that's it! You now have a module which displays transfers all `GET` requests in your browser to `POST` requests.
+And that's it! You now have a module which transforms all `GET` requests to `POST` requests in order to completely break your API ^^.

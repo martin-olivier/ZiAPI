@@ -56,14 +56,13 @@ Then, let's implement the `ShouldPostProcess()`. This method is invoked to know 
 }
 ```
 
-Great! Now our post-processor will be called on all GET requests! Now let's add the `PostProcess()`.
+Great! Now our post-processor will be called on all responses with a status code lower than `400`! Now let's add the `PostProcess()`.
 
 ```c++
 void MyPostProcessor::PostProcess(http::Context &ctx, http::Response &res)
 {
-    res.status_code = 200;
-    res.body = "Hello guys!";
+    std::cout << "New " << res.status_code << " response!" << std::endl;
 }
 ```
 
-And that's it! You now have a module which displays `"Hello guys!"` in your browser upon all `GET` requests.
+And that's it! You now have a module which logs all responses with a status code < `400`.

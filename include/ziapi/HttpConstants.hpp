@@ -25,6 +25,7 @@ constexpr auto V3 = 30;
 
 namespace header {
 
+/// TODO: Must add all standard headers
 constexpr auto CONTENT_TYPE = "Content-Type";
 constexpr auto AUTHORIZATION = "Authorization";
 constexpr auto HOST = "Host";
