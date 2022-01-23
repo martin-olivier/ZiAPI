@@ -30,6 +30,7 @@ set(TEST_SOURCES
     tests/Logger.cpp
     tests/Config.cpp
     tests/Compressor.cpp
+    tests/Decompressor.cpp
 )
 
 add_executable(${BIN}
