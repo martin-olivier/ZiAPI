@@ -18,7 +18,7 @@ Here is the repo architecture of this example:
     └── module.cpp
 ```
 
-Let's create a CMakeLists to build our binary (zia) and our module (module):
+Let's create a `CMakeLists` to build our binary `zia` and our dynamic library `module`:
 
 ```cmake
 cmake_minimum_required(VERSION 3.17)
