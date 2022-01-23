@@ -29,6 +29,7 @@ endif()
 set(TEST_SOURCES
     tests/Logger.cpp
     tests/Config.cpp
+    tests/Compressor.cpp
 )
 
 add_executable(${BIN}
@@ -41,6 +42,9 @@ gtest_discover_tests(${BIN})
 target_link_libraries(${BIN} PRIVATE gtest_main)
 
 # The include path
-include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories(
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/examples/modules
+)
 
 endif()
