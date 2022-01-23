@@ -4,16 +4,16 @@ In this guide we will learn how to implement a Handler module which is a type of
 
 ## `IHandlerModule` interface
 
-Let's look at the definition of the `IHandlerModule` interface (simplified).
+Let's look at the definition of the `IHandlerModule` interface.
 
 ```c++
 class IHandlerModule : public IModule {
 public:
-    void Handle(http::Request &req, http::Response &res) = 0;
+    virtual void Handle(http::Request &req, http::Response &res) = 0;
 
-    double GetHandlerPriority() const = 0;
+    [[nodiscard]] virtual double GetHandlerPriority() const = 0;
 
-    bool ShouldHandle(const http::Request &req) = 0;
+    [[nodiscard]] virtual bool ShouldHandle(const http::Request &req) = 0;
 };
 ```
 
@@ -28,11 +28,11 @@ Okay, let's create our own class which inherits from `IHandlerModule`.
 
 class MyHandler : public ziapi::IHandlerModule {
 public:
+    void Handle(http::Context &ctx, const ziapi::http::Request &req, ziapi::http::Response &res) override;
+
     [[nodiscard]] double GetHandlerPriority() const noexcept override;
 
-    [[nodiscard]] bool ShouldHandle(const http::Context &ctx, const ziapi::http::Request &req);
-
-    void Handle(http::Context &ctx, const ziapi::http::Request &req, ziapi::http::Response &res);
+    [[nodiscard]] bool ShouldHandle(const http::Context &ctx, const ziapi::http::Request &req) override;
 }
 ```
 

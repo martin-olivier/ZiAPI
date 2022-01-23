@@ -49,6 +49,10 @@ if(UNIX)
 endif()
 ```
 
+## Contact
+
+Feel free to submit any issues on our GitHub repository or ask questions on our [Discord](https://discord.gg/ztptguX2sE)
+
 ## Authors
 
  - [Martin Olivier](https://github.com/martin-olivier)

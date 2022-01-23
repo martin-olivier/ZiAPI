@@ -32,6 +32,7 @@ public:
 class IHandlerModule : public IModule {
 public:
     virtual ~IHandlerModule() = default;
+
     /**
      *  Handler invoked as the response-generation step for the request. For a
      *  single HTTP request, only one handler will be invoked. If multiple

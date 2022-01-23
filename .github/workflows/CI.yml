@@ -27,7 +27,11 @@ jobs:
         runs-on: ${{ matrix.os }}
 
         steps:
-            - uses: actions/checkout@v2
+            - name: Checkout repository
+              uses: actions/checkout@v2
+
+            - name: Checkout submodules
+              run: git submodule update --init --recursive
 
             - name: Generate Tests Build File
               run: cmake . -B build -DUNIT_TESTS=ON

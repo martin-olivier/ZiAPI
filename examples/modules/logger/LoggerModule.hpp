@@ -4,8 +4,7 @@
 #include "ziapi/Logger.hpp"
 #include "ziapi/Module.hpp"
 
-class LoggerModule : virtual public ziapi::IPostProcessorModule, public ziapi::IPreProcessorModule {
-private:
+class LoggerModule : virtual public ziapi::IPreProcessorModule, public ziapi::IPostProcessorModule {
 public:
     void Init(const ziapi::Config &config) {}
 

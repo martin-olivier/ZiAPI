@@ -4,16 +4,24 @@
 #include <map>
 #include <string>
 
+#include "HttpConstants.hpp"
+
 namespace ziapi::http {
 
 /**
  *  Struct that represents an HTTP request message
  */
 struct Request {
+    /// For possible values of version checkout ziapi::http::version.
     int version;
+
+    /// For possible values of method checkout ziapi::http::method.
     std::string method;
+
     std::string target;
+
     std::map<std::string, std::string> fields;
+
     std::string body;
 };
 
@@ -21,11 +29,20 @@ struct Request {
  *  Struct that represents an HTTP response message
  */
 struct Response {
+    /// For possible values of version checkout ziapi::http::version.
     int version;
+
+    /// For possible values of version checkout ziapi::http::code.
     int status_code;
+
+    /// For possible values of version checkout ziapi::http::reason.
     std::string reason;
+
     std::map<std::string, std::string> fields;
+
     std::string body;
+
+    void Bootstrap(int status_code = code::OK, std::string reason = reason::OK, int version = version::V1_1);
 };
 
 /**
@@ -57,17 +74,5 @@ public:
 
     [[nodiscard]] virtual std::size_t Size() const noexcept = 0;
 };
-
-namespace method {
-
-constexpr auto GET = "GET";
-constexpr auto POST = "POST";
-constexpr auto PUT = "PUT";
-constexpr auto DELETE = "DELETE";
-constexpr auto PATCH = "PATCH";
-constexpr auto OPTIONS = "OPTIONS";
-constexpr auto HEAD = "HEAD";
-
-}  // namespace method
 
 }  // namespace ziapi::http

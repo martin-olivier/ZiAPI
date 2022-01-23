@@ -1,30 +1,33 @@
-#include "examples/modules/CompressorModule.hpp"
-
 #include <gtest/gtest.h>
+
+#include "compressor/CompressorModule.hpp"
 
 TEST(Compressor, UtilsInfo)
 {
     CompressorModule compressor;
 
-    ASSERT_EQ(compressor.GetName(), "CompressorModule");
-    ASSERT_EQ(compressor.GetDescription(), "Compress the response body before sending it back to the network");
-    ASSERT_EQ(compressor.GetCompatibleApiVersion(), Version(1, 0));
-    ASSERT_EQ(compressor.GetVersion(), Version(1, 0));
+    ASSERT_EQ(std::string(compressor.GetName()), std::string("CompressorModule"));
+    ASSERT_EQ(std::string(compressor.GetDescription()),
+              std::string("Compress the response body before sending it back to the network"));
+    ASSERT_EQ(compressor.GetCompatibleApiVersion(), (ziapi::Version{1, 0}));
+    ASSERT_EQ(compressor.GetVersion(), (ziapi::Version{1, 0}));
 }
 
 TEST(Compressor, compressionRate)
 {
     CompressorModule compressor;
     ziapi::http::Context ctx;
-    ziapi::http::Response res;
-
-    res.version = 11;
-    res.status_code = 200;
-    res.reason = std::string("OK");
+    ziapi::http::Response res = {
+        11,                                                      // Version
+        200,                                                     // Status code
+        std::string("OK"),                                       // reason
+        std::map<std::string, std::string>({}),                  // fields
+        std::string("not compressed stuff blabla omg so long"),  // body
+    };
     res.fields.insert(std::make_pair<std::string, std::string>("Content-Type", "application/json"));
-    res.body = std::string("not compressed stuff blabla omg so long");
 
-    compressor.PostProcess(ctx, res);
-    ASSERT_EQ(res.body, "hihihi i'm compressed bro");
+    if (compressor.ShouldPostProcess(ctx, res)) {
+        compressor.PostProcess(ctx, res);
+    }
+    ASSERT_EQ(res.body, "not compressed stuf");
 }
-
