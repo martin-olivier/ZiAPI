@@ -1,5 +1,7 @@
 # ZIAPI
 
+![Banner](docs/assets/project_banner.png)
+
 [![ZiAPI](https://img.shields.io/badge/ZiAPI-v1.0.0-blue.svg)](https://github.com/martin-olivier/ZiAPI/releases/tag/v1.0.0)
 [![CPP Version](https://img.shields.io/badge/C++-17_and_above-darkgreen.svg)](https://isocpp.org/)
 [![workflow](https://github.com/martin-olivier/ZiAPI/actions/workflows/CI.yml/badge.svg)](https://github.com/martin-olivier/ZiAPI/actions/workflows/CI.yml)
