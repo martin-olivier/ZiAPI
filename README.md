@@ -17,9 +17,9 @@ Here are the most useful doc pages for starting out:
 - [Install and build guide](docs/guides/INSTALL_AND_BUILD.md.md)
 - [Module interfaces](docs/general/MODULES.md.md)
 
-## :computer: Usage
+## Usage
 
-### :rocket: Fetch ZiAPI using CMake
+### Fetch ZiAPI using CMake
 
 Add the following content to your CMakeLists to fetch the API and include its header files in your project:
 ```cmake
@@ -45,7 +45,7 @@ if(UNIX)
 endif()
 ```
 
-### :white_check_mark: Build and run unit tests
+### Build and run unit tests
 
 After cloning the repository, run the following commands:
 ```sh
