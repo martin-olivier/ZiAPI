@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 
-#include "Constants.hpp"
+#include "HttpConstants.hpp"
 
 namespace ziapi::http {
 
@@ -12,21 +12,14 @@ namespace ziapi::http {
  *  Struct that represents an HTTP request message
  */
 struct Request {
-    /// Versions are described using an integer as per the boost implemetation
-    /// of HTTP.
-    /// 1.0 => 10
-    /// 1.1 => 11
-    /// 2.0 => 20
-    /// 3.0 => 20
+    /// For possible values of version checkout ziapi::http::version.
     int version;
 
-    /// The HTTP request's method (GET, PUT, PATCH, OPTIONS, DELETE, HEAD)
+    /// For possible values of method checkout ziapi::http::method.
     std::string method;
 
-    /// The requests' headers fields.
     std::string target;
 
-    /// The requests' headers.
     std::map<std::string, std::string> fields;
 
     std::string body;
@@ -36,11 +29,20 @@ struct Request {
  *  Struct that represents an HTTP response message
  */
 struct Response {
+    /// For possible values of version checkout ziapi::http::version.
     int version;
+
+    /// For possible values of version checkout ziapi::http::code.
     int status_code;
+
+    /// For possible values of version checkout ziapi::http::reason.
     std::string reason;
+
     std::map<std::string, std::string> fields;
+
     std::string body;
+
+    void Bootstrap(int status_code = code::OK, std::string reason = reason::OK, int version = version::V1_1);
 };
 
 /**

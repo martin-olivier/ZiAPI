@@ -1,5 +1,5 @@
 #include "ziapi/Module.hpp"
 
-class LoggerModule : public ziapi::IHandlerModule {
+class LoggerModule : virtual public ziapi::IPreProcessorModule, public ziapi::IPostProcessorModule {
 public:
 };
