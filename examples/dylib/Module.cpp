@@ -5,12 +5,6 @@
 
 #include "dylib/dylib.hpp"
 
-#if defined(_WIN32) || defined(_WIN64)
-#define EXPORT_SYM extern "C++" __declspec(dllexport)
-#else
-#define EXPORT_SYM extern "C++"
-#endif
-
 class Module : public ziapi::IModule {
 public:
     Module() = default;
@@ -27,4 +21,4 @@ public:
     }
 };
 
-EXPORT_SYM std::unique_ptr<ziapi::IModule> LoadModule() { return std::make_unique<Module>(); }
+DYLIB_API ziapi::IModule *LoadModule() { return new Module; }
