@@ -1,6 +1,6 @@
 # Implement a PostProcessor module
 
-In this guide we will learn how to implement a PostProcessor module which is a type of module that allows us to generate an HTTP response from a request.
+In this guide we will learn how to implement a PostProcessor module which is a type of module that allows us to modify an HTTP response from a current response.
 
 ## `IPostProcessorModule` interface
 
@@ -47,16 +47,16 @@ Then, let's implement the `GetPostProcessorPriority()`. Our module doesn't have 
 }
 ```
 
-Then, let's implement the `ShouldHandle()`. This method is invoked to know if our post-processor should be called for a specific request. We can return `true` if we want all requests to go through this post-processor but let's just say our post-processor only handles `GET` request for the sake of the example.
+Then, let's implement the `ShouldPostProcess()`. This method is invoked to know if our post-processor should be called for a specific request. We can return `true` if we want all requests to go through this post-processor but let's just say our post-processor only handles `status code` inferior to 400 for the sake of the example.
 
 ```c++
 [[nodiscard]] bool ShouldPostProcess(const http::Context &ctx, const http::Response &res) const
 {
-    return req.method == http::method::GET;
+    return res.status_code < 400;
 }
 ```
 
-Great! Now our post-processor will be called on all GET requests! Now let's add the `Handle()`.
+Great! Now our post-processor will be called on all GET requests! Now let's add the `PostProcess()`.
 
 ```c++
 void MyPostProcessor::PostProcess(http::Context &ctx, http::Response &res)
