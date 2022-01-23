@@ -17,11 +17,11 @@ TEST(Decompressor, Decompression)
     DecompressorModule decompressor;
     ziapi::http::Context ctx;
     ziapi::http::Request req = {
-        .version = 11,
-        .method = ziapi::http::method::POST,
-        .target = "/zipper",
-        .fields = std::map<std::string, std::string>({}),
-        .body = std::string("0101010110101"),
+        11,                                      // version
+        ziapi::http::method::POST,               // method
+        "/zipper",                               // target
+        std::map<std::string, std::string>({}),  // fields
+        std::string("0101010110101"),            // body
     };
 
     req.fields.insert(std::make_pair<std::string, std::string>("compressed", "true"));

@@ -17,11 +17,11 @@ TEST(Compressor, compressionRate)
     CompressorModule compressor;
     ziapi::http::Context ctx;
     ziapi::http::Response res = {
-        .version = 11,
-        .status_code = 200,
-        .reason = std::string("OK"),
-        .fields = std::map<std::string, std::string>({}),
-        .body = std::string("not compressed stuff blabla omg so long"),
+        11,                                                      // Version
+        200,                                                     // Status code
+        std::string("OK"),                                       // reason
+        std::map<std::string, std::string>({}),                  // fields
+        std::string("not compressed stuff blabla omg so long"),  // body
     };
     res.fields.insert(std::make_pair<std::string, std::string>("Content-Type", "application/json"));
 
