@@ -4,8 +4,8 @@ The goal of this guide is to build a module as a dynamic library and load it at 
 
 ## Documentation
 
-[modules](https://github.com/martin-olivier/ZiAPI/blob/main/docs/general/MODULES.md)
-[dylib](https://github.com/martin-olivier/dylib)
+- [modules](https://github.com/martin-olivier/ZiAPI/blob/main/docs/general/MODULES.md)  
+- [dylib](https://github.com/martin-olivier/dylib)
 
 ## Setup Build
 
