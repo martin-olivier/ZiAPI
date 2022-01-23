@@ -35,7 +35,61 @@ There's not much to say about this interface. Every module must implement it so 
 
 ## `INetworkModule`
 
+Run starts the module providing it with an output queue in which it
+shall push incoming requests and an input queue from which it should
+receive incoming responses and send them over the network
+
+```c++
+virtual void INetworkModule::Run(http::IRequestOutputQueue &requests, http::IResponseInputQueue &responses);
+```
+
+Terminate will be invoked upon reloading or termination of the server,
+it notifies the module that it needs to stops running altogether and
+release every resource it has created
+
+```c++
+virtual void INetworkModule::Terminate() = 0;
+```
+
 ## `IPreProcessorModule`
+
+Handler invoked during the pre-processing pipeline before the handler
+
+```c++
+virtual void IPreProcessorModule::PreProcess(http::Context &ctx, http::Request &req) = 0;
+```
+
+Value between zero and one which states the module's priority of execution in the pipeline. Higher values are prioritized
+
+```c++
+[[nodiscard]] virtual double GetPreProcessorPriority() const noexcept = 0;
+```
+
+Whether this module's PreProcess method should be called on the request
+
+```c++
+[[nodiscard]] virtual bool ShouldPreProcess(const http::Context &ctx, const http::Request &req) const = 0;
+```
+
+## `IPostProcesserModule`
+
+The `PostProcess()` method sets the handler invoked during the post-processing pipeline after the handler.
+
+```c++
+virtual void IPostProcessorModule::PostProcess(http::Context &ctx, http::Response &res) = 0;
+```
+
+The `GetPostProcessorPriority()` method returns the priority of the module between zero and one
+
+```c++
+[[nodiscard]] virtual double IPostProcessorModule::GetPostProcessorPriority() const noexcept = 0;
+```
+
+The `ShouldPostProcess()` method returns true if this module's PostProcess should be called on the response
+
+```c++
+[[nodiscard]] virtual bool IPostProcessorModule::ShouldPostProcess(const http::Context &ctx, const http::Response &res) const = 0;
+```
 
 ## `IHandlerModule`
 
@@ -56,5 +110,3 @@ The `ShouldHandle()` is used to determin if your module **wants** to handle a sp
 ```c++
 [[nodiscard]] virtual bool ShouldHandle(const http::Context &ctx, const http::Request &req) const = 0;
 ```
-
-## `IPostProcessorModule`
