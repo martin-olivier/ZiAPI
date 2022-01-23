@@ -1,4 +1,4 @@
-# MODULES_101
+# Modules 101
 
 The goal of this guide is to build a module as a dynamic library and load it at runtime
 
