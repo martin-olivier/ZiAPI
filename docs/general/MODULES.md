@@ -20,23 +20,23 @@ We'll see each of these modules types detail, but first, let's look at the `IMod
 Each **ZIAPI** module type inherits from `IModule`. It features very basic methods to make it easier to manage modules.
 
 ```c++
-void IModule::Init(const IConfig &cfg);
+virtual void Init(const Config &cfg) = 0;
 
-Version IModule::GetVersion() const;
+[[nodiscard]] virtual Version GetVersion() const noexcept = 0;
 
-Version IModule::GetCompatibleApiVersion() const;
+[[nodiscard]] virtual Version GetCompatibleApiVersion() const noexcept = 0;
 
-const char *IModule::GetName() const;
+[[nodiscard]] virtual const char *GetName() const noexcept = 0;
 
-const char *IModule::GetDescription() const;
+[[nodiscard]] virtual const char *GetDescription() const noexcept = 0;
 ```
 
 There's not much to say about this interface. Every module must implement it so we can have access to its version, name, description...
 
 ## `INetworkModule`
 
-## `IPreProcessingModule`
+## `IPreProcesserModule`
 
 ## `IHandlerModule`
 
-## `IPostProcessingModule`
+## `IPostProcesserModule`
