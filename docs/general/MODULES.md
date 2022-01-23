@@ -53,22 +53,22 @@ virtual void INetworkModule::Terminate() = 0;
 
 ## `IPreProcessorModule`
 
-Handler invoked during the pre-processing pipeline before the handler
+The `PostProcess()` method sets the handler invoked during the pre-processing pipeline before the handler
 
 ```c++
 virtual void IPreProcessorModule::PreProcess(http::Context &ctx, http::Request &req) = 0;
 ```
 
-Value between zero and one which states the module's priority of execution in the pipeline. Higher values are prioritized
+The `GetPreProcessorPriority()` method returns the priority of the module between zero and one
 
 ```c++
-[[nodiscard]] virtual double GetPreProcessorPriority() const noexcept = 0;
+[[nodiscard]] virtual double IPreProcessorModule::GetPreProcessorPriority() const noexcept = 0;
 ```
 
-Whether this module's PreProcess method should be called on the request
+The `ShouldPreProcess()` method returns true if this module's PreProcess method should be called on the request
 
 ```c++
-[[nodiscard]] virtual bool ShouldPreProcess(const http::Context &ctx, const http::Request &req) const = 0;
+[[nodiscard]] virtual bool IPreProcessorModule::ShouldPreProcess(const http::Context &ctx, const http::Request &req) const = 0;
 ```
 
 ## `IPostProcesserModule`
