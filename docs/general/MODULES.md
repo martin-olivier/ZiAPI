@@ -35,7 +35,7 @@ There's not much to say about this interface. Every module must implement it so 
 
 ## `INetworkModule`
 
-Run starts the module providing it with an output queue in which it
+The `Run()` method starts the module, providing it with an output queue in which it
 shall push incoming requests and an input queue from which it should
 receive incoming responses and send them over the network
 
@@ -43,7 +43,7 @@ receive incoming responses and send them over the network
 virtual void Run(http::IRequestOutputQueue &requests, http::IResponseInputQueue &responses);
 ```
 
-Terminate will be invoked upon reloading or termination of the server,
+The `Terminate()` method will be invoked upon reloading or termination of the server,
 it notifies the module that it needs to stops running altogether and
 release every resource it has created
 
