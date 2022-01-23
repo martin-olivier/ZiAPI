@@ -49,7 +49,7 @@ public:
     /**
      *  Whether this module's Handle method should be called on the request
      */
-    [[nodiscard]] virtual bool ShouldHandle(const http::Context &ctx, const http::Request &req) = 0;
+    [[nodiscard]] virtual bool ShouldHandle(const http::Context &ctx, const http::Request &req) const = 0;
 };
 
 /**
@@ -73,7 +73,7 @@ public:
     /**
      *  Whether this module's PostProcess should be called on the response
      */
-    [[nodiscard]] virtual bool ShouldPostProcess(const http::Context &ctx, const http::Response &res) = 0;
+    [[nodiscard]] virtual bool ShouldPostProcess(const http::Context &ctx, const http::Response &res) const = 0;
 };
 
 /**
@@ -97,7 +97,7 @@ public:
     /**
      *  Whether this module's PreProcess method should be called on the request
      */
-    [[nodiscard]] virtual bool ShouldPreProcess(const http::Context &ctx, const http::Request &req) = 0;
+    [[nodiscard]] virtual bool ShouldPreProcess(const http::Context &ctx, const http::Request &req) const = 0;
 };
 
 class INetworkModule {

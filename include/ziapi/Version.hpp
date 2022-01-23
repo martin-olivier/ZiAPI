@@ -6,8 +6,8 @@ namespace ziapi {
  *  Semantic versioning structure with a major and a minor version
  */
 struct Version {
-    int major;
-    int minor;
+    unsigned int major;
+    unsigned int minor;
 };
 
 }  // namespace ziapi

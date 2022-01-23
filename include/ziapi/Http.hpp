@@ -43,7 +43,7 @@ public:
 
     virtual std::pair<Request, Context> Pop() = 0;
 
-    virtual std::size_t Size() const noexcept = 0;
+    [[nodiscard]] virtual std::size_t Size() const noexcept = 0;
 };
 
 /**
@@ -55,7 +55,7 @@ public:
 
     virtual void Push(std::pair<Request, Context> &&req) = 0;
 
-    virtual std::size_t Size() const noexcept = 0;
+    [[nodiscard]] virtual std::size_t Size() const noexcept = 0;
 };
 
 namespace method {
