@@ -40,7 +40,7 @@ shall push incoming requests and an input queue from which it should
 receive incoming responses and send them over the network
 
 ```c++
-virtual void INetworkModule::Run(http::IRequestOutputQueue &requests, http::IResponseInputQueue &responses);
+virtual void Run(http::IRequestOutputQueue &requests, http::IResponseInputQueue &responses);
 ```
 
 Terminate will be invoked upon reloading or termination of the server,
@@ -48,7 +48,7 @@ it notifies the module that it needs to stops running altogether and
 release every resource it has created
 
 ```c++
-virtual void INetworkModule::Terminate() = 0;
+virtual void Terminate() = 0;
 ```
 
 ## `IPreProcessorModule`
@@ -56,19 +56,19 @@ virtual void INetworkModule::Terminate() = 0;
 The `PostProcess()` method sets the handler invoked during the pre-processing pipeline before the handler
 
 ```c++
-virtual void IPreProcessorModule::PreProcess(http::Context &ctx, http::Request &req) = 0;
+virtual void PreProcess(http::Context &ctx, http::Request &req) = 0;
 ```
 
 The `GetPreProcessorPriority()` method returns the priority of the module between zero and one
 
 ```c++
-[[nodiscard]] virtual double IPreProcessorModule::GetPreProcessorPriority() const noexcept = 0;
+[[nodiscard]] virtual double GetPreProcessorPriority() const noexcept = 0;
 ```
 
 The `ShouldPreProcess()` method returns true if this module's PreProcess method should be called on the request
 
 ```c++
-[[nodiscard]] virtual bool IPreProcessorModule::ShouldPreProcess(const http::Context &ctx, const http::Request &req) const = 0;
+[[nodiscard]] virtual bool ShouldPreProcess(const http::Context &ctx, const http::Request &req) const = 0;
 ```
 
 ## `IPostProcesserModule`
@@ -76,19 +76,19 @@ The `ShouldPreProcess()` method returns true if this module's PreProcess method 
 The `PostProcess()` method sets the handler invoked during the post-processing pipeline after the handler.
 
 ```c++
-virtual void IPostProcessorModule::PostProcess(http::Context &ctx, http::Response &res) = 0;
+virtual void PostProcess(http::Context &ctx, http::Response &res) = 0;
 ```
 
 The `GetPostProcessorPriority()` method returns the priority of the module between zero and one
 
 ```c++
-[[nodiscard]] virtual double IPostProcessorModule::GetPostProcessorPriority() const noexcept = 0;
+[[nodiscard]] virtual double GetPostProcessorPriority() const noexcept = 0;
 ```
 
 The `ShouldPostProcess()` method returns true if this module's PostProcess should be called on the response
 
 ```c++
-[[nodiscard]] virtual bool IPostProcessorModule::ShouldPostProcess(const http::Context &ctx, const http::Response &res) const = 0;
+[[nodiscard]] virtual bool ShouldPostProcess(const http::Context &ctx, const http::Response &res) const = 0;
 ```
 
 ## `IHandlerModule`
