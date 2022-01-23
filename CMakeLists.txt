@@ -42,7 +42,7 @@ add_executable(${BIN}
 enable_testing()
 include(GoogleTest)
 gtest_discover_tests(${BIN})
-target_link_libraries(${BIN} PRIVATE gtest_main)
+target_link_libraries(${BIN} PRIVATE gtest_main dl)
 
 # The include path
 include_directories(
