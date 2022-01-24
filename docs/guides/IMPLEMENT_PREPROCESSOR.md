@@ -1,6 +1,6 @@
 # Implement a PreProcessor module
 
-In this guide we will learn how to implement a PreProcessor module which is a type of module that allows us to modify an HTTP request from a current request.
+In this guide we will learn how to implement a PreProcessor module which is a type of module that allows us to modify an HTTP request before it is handled.
 
 ## `IPreProcessorModule` interface
 
