@@ -1,4 +1,4 @@
-# Directory Listing Module Tutorial
+# PHP-CGI Module Tutorial
 
 Let's implement a simple php-cgi module.
 
