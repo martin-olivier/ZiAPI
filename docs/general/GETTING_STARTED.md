@@ -18,6 +18,12 @@ To understand how the ZiAPI works, lets take a look at how requests are handled 
 
 ### Request handling process
 
+The request / response cycle is handled in 5 steps. Before we go into detail about how each of the steps work let's look at a quick illustration to help us understand better.
+
+![Request / Response flow](docs/assets/request-response-diagram.png)
+
+Okay now, let's study each step in detail.
+
 #### Step 1. Receive
 
 Like any HTTP message, the request is first handled through the network layer (TCP sockets, etc...). This is where you'll setup your sockets and listeners, your hypothetical SSL / TLS encryption logic, your HTTP parser and any additional serialization / deserialization code. When a request arrives, the networking layer must **read it, decrypt it, parse it** and forward it to the next layer: the pre-processing layer!

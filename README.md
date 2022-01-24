@@ -21,6 +21,10 @@ Here are the most useful doc pages for starting out:
 - [Install and build guide](docs/guides/INSTALL_AND_BUILD.md)
 - [Module interfaces](docs/general/MODULES.md)
 
+Here is a quick overview of how the request / response cycle is handled with the ZIAPI.
+
+![Request / Response flow](docs/assets/request-response-diagram.png)
+
 ## Usage
 
 ### Fetch ZiAPI using CMake
