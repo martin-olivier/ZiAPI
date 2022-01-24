@@ -20,7 +20,7 @@ To understand how the ZiAPI works, lets take a look at how requests are handled 
 
 The request / response cycle is handled in 5 steps. Before we go into detail about how each of the steps work let's look at a quick illustration to help us understand better.
 
-![Request / Response flow](docs/assets/request-response-diagram.png)
+![Request / Response flow](/docs/assets/request-response-diagram.png)
 
 Okay now, let's study each step in detail.
 
