@@ -6,7 +6,7 @@ The ZIAPI features 4 different types of modules:
 - `IHandlerModule`
 - `IPostProcessorModule`
 
-Each module is invoked at a different stage in the request lifecycle. If you remember from the [Getting started](GETTING_STARTED.md) page of the documentation, a goes through 5 different steps when received by our HTTP server. Let's see which steps correspond to which module.
+Each module is invoked at a different stage in the request lifecycle. If you remember from the [Getting started](GETTING_STARTED.md) page of the documentation, a request goes through 5 different steps when received by our HTTP server. Let's see which steps correspond to which module.
 - **1. Receive** step is handled by `INetworkModule`.
 - **2. Pre-process** step is handled by `IPreProcessorModule`.
 - **3. Handle** step is handled by `IHandlerModule`.
