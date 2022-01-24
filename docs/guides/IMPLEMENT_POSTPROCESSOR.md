@@ -1,6 +1,6 @@
 # Implement a PostProcessor module
 
-In this guide we will learn how to implement a PostProcessor module which is a type of module that allows us to modify an HTTP response from a current response.
+In this guide we will learn how to implement a PostProcessor module which is a type of module that allows us to modify an HTTP response after it was handled.
 
 ## `IPostProcessorModule` interface
 
