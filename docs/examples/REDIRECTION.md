@@ -1,4 +1,4 @@
-# Directory Listing Module Tutorial
+# Redirection Module Tutorial
 
 Let's implement a simple redirection module.
 
