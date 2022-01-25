@@ -13,7 +13,8 @@ Here is a list of non-hexaustive list of modules you can very easily implement u
 - Routing
 - [Redirection](../examples/REDIRECTION.md)
 - Secure connection module
-- [PHP CGI](../examples/PHP_CGI.md)
+- PHP CGI
+- SSL / TLS
 - HTTP Handler
 - Database
 - Benchmark
