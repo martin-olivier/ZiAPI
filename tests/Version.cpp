@@ -74,7 +74,7 @@ TEST(Version, less)
     ASSERT_FALSE(a < b);
 }
 
-TEST(Version, upper_eq)
+TEST(Version, greater_or_equal)
 {
     ziapi::Version a{1, 0};
     ziapi::Version b{1, 0};
