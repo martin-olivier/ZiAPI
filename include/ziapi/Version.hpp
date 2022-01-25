@@ -17,11 +17,11 @@ struct Version {
 
     inline bool operator>(const Version &other) const noexcept
     {
-        if (this->major > other.major)
+        if (major > other.major)
             return true;
-        if (this->major < other.major)
+        if (major < other.major)
             return false;
-        return this->minor > other.minor;
+        return minor > other.minor;
     }
 
     inline bool operator<(const Version &other) const noexcept
