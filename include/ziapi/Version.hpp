@@ -10,7 +10,7 @@ struct Version {
 
     inline bool operator==(const Version &other) const noexcept
     {
-        return this->major == other.major && this->minor == other.minor;
+        return major == other.major && minor == other.minor;
     }
 
     inline bool operator!=(const Version &other) const noexcept { return !(*this == other); }
