@@ -17,7 +17,7 @@ General documentation pages will help you understand the general concepts of the
 
 Guides are step by step instructions on how to do pretty much anything with the ZIAPI.
 
-- [Install and build](guides/INSTALL_AND_BUILD.md.md)
+- [Install and build](guides/INSTALL_AND_BUILD.md)
 - [Module 101](guides/MODULES_101.md)
 - [Implementing a handler module](guides/IMPLEMENT_HANDLER.md)
 - [Implementing a pre-processor module](guides/IMPLEMENT_PREPROCESSOR.md)
