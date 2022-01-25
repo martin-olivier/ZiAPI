@@ -17,6 +17,8 @@ struct Version {
 
     inline bool operator>(const Version &other) const noexcept
     {
+        if (this->major > other.major)
+            return true;
         if (this->major < other.major)
             return false;
         return this->minor > other.minor;
@@ -24,24 +26,16 @@ struct Version {
 
     inline bool operator<(const Version &other) const noexcept
     {
+        if (this->major < other.major)
+            return true;
         if (this->major > other.major)
             return false;
         return this->minor < other.minor;
     }
 
-    inline bool operator>=(const Version &other) const noexcept
-    {
-        if (this->major < other.major)
-            return false;
-        return this->minor <= other.minor;
-    }
+    inline bool operator>=(const Version &other) const noexcept { return (*this > other) || (*this == other); }
 
-    inline bool operator<=(const Version &other) const noexcept
-    {
-        if (this->major > other.major)
-            return false;
-        return this->minor >= other.minor;
-    }
+    inline bool operator<=(const Version &other) const noexcept { return (*this < other) || (*this == other); }
 
     unsigned int major;
     unsigned int minor;
