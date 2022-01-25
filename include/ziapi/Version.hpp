@@ -8,9 +8,34 @@ namespace ziapi {
 struct Version {
     Version(int major, int minor) : major(major), minor(minor) {}
 
-    bool operator==(const Version &other) const { return this->major == other.major && this->minor == other.minor; }
+    inline bool operator==(const Version &other) const noexcept
+    {
+        return major == other.major && minor == other.minor;
+    }
 
-    bool operator!=(const Version &other) const { return this->major != other.major || this->minor != other.minor; }
+    inline bool operator!=(const Version &other) const noexcept { return !(*this == other); }
+
+    inline bool operator>(const Version &other) const noexcept
+    {
+        if (major > other.major)
+            return true;
+        if (major < other.major)
+            return false;
+        return minor > other.minor;
+    }
+
+    inline bool operator<(const Version &other) const noexcept
+    {
+        if (major < other.major)
+            return true;
+        if (major > other.major)
+            return false;
+        return minor < other.minor;
+    }
+
+    inline bool operator>=(const Version &other) const noexcept { return (*this > other) || (*this == other); }
+
+    inline bool operator<=(const Version &other) const noexcept { return (*this < other) || (*this == other); }
 
     unsigned int major;
     unsigned int minor;

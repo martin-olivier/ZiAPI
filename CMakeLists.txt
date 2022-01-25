@@ -33,6 +33,7 @@ set(TEST_SOURCES
     tests/Compressor.cpp
     tests/Decompressor.cpp
     tests/Module.cpp
+    tests/Version.cpp
 )
 
 add_executable(${BIN}
