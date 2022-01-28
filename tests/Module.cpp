@@ -11,7 +11,7 @@ TEST(Module, example)
         dylib lib("./module", dylib::extension);
         auto entry_point_fn = lib.get_function<ziapi::IModule *()>("LoadZiaModule");
         std::unique_ptr<ziapi::IModule> mod(entry_point_fn());
-        ziapi::Logger::Info("Module loaded: " + std::string(mod->GetName()) + " - " + mod->GetDescription());
+        ziapi::Logger::Info("Module loaded: ", mod->GetName(), " - ", mod->GetDescription());
     } catch (const dylib::exception &e) {
         EXPECT_TRUE(false);
         ziapi::Logger::Error(e.what());
