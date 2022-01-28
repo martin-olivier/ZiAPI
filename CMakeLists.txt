@@ -27,7 +27,6 @@ FetchContent_MakeAvailable(googletest)
 
 # The bin name for your unit tests
 set(BIN unit_tests)
-include(import/FetchGoogleTest.cmake)
 
 # The build flags
 if(UNIX)
