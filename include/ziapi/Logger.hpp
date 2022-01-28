@@ -12,9 +12,7 @@ namespace ziapi {
 
 /**
  *  Log a message in a stream
- *  @param message message to be logged
- *  @param log_type Debug, Info, Warning or Error
- *  @param stream the stream where the message will be logged
+ *  @param args message to be logged as variadic template arguments
  */
 class Logger {
 private:
