@@ -19,7 +19,8 @@ namespace ziapi {
 class Logger {
 private:
     enum LogType { debug, info, warning, error };
-    static void Log(const std::string &message, std::ostream &stream, LogType log_type)
+    template<typename ...Args>
+    static void Log(std::ostream &stream, LogType log_type, Args &&...args)
     {
         static const std::map<LogType, std::string> log_type_map{
             {LogType::info, color::BLUE + std::string(" [i] ") + color::DEFAULT},
@@ -33,25 +34,30 @@ private:
                        time_str.end());
 
         stream << color::CYAN << time_str << color::DEFAULT;
-        stream << log_type_map.at(log_type) << message << color::DEFAULT << std::endl;
+        stream << log_type_map.at(log_type);
+        ((stream << args), ...) << std::endl;
     }
 
 public:
-    static void Debug(const std::string &message, std::ostream &stream = std::cout)
+    template<typename ...Args>
+    static void Debug(Args &&...args)
     {
-        Log(message, stream, LogType::debug);
+        Log(std::cout, LogType::debug, std::forward<Args>(args)...);
     }
-    static void Info(const std::string &message, std::ostream &stream = std::cout)
+    template<typename ...Args>
+    static void Info(Args &&...args)
     {
-        Log(message, stream, LogType::info);
+        Log(std::cout, LogType::info, std::forward<Args>(args)...);
     }
-    static void Warning(const std::string &message, std::ostream &stream = std::cout)
+    template<typename ...Args>
+    static void Warning(Args &&...args)
     {
-        Log(message, stream, LogType::warning);
+        Log(std::cout, LogType::warning, std::forward<Args>(args)...);
     }
-    static void Error(const std::string &message, std::ostream &stream = std::cerr)
+    template<typename ...Args>
+    static void Error(Args &&...args)
     {
-        Log(message, stream, LogType::error);
+        Log(std::cerr, LogType::error, std::forward<Args>(args)...);
     }
 };
 
