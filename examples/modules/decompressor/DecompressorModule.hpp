@@ -4,7 +4,7 @@ class DecompressorModule : public ziapi::IPreProcessorModule {
 public:
     ~DecompressorModule() = default;
 
-    void Init([[maybe_unused]] const ziapi::Config &cfg) override
+    void Init(const ziapi::config::Node &) override
     {
         // Don't need anything to configure in this implementation
     }
@@ -20,19 +20,15 @@ public:
         return "Decompress the response body before sending it to the module pipeline";
     }
 
-    void PreProcess([[maybe_unused]] ziapi::http::Context &ctx, ziapi::http::Request &req) override
-    {
-        req.body = DecompressBody(req.body);
-    }
+    void PreProcess(ziapi::http::Context &, ziapi::http::Request &req) override { req.body = DecompressBody(req.body); }
 
     [[nodiscard]] double GetPreProcessorPriority() const noexcept override
     {
-        // Decompressor need to be run the first just before sending data back
-        return 0;
+        // Decompressor needs to be ran first, before any pre-processor.
+        return 0.0f;
     }
 
-    [[nodiscard]] bool ShouldPreProcess([[maybe_unused]] const ziapi::http::Context &ctx,
-                                        [[maybe_unused]] const ziapi::http::Request &req) const override
+    [[nodiscard]] bool ShouldPreProcess(const ziapi::http::Context &, const ziapi::http::Request &req) const override
     {
         // Only use if compressed header is set
         return req.fields.at("compressed") == std::string("true");

@@ -28,7 +28,7 @@ We set the post-processing priority to 1 so it is also the last module called.
 
 class LoggerModule : virtual public ziapi::IPreProcessorModule, public ziapi::IPostProcessorModule {
 public:
-    void Init(const ziapi::Config &config) {}
+    void Init(const ziapi::config::Node &cfg) {}
 
     [[nodiscard]] ziapi::Version GetVersion() const noexcept override { return {1, 0}; }
 

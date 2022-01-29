@@ -2,44 +2,77 @@
 
 #include <gtest/gtest.h>
 
-#include <map>
+#include <memory>
+#include <unordered_map>
 
-struct position {
-    int x, y;
-};
+using namespace ziapi::config;
 
-TEST(Config, get_values)
+TEST(Config, SimpleInt)
 {
-    ziapi::Config conf{{"mod_path", std::make_any<std::string>("./modules")},
-                       {"std", std::make_any<int>(17)},
-                       {"position", std::make_any<position>(position{50, 100})}};
+    Node node(10);
 
-    ASSERT_EQ(std::any_cast<std::string>(conf["mod_path"]), "./modules");
-    ASSERT_EQ(std::any_cast<int>(conf["std"]), 17);
-    auto pos = std::any_cast<position>(conf["position"]);
-    ASSERT_EQ(pos.x, 50);
-    ASSERT_EQ(pos.y, 100);
+    ASSERT_EQ(node.AsInt(), 10);
 }
 
-TEST(Config, set_values)
+TEST(Config, SimpleString)
 {
-    ziapi::Config conf{{"mod_path", std::make_any<std::string>("./modules")},
-                       {"std", std::make_any<int>(17)},
-                       {"position", std::make_any<position>(position{50, 100})}};
+    Node node(String("Hello world"));
 
-    conf["mod_path"] = std::make_any<std::string>("/usr/local/mod");
-    ASSERT_EQ(std::any_cast<std::string>(conf["mod_path"]), "/usr/local/mod");
-
-    conf["std"] = std::make_any<int>(20);
-    ASSERT_EQ(std::any_cast<int>(conf["std"]), 20);
+    ASSERT_EQ(node.AsString(), "Hello world");
 }
 
-TEST(Config, bad_key)
+TEST(Config, SimpleDouble)
 {
-    ziapi::Config conf{{"mod_path", std::make_any<std::string>("./modules")},
-                       {"std", std::make_any<int>(17)},
-                       {"position", std::make_any<position>(position{50, 100})}};
+    Node node(45.647f);
 
-    auto val = conf["bad_key"];
-    ASSERT_EQ(val.has_value(), false);
+    ASSERT_EQ(node.AsDouble(), 45.647f);
+}
+
+TEST(Config, SimpleBool)
+{
+    Node node(true);
+
+    ASSERT_EQ(node.AsBool(), true);
+}
+
+TEST(Config, SimpleArray)
+{
+    Node node_1(10);
+    Node node_2("Hello world");
+    Node node_3(14.5f);
+    Node array({
+        &node_1,
+        &node_2,
+        &node_3,
+    });
+
+    ASSERT_EQ(array.AsArray()[0]->AsInt(), 10);
+    ASSERT_EQ(array.AsArray()[1]->AsString(), "Hello world");
+    ASSERT_EQ(array.AsArray()[2]->AsDouble(), 14.5f);
+}
+
+TEST(Config, SimpleDict)
+{
+    Node modules_count(10);
+    Node dict = {
+        {"modules_count", &modules_count},
+    };
+
+    ASSERT_EQ(dict.AsDict()["modules_count"]->AsInt(), 10);
+}
+
+TEST(Config, NestedAccess)
+{
+    Node root("/var/www");
+    Node root_node({
+        {"root", &root},
+    });
+    Node modules_node({
+        {"directoryListing", &root_node},
+    });
+    Node cfg({
+        {"modules", &modules_node},
+    });
+
+    ASSERT_EQ(cfg["modules"]["directoryListing"]["root"].AsString(), "/var/www");
 }

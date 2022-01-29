@@ -2,57 +2,46 @@
 
 #include <any>
 #include <iostream>
+#include <string>
 
 #include "ziapi/Module.hpp"
 
-using namespace ziapi;
-
-class RedirectionModule : public IHandlerModule {
+class RedirectionModule : public ziapi::IHandlerModule {
 public:
-    enum RedirectCode : ushort {
-        kMultipleChoice = 300,
-        kMovedPermanently,
-        kFound,
-        kSeeOther,
-        kNotModified,
-        kUseProxy,
-        kSwitchProxy,
-        kTemporaryRedirect,
-        kPermanentRedirect,
-    };
-
-    using routeRedirectionMap = std::map<std::string, std::string>;
-
-    void Init(const Config &cfg)
+    void Init(const ziapi::config::Node &cfg) override
     {
-        if (cfg.find("redirections") != cfg.end())
-            _redirections = std::any_cast<routeRedirectionMap>(cfg.at("redirections"));
-        if (cfg.find("redirect_code") != cfg.end())
-            _status_code = std::any_cast<RedirectCode>(cfg.at("redirect_code"));
+        /// We'll load from the configuration where to redirect to!
+        redirection_route_ = cfg.AsDict()["modules"]->AsDict()["redirection"]->AsDict()["route"]->AsString();
     }
 
-    void Handle(http::Request &req, http::Response &res)
+    void Handle(ziapi::http::Context &ctx, const ziapi::http::Request &req, ziapi::http::Response &res) override
     {
-        res.fields["Location"] = _redirections[req.target];
-        res.status_code = _status_code;
+        /// Now we just say that the resource was moved permenatly and we indicate the new
+        /// location with the redirection route.
+        res.fields[ziapi::http::header::LOCATION] = redirection_route_;
+        res.status_code = ziapi::http::code::MOVED_PERMANENTLY;
     }
 
-    [[nodiscard]] bool ShouldHandle(const http::Request &req)
+    [[nodiscard]] bool ShouldHandle(const ziapi::http::Request &req)
     {
-        return _redirections.find(req.target) != _redirections.end();
+        /// We wish to handle all requests.
+        return true;
     }
 
-    [[nodiscard]] Version GetVersion() const noexcept { return {0, 1}; }
+    [[nodiscard]] double GetHandlerPriority() const noexcept
+    {
+        /// Our handler is really important!
+        return 0.9f;
+    }
 
-    [[nodiscard]] Version GetCompatibleApiVersion() const noexcept { return {0, 1}; }
+    [[nodiscard]] ziapi::Version GetVersion() const noexcept { return {0, 1}; }
+
+    [[nodiscard]] ziapi::Version GetCompatibleApiVersion() const noexcept { return {0, 1}; }
 
     [[nodiscard]] const char *GetName() const noexcept { return "Redirection Module"; }
 
     [[nodiscard]] const char *GetDescription() const noexcept { return "Redirects the request to another location."; }
 
-    [[nodiscard]] double GetHandlerPriority() const noexcept { return 0.9; }
-
 private:
-    static inline std::map<std::string, std::string> _redirections{};
-    static inline RedirectCode _status_code = kMultipleChoice;
+    std::string redirection_route_;
 };

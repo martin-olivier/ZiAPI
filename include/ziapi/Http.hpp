@@ -49,7 +49,7 @@ struct Response {
  *  Context stores the context associated with an HTTP request. It acts like
  *  a key value store to allow inter-module communication
  */
-using Context = std::map<std::string, std::any>;
+using Context = std::unordered_map<std::string, std::any>;
 
 /**
  *  IResponseInputQueue is a consumer-only container for HTTP responses.

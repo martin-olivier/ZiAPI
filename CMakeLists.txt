@@ -38,9 +38,9 @@ endif()
 # The list of tests source files
 set(TEST_SOURCES
     tests/Logger.cpp
-    tests/Config.cpp
     tests/Compressor.cpp
     tests/Decompressor.cpp
+    tests/Config.cpp
     tests/Module.cpp
     tests/Version.cpp
 )
@@ -62,6 +62,7 @@ endif()
 include_directories(
     ${PROJECT_SOURCE_DIR}/include
     ${PROJECT_SOURCE_DIR}/examples/modules
+    ${PROJECT_SOURCE_DIR}/examples/utils
 )
 
 add_library(module SHARED examples/dylib/Module.cpp)
