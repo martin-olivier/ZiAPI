@@ -5,19 +5,18 @@ Let's implement a simple redirection module.
 ## Purpose
 
 This module will handle incoming http requests and send back a redirection response.
-It will allow us to redirect certain routes to other websites or other routes.
+For example we might want to redirect all requests to `google.com`.
 
-For example if we want to redirect our `/google` route to google.com and fetch it like so: 
+So for the following incoming request:
 ```
 GET /google HTTP/1.1
 ```
 
-We'll then get this response:
+We'll then get the following response:
 ```
 HTTP/1.1 301 Moved Permanently
 Location: www.google.com
 ``` 
-
 
 ## Tutorial
 
@@ -28,7 +27,7 @@ First, let's implement the `IHandlerModule` interface base.
 
 class PhpCgiModule : public ziapi::IHandlerModule {
 public:
-    void Init(const ziapi::Config &cfg) override {}
+    void Init(const ziapi::config::Node &cfg) override {}
 
     [[nodiscard]] Version GetVersion() const noexcept { return {0, 1}; }
 
@@ -48,57 +47,44 @@ public:
 ```
 
 Let's give our module a configuration.
-We first need to know which routes are going to be redirected to which route or website.
-For this example sake, we're going to make every page affected by redirection, redirect with the same status code.
-Well, we can add both the status code and the different redircetions as variables of our config file and fetch them in the `Init()` function. We will store them as a `_redirections` and a `_status_code` member variable in our class.
+Let's load from the config the route to which we will redirect requests. We'll store the value in a member variable of our module called `redirection_route_`.
 
 ```c++
-    /// Our target route as key and the redirection as value
-    using routeRedirectionMap = std::map<std::string, std::string>;
-
-    enum RedirectCode : ushort {
-        kMultipleChoice = 300,
-        kMovedPermanently,
-        kFound,
-        kSeeOther,
-        kNotModified,
-        kUseProxy,
-        kSwitchProxy,
-        kTemporaryRedirect,
-        kPermanentRedirect,
-    };
 ...
-    void Init(const Config &cfg)
-    {
-        if (cfg.find("redirections") != cfg.end())
-            _redirections = std::any_cast<routeRedirectionMap>(cfg.at("redirections"));
-        if (cfg.find("redirect_code") != cfg.end())
-            _status_code = std::any_cast<RedirectCode>(cfg.at("redirect_code"));
-    }
+
+void Init(const Config &cfg)
+{
+    /// We'll load from the configuration where to redirect to!
+    redirection_route_ = cfg.AsDict()["modules"]->AsDict()["redirection"]->AsDict()["route"]->AsString();
+}
+
 ...
 ```
 
-Now let's get to the `ShouldHandle()` function, we need this to know if we need to redirect or not !
-It's pretty simple, we just need check if the target appears in the config.
+We want to redirect all requests so we just return `true` in our `ShouldHandle()`.
 
 ```cpp
-    [[nodiscard]] bool ShouldHandle([[gnu::unused]] const http::Context &ctx, const http::Request &req) const
-    {
-        return _redirections.find(req.target) != _redirections.end();
-    }
+...
+
+[[nodiscard]] bool ShouldHandle(const http::Context &, const http::Request &req) const
+{
+    return true;
+}
+
+...
 ```
 
-Let's now code the `Handle()` method.
-
-It's actually very simple, we just need to change or add our Location header and change the status in the response.
+Let's now implement the `Handle()` method. We simply redirect each request to the `redirection_route_` by changing the `Location` header on the response. We also set the appropriate status code.
 
 ```c++
-...    
-    void Handle([[gnu::unused]] http::Context &ctx, [[gnu::unused]] const http::Request &req, http::Response &res)
-    {
-        res.fields["Location"] = _redirections[req.target];
-        res.status_code = _status_code;
-    }
+...
+
+void Handle(http::Context &, const http::Request &, http::Response &res)
+{
+    res.fields[ziapi::http::header::LOCATION] = redirection_route_;
+    res.status_code = ziapi::http::code::MOVED_PERMANENTLY;
+}
+
 ...
 ```
 

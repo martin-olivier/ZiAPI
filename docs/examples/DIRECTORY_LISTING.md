@@ -24,7 +24,7 @@ First, let's implement the `IHandlerModule` interface. We give it a basic priori
 
 class DirectoryListingModule : public ziapi::IHandlerModule {
 public:
-    void Init(const ziapi::Config &cfg) override {}
+    void Init(const ziapi::config::Node &cfg) override {}
 
     [[nodiscard]] ziapi::Version GetVersion() const noexcept override { return {1, 0}; }
 
@@ -57,10 +57,10 @@ Well, we can add the path to this directory as a variable of our config file and
 ```c++
 ...
 
-void Init(const ziapi::Config &cfg) override
+void Init(const ziapi::config::Node &cfg) override
 {
     /// In our config, we can specify which folder our module serves.
-    root_ = std::any_cast<std::string>(cfg.at("modules.directory_listing.path"));
+    root_ = cfg.AsDict()["modules"]->AsDict()["directoryListing"]->AsDict()["root"]->AsString();
 }
 
 ...
