@@ -21,6 +21,8 @@ public:
     using ValueType = std::variant<std::nullopt_t, std::nullptr_t, bool, int, double, std::string,
                                    std::vector<std::unique_ptr<IConfig>>, std::unique_ptr<IConfig>>;
 
+    virtual ~IConfig() = default;
+
     /// Get a value by key. Accessing nested keys such as "user.name" directly
     /// is non-standard and may not be supported by every implementation. To
     /// access nested values you should get the initial top level key ("user"
