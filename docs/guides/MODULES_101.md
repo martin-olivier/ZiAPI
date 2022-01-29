@@ -77,9 +77,13 @@ After that lets implement `module.cpp` that will be build into a dynamic lib:
 class Module : public ziapi::IModule {
 public:
     Module() = default;
+
     ~Module() override = default;
-    void Init(const ziapi::Config &) override {}
+
+    void Init(const ziapi::config::Node &) override {}
+
     ziapi::Version GetVersion() const noexcept override { return {1, 0}; }
+    
     ziapi::Version GetCompatibleApiVersion() const noexcept override { return {1, 0}; }
 
     [[nodiscard]] virtual const char *GetName() const noexcept override { return "module_name"; }

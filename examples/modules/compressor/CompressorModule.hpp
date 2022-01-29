@@ -2,7 +2,7 @@
 
 class CompressorModule : public ziapi::IPostProcessorModule {
 public:
-    void Init([[maybe_unused]] const ziapi::config::Node &) override
+    void Init(const ziapi::config::Node &) override
     {
         // Don't need anything to configure in this implementation
     }
@@ -18,10 +18,7 @@ public:
         return "Compress the response body before sending it back to the network";
     }
 
-    void PostProcess([[maybe_unused]] ziapi::http::Context &ctx, ziapi::http::Response &res) override
-    {
-        res.body = CompressBody(res.body);
-    }
+    void PostProcess(ziapi::http::Context &, ziapi::http::Response &res) override { res.body = CompressBody(res.body); }
 
     [[nodiscard]] double GetPostProcessorPriority() const noexcept override
     {
@@ -29,8 +26,7 @@ public:
         return 1.0f;
     }
 
-    [[nodiscard]] bool ShouldPostProcess([[maybe_unused]] const ziapi::http::Context &ctx,
-                                         [[maybe_unused]] const ziapi::http::Response &res) const override
+    [[nodiscard]] bool ShouldPostProcess(const ziapi::http::Context &, const ziapi::http::Response &) const override
     {
         // Compressor will always be used as it's always useful
         return true;
