@@ -41,6 +41,12 @@ public:
 
     bool AsBool() const { return std::get<bool>(*this); }
 
+    Node &operator[](const char *key) const { return *AsDict().at(key); }
+
+    Node &operator[](const std::string &key) const { return *AsDict().at(key); }
+
+    Node &operator[](std::size_t index) const { return *AsArray().at(index); }
+
     Dict AsDict() const { return std::get<Dict>(*this); }
 
     String AsString() const { return std::get<String>(*this); }

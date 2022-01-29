@@ -61,3 +61,22 @@ TEST(Config, SimpleDict)
 
     ASSERT_EQ(node.AsDict()["modules_count"]->AsInt(), 10);
 }
+
+TEST(Config, NestedAccess)
+{
+    Node root("/var/www");
+    Dict root_dict = {
+        {"root", &root},
+    };
+    Node root_node(root_dict);
+    Dict modules_dict = {
+        {"directoryListing", &root_node},
+    };
+    Node modules_node(std::move(modules_dict));
+    Dict dict = {
+        {"modules", &modules_node},
+    };
+    Node cfg(dict);
+
+    ASSERT_EQ(cfg["modules"]["directoryListing"]["root"].AsString(), "/var/www");
+}
