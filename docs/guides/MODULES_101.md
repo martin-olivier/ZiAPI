@@ -93,7 +93,10 @@ public:
 DYLIB_API ziapi::IModule *LoadZiaModule() { return new Module; }
 ```
 
-> :warning: The function that returns a new module from a dynamic library must be called `LoadZiaModule`
+> :warning: The function that returns a new module from a dynamic library **MUST** have this prototype:
+```c++
+DYLIB_API ziapi::IModule *LoadZiaModule()
+```
 
 And then let's implement our `main.cpp` that will load the dynamic lib:
 
