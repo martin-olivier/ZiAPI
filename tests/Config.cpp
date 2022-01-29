@@ -5,24 +5,59 @@
 #include <memory>
 #include <unordered_map>
 
-#include "MockConfig.hpp"
+using namespace ziapi::config;
 
-TEST(Config, SimpleMockConfig)
+TEST(Config, SimpleInt)
 {
-    std::unordered_map<std::string, ziapi::IConfig::ValueType> config_values = {
-        {"int", 10},    {"nullopt", std::nullopt}, {"null", nullptr}, {"config", (ziapi::IConfig *)nullptr},
-        {"bool", true},
-    };
-    auto cfg = std::unique_ptr<ziapi::IConfig>(new ziapi::MockConfig(config_values));
-    auto _int = std::get<int>(cfg->Get("int"));
-    // auto _nullopt = std::get<std::nullopt_t>(cfg->Get("nullopt"));
-    auto _bool = std::get<bool>(cfg->Get("bool"));
-    auto _null = std::get<std::nullptr_t>(cfg->Get("null"));
-    auto _config = std::get<ziapi::IConfig *>(cfg->Get("config"));
+    Node node(10);
 
-    ASSERT_EQ(_int, 10);
-    // ASSERT_EQ(_nullopt);
-    ASSERT_EQ(_bool, true);
-    ASSERT_EQ(_null, nullptr);
-    ASSERT_EQ(_config, nullptr);
+    ASSERT_EQ(node.AsInt(), 10);
+}
+
+TEST(Config, SimpleString)
+{
+    Node node(String("Hello world"));
+
+    ASSERT_EQ(node.AsString(), "Hello world");
+}
+
+TEST(Config, SimpleDouble)
+{
+    Node node(45.647f);
+
+    ASSERT_EQ(node.AsDouble(), 45.647f);
+}
+
+TEST(Config, SimpleBool)
+{
+    Node node(true);
+
+    ASSERT_EQ(node.AsBool(), true);
+}
+
+TEST(Config, SimpleArray)
+{
+    Array array;
+    Node node_1(10);
+    Node node_2("Hello world");
+    Node node_3(14.5f);
+    array.emplace_back(&node_1);
+    array.emplace_back(&node_2);
+    array.emplace_back(&node_3);
+    Node array_node(array);
+
+    ASSERT_EQ(array_node.AsArray()[0]->AsInt(), 10);
+    ASSERT_EQ(array_node.AsArray()[1]->AsString(), "Hello world");
+    ASSERT_EQ(array_node.AsArray()[2]->AsDouble(), 14.5f);
+}
+
+TEST(Config, SimpleDict)
+{
+    Node modules_count(10);
+    Dict dict = {
+        {"modules_count", &modules_count},
+    };
+    Node node(dict);
+
+    ASSERT_EQ(node.AsDict()["modules_count"]->AsInt(), 10);
 }

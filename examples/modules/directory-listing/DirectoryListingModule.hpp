@@ -1,16 +1,17 @@
 #include <filesystem>
 #include <fstream>
 
+#include "ziapi/Config.hpp"
 #include "ziapi/Module.hpp"
 
 class DirectoryListingModule : public ziapi::IHandlerModule {
 public:
-    void Init(const ziapi::IConfig &cfg) override
+    void Init(const ziapi::config::Node &cfg) override
     {
         /// In our config, we can specify which folder our module serves.
-        /// We fetch the "directory_listing_path" variable from the config
+        /// We fetch the "modules.directoryListing.root" variable from the config
         /// as a string.
-        root_ = std::get<std::string>(cfg.Get("directory_listing_path"));
+        root_ = cfg.AsDict()["modules"]->AsDict()["directoryListing"]->AsDict()["root"]->AsString();
     }
 
     [[nodiscard]] ziapi::Version GetVersion() const noexcept override { return {1, 0}; }

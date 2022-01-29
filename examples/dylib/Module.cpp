@@ -8,7 +8,7 @@ public:
 
     ~Module() override = default;
 
-    void Init(const ziapi::IConfig &) override {}
+    void Init(const ziapi::config::Node &) override {}
 
     ziapi::Version GetVersion() const noexcept override { return {1, 0}; }
 

@@ -4,7 +4,7 @@ class DecompressorModule : public ziapi::IPreProcessorModule {
 public:
     ~DecompressorModule() = default;
 
-    void Init([[maybe_unused]] const ziapi::IConfig &cfg) override
+    void Init([[maybe_unused]] const ziapi::config::Node &cfg) override
     {
         // Don't need anything to configure in this implementation
     }

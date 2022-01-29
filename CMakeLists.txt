@@ -39,8 +39,8 @@ endif()
 set(TEST_SOURCES
     tests/Logger.cpp
     tests/Compressor.cpp
-    tests/Config.cpp
     tests/Decompressor.cpp
+    tests/Config.cpp
     tests/Module.cpp
     tests/Version.cpp
 )

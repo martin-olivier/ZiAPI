@@ -2,7 +2,7 @@
 
 class CompressorModule : public ziapi::IPostProcessorModule {
 public:
-    void Init([[maybe_unused]] const ziapi::IConfig &) override
+    void Init([[maybe_unused]] const ziapi::config::Node &) override
     {
         // Don't need anything to configure in this implementation
     }
