@@ -109,7 +109,7 @@ public:
      *  shall push incoming requests and an input queue from which it should
      *  receive incoming responses and send them over the network
      */
-    virtual void Run(http::IRequestOutputQueue &requests, http::IResponseInputQueue &responses);
+    virtual void Run(http::IRequestOutputQueue &requests, http::IResponseInputQueue &responses) = 0;
 
     /**
      *  Terminate will be invoked upon reloading or termination of the server,

@@ -67,12 +67,12 @@ TEST(Logger, debug)
                 std::string::npos);
 }
 
-TEST(Logger, stream)
+TEST(Logger, variadic)
 {
-    OSRedirector os(std::cerr);
+    OSRedirector os(std::cout);
 
-    ziapi::Logger::Debug("debug on cerr", std::cerr);
+    ziapi::Logger::Debug("debug", ' ', 1.1);
     auto out = os.getContent();
-    EXPECT_TRUE(out.find(ziapi::color::GREEN + std::string(" [&] ") + ziapi::color::DEFAULT + "debug on cerr") !=
+    EXPECT_TRUE(out.find(ziapi::color::GREEN + std::string(" [&] ") + ziapi::color::DEFAULT + "debug 1.1") !=
                 std::string::npos);
 }
