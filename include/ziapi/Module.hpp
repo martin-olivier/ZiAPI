@@ -13,7 +13,7 @@ class IModule {
 public:
     virtual ~IModule() = default;
 
-    virtual void Init(const Config &cfg) = 0;
+    virtual void Init(const IConfig &cfg) = 0;
 
     [[nodiscard]] virtual Version GetVersion() const noexcept = 0;
 
