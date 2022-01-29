@@ -29,11 +29,7 @@ public:
     /// access nested values you should get the initial top level key ("user"
     /// for example) and then perform a variant cast as an IConfig unique_ptr
     /// before accessing the final key.
-    virtual ValueType Get(const std::string &key) = 0;
-
-    /// Set a value by key. Setting nested keys such as "user.name" directly
-    /// is non-standard and may not be supported by every implementation.
-    virtual void Set(const std::string &key, ValueType &&value) = 0;
+    virtual const ValueType &Get(const std::string &key) const = 0;
 };
 
 }  // namespace ziapi
