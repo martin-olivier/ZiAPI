@@ -27,8 +27,8 @@ public:
 
     [[nodiscard]] double GetPreProcessorPriority() const noexcept override
     {
-        // Decompressor need to be run the first just before sending data back
-        return 0;
+        // Decompressor needs to be ran first, before any pre-processor.
+        return 0.0f;
     }
 
     [[nodiscard]] bool ShouldPreProcess([[maybe_unused]] const ziapi::http::Context &ctx,

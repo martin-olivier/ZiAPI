@@ -2,8 +2,6 @@
 
 class CompressorModule : public ziapi::IPostProcessorModule {
 public:
-    ~CompressorModule() = default;
-
     void Init([[maybe_unused]] const ziapi::IConfig &) override
     {
         // Don't need anything to configure in this implementation
@@ -27,21 +25,21 @@ public:
 
     [[nodiscard]] double GetPostProcessorPriority() const noexcept override
     {
-        // Compressor need to be run the last just before sending data back
-        return 1;
+        // Compressor needs to be ran last, just before sending data back
+        return 1.0f;
     }
 
     [[nodiscard]] bool ShouldPostProcess([[maybe_unused]] const ziapi::http::Context &ctx,
                                          [[maybe_unused]] const ziapi::http::Response &res) const override
     {
-        // Compressor will alwaus be used as it's always useful
+        // Compressor will always be used as it's always useful
         return true;
     }
 
 private:
     std::string CompressBody(const std::string &body)
     {
-        // algorithm of the hell
+        // Algorithm of the hell
         return body.substr(0, body.length() / 2);
     }
 };

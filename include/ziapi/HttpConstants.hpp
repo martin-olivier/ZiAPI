@@ -29,6 +29,7 @@ namespace header {
 constexpr auto CONTENT_TYPE = "Content-Type";
 constexpr auto AUTHORIZATION = "Authorization";
 constexpr auto HOST = "Host";
+constexpr auto LOCATION = "Location";
 
 }  // namespace header
 

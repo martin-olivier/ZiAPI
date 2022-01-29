@@ -8,7 +8,9 @@ public:
     void Init(const ziapi::IConfig &cfg) override
     {
         /// In our config, we can specify which folder our module serves.
-        root_ = std::any_cast<std::string>(cfg.at("modules.directory_listing.path"));
+        /// We fetch the "directory_listing_path" variable from the config
+        /// as a string.
+        root_ = std::get<std::string>(cfg.Get("directory_listing_path"));
     }
 
     [[nodiscard]] ziapi::Version GetVersion() const noexcept override { return {1, 0}; }
