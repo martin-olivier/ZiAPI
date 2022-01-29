@@ -23,7 +23,7 @@ public:
 
     using routeRedirectionMap = std::map<std::string, std::string>;
 
-    void Init(const Config &cfg)
+    void Init(const IConfig &cfg)
     {
         if (cfg.find("redirections") != cfg.end())
             _redirections = std::any_cast<routeRedirectionMap>(cfg.at("redirections"));

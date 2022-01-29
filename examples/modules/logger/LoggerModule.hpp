@@ -6,7 +6,7 @@
 
 class LoggerModule : virtual public ziapi::IPreProcessorModule, public ziapi::IPostProcessorModule {
 public:
-    void Init(const ziapi::Config &config) {}
+    void Init(const ziapi::IConfig &config) {}
 
     [[nodiscard]] ziapi::Version GetVersion() const noexcept override { return {1, 0}; }
 

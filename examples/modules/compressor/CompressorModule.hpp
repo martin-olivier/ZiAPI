@@ -4,7 +4,7 @@ class CompressorModule : public ziapi::IPostProcessorModule {
 public:
     ~CompressorModule() = default;
 
-    void Init([[maybe_unused]] const ziapi::Config &cfg) override
+    void Init([[maybe_unused]] const ziapi::IConfig &) override
     {
         // Don't need anything to configure in this implementation
     }

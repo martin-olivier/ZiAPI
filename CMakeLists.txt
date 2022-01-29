@@ -38,7 +38,6 @@ endif()
 # The list of tests source files
 set(TEST_SOURCES
     tests/Logger.cpp
-    tests/Config.cpp
     tests/Compressor.cpp
     tests/Decompressor.cpp
     tests/Module.cpp

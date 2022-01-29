@@ -5,7 +5,7 @@
 
 class DirectoryListingModule : public ziapi::IHandlerModule {
 public:
-    void Init(const ziapi::Config &cfg) override
+    void Init(const ziapi::IConfig &cfg) override
     {
         /// In our config, we can specify which folder our module serves.
         root_ = std::any_cast<std::string>(cfg.at("modules.directory_listing.path"));
