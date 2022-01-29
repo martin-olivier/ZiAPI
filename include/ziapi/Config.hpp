@@ -34,6 +34,12 @@ using Dict = std::unordered_map<std::string, Node *>;
 
 struct Node : public std::variant<Undefined, Null, bool, int, double, String, Array, Dict> {
 public:
+    Node(const std::initializer_list<std::pair<const std::string, Node *>> &values)
+        : std::variant<Undefined, Null, bool, int, double, String, Array, Dict>(Dict(values)){};
+
+    Node(const std::initializer_list<Node *> &values)
+        : std::variant<Undefined, Null, bool, int, double, String, Array, Dict>(std::vector(values)){};
+
     Node(const char *str) : std::variant<Undefined, Null, bool, int, double, String, Array, Dict>(std::string(str)){};
 
     template <typename... Args>

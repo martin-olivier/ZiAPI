@@ -37,46 +37,42 @@ TEST(Config, SimpleBool)
 
 TEST(Config, SimpleArray)
 {
-    Array array;
     Node node_1(10);
     Node node_2("Hello world");
     Node node_3(14.5f);
-    array.emplace_back(&node_1);
-    array.emplace_back(&node_2);
-    array.emplace_back(&node_3);
-    Node array_node(array);
+    Node array({
+        &node_1,
+        &node_2,
+        &node_3,
+    });
 
-    ASSERT_EQ(array_node.AsArray()[0]->AsInt(), 10);
-    ASSERT_EQ(array_node.AsArray()[1]->AsString(), "Hello world");
-    ASSERT_EQ(array_node.AsArray()[2]->AsDouble(), 14.5f);
+    ASSERT_EQ(array.AsArray()[0]->AsInt(), 10);
+    ASSERT_EQ(array.AsArray()[1]->AsString(), "Hello world");
+    ASSERT_EQ(array.AsArray()[2]->AsDouble(), 14.5f);
 }
 
 TEST(Config, SimpleDict)
 {
     Node modules_count(10);
-    Dict dict = {
+    Node dict = {
         {"modules_count", &modules_count},
     };
-    Node node(dict);
 
-    ASSERT_EQ(node.AsDict()["modules_count"]->AsInt(), 10);
+    ASSERT_EQ(dict.AsDict()["modules_count"]->AsInt(), 10);
 }
 
 TEST(Config, NestedAccess)
 {
     Node root("/var/www");
-    Dict root_dict = {
+    Node root_node({
         {"root", &root},
-    };
-    Node root_node(root_dict);
-    Dict modules_dict = {
+    });
+    Node modules_node({
         {"directoryListing", &root_node},
-    };
-    Node modules_node(std::move(modules_dict));
-    Dict dict = {
+    });
+    Node cfg({
         {"modules", &modules_node},
-    };
-    Node cfg(dict);
+    });
 
     ASSERT_EQ(cfg["modules"]["directoryListing"]["root"].AsString(), "/var/www");
 }
