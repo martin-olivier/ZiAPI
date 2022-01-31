@@ -32,19 +32,17 @@ using Array = std::vector<Node *>;
 
 using Dict = std::unordered_map<std::string, Node *>;
 
-struct Node : public std::variant<Undefined, Null, bool, int, double, String, Array, Dict> {
+using NodeVariant = std::variant<Undefined, Null, bool, int, double, String, Array, Dict>;
+
+struct Node : public NodeVariant {
 public:
-    Node(const std::initializer_list<Dict::value_type> &values)
-        : std::variant<Undefined, Null, bool, int, double, String, Array, Dict>(Dict(values)){};
+    using NodeVariant::NodeVariant;
 
-    Node(const std::initializer_list<Array::value_type> &values)
-        : std::variant<Undefined, Null, bool, int, double, String, Array, Dict>(std::vector(values)){};
+    Node(const std::initializer_list<Dict::value_type> &values) : NodeVariant(Dict(values)){};
 
-    Node(const char *str) : std::variant<Undefined, Null, bool, int, double, String, Array, Dict>(std::string(str)){};
+    Node(const std::initializer_list<Array::value_type> &values) : NodeVariant(std::vector(values)){};
 
-    template <typename... Args>
-    Node(Args &&...args)
-        : std::variant<Undefined, Null, bool, int, double, String, Array, Dict>(std::forward<Args>(args)...){};
+    Node(const char *str) : NodeVariant(std::string(str)){};
 
     bool AsBool() const { return std::get<bool>(*this); }
 
