@@ -7,7 +7,9 @@
 [![Discord](https://img.shields.io/discord/934852777136513075)](https://discord.gg/ztptguX2sE)
 [![workflow](https://github.com/martin-olivier/ZiAPI/actions/workflows/CI.yml/badge.svg)](https://github.com/martin-olivier/ZiAPI/actions/workflows/CI.yml)
 
-Welcome to the **ZIAPI** repository which contains the interfaces and concrete implementations that make up our API.
+Welcome to the **ZIAPI** repository which contains the interfaces and concrete implementations that make up our Epitech Zia project API proposal.
+
+**ZIAPI** was elected as the city-wide API for the **Paris Region** in **2022**.
 
 [**ZIAPI Official Website**](https://ziapi.vercel.app)  
 [**ZIAPI Official Discord**](https://discord.gg/ztptguX2sE)
