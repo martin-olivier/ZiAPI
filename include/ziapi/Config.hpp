@@ -81,8 +81,8 @@ public:
     /// Check if your Node value is undefined
     bool IsUndefined() const { return index() == kUndefined; }
 
-    /// Check if your Node is null or unefined
-    operator bool() const { return IsNull() || IsUndefined(); }
+    /// Check if your Node is not empty
+    operator bool() const { return !IsNull() && !IsUndefined(); }
 };
 
 }  // namespace ziapi::config
