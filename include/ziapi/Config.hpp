@@ -43,7 +43,8 @@ public:
     Node(const char *str) : std::variant<Undefined, Null, bool, int, double, String, Array, Dict>(std::string(str)){};
 
     template <typename... Args>
-    Node(Args &&...args) : std::variant<Undefined, Null, bool, int, double, String, Array, Dict>(args...){};
+    Node(Args &&...args)
+        : std::variant<Undefined, Null, bool, int, double, String, Array, Dict>(std::forward<Args>(args)...){};
 
     bool AsBool() const { return std::get<bool>(*this); }
 
