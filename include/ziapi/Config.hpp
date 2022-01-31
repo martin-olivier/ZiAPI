@@ -30,16 +30,20 @@ using String = std::string;
 
 using Array = std::vector<Node *>;
 
+/// Datatype for json/yaml-like data
 using Dict = std::unordered_map<std::string, Node *>;
 
 struct Node : public std::variant<Undefined, Null, bool, int, double, String, Array, Dict> {
 public:
+    /// Used to construct a Node from a Dict
     Node(const std::initializer_list<Dict::value_type> &values)
         : std::variant<Undefined, Null, bool, int, double, String, Array, Dict>(Dict(values)){};
 
+    /// Used to construct a Node from an Array
     Node(const std::initializer_list<Array::value_type> &values)
         : std::variant<Undefined, Null, bool, int, double, String, Array, Dict>(std::vector(values)){};
 
+    /// Used to construct a Node from a string
     Node(const char *str) : std::variant<Undefined, Null, bool, int, double, String, Array, Dict>(std::string(str)){};
 
     template <typename... Args>
