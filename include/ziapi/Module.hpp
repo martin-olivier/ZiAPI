@@ -101,7 +101,7 @@ public:
     [[nodiscard]] virtual bool ShouldPreProcess(const http::Context &ctx, const http::Request &req) const = 0;
 };
 
-class INetworkModule {
+class INetworkModule : public IModule {
 public:
     virtual ~INetworkModule() = default;
     /**
