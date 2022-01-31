@@ -76,3 +76,14 @@ TEST(Config, NestedAccess)
 
     ASSERT_EQ(cfg["modules"]["directoryListing"]["root"].AsString(), "/var/www");
 }
+
+TEST(Config, OperatorBool)
+{
+    Node undefined(Undefined{});
+    Node null(nullptr);
+    Node string("Hello");
+
+    ASSERT_EQ(undefined.operator bool(), false);
+    ASSERT_EQ(null.operator bool(), false);
+    ASSERT_EQ(string.operator bool(), true);
+}

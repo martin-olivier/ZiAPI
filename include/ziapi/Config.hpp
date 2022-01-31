@@ -66,7 +66,7 @@ public:
 
     bool IsUndefined() const { return index() == kUndefined; }
 
-    operator bool() const { return IsNull() || IsUndefined(); }
+    operator bool() const { return !IsNull() && !IsUndefined(); }
 };
 
 }  // namespace ziapi::config
