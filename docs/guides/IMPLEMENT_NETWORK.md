@@ -48,10 +48,6 @@ void MyNetwork::Run(http::IRequestOutputQueue &requests, http::IResponseInputQue
         if (mainSocket.HasNewConnection()) {
             clients.append(mainSocket.Accept());
         }
-        // Trigger key to stop the server
-        if (keyPressed("q")) {
-            mustStop = true;
-        }
         if (mustStop) {
             mainSocket.destroy();
             return;
@@ -80,7 +76,6 @@ void MyNetwork::Terminate()
 {
     shouldStop = true;
     // join threads if there is
-    // wait for modules to stop
 }
 ```
 
