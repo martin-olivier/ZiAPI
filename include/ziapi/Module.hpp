@@ -57,7 +57,7 @@ public:
  *  Post processor modules are invoked after the generation of the response
  *  by the handler module. They can be used for logging, cors, compression, etc...
  */
-class IPostProcessorModule : public IModule {
+class IPostProcessorModule : virtual public IModule {
 public:
     virtual ~IPostProcessorModule() = default;
     /**
@@ -81,7 +81,7 @@ public:
  *  Pre processor modules are invoked before the generation of the response by
  *  the handler module. They can be used for url rewriting, authentication, logging, etc...
  */
-class IPreProcessorModule : public IModule {
+class IPreProcessorModule : virtual public IModule {
 public:
     virtual ~IPreProcessorModule() = default;
     /**
