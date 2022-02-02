@@ -52,7 +52,7 @@ Then, let's implement the `ShouldHandle()`. This method is invoked to know if ou
 ```c++
 [[nodiscard]] bool MyHandler::ShouldHandle(const http::Context &ctx, const http::Request &req) const
 {
-    return req.method == http::method::GET;
+    return req.method == http::method::kGet;
 }
 ```
 
