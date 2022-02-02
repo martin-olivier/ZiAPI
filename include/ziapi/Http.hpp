@@ -59,7 +59,7 @@ class IResponseInputQueue {
 public:
     virtual ~IResponseInputQueue() = default;
 
-    virtual bool Pop(std::pair<Request, Context> &req) = 0;
+    virtual std::pair<std::pair<Request, Context>, bool> Pop() = 0;
 
     [[nodiscard]] virtual std::size_t Size() const noexcept = 0;
 };
