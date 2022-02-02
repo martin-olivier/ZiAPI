@@ -43,7 +43,7 @@ public:
     [[nodiscard]] bool ShouldHandle(const ziapi::http::Context &ctx, const ziapi::http::Request &req) const override
     {
         /// We only want to handle GET requests.
-        return req.method == ziapi::http::method::kGet;
+        return req.method == ziapi::http::method::GET;
     }
 
     void Handle(ziapi::http::Context &ctx, const ziapi::http::Request &req, ziapi::http::Response &res) override {}

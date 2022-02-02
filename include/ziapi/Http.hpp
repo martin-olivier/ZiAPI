@@ -2,8 +2,8 @@
 
 #include <any>
 #include <map>
-#include <string>
 #include <unordered_map>
+#include <string>
 
 #include "HttpConstants.hpp"
 
@@ -43,7 +43,7 @@ struct Response {
 
     std::string body;
 
-    void Bootstrap(int status_code = code::kOK, std::string reason = reason::kOK, int version = version::kV1_1);
+    void Bootstrap(int status_code = code::OK, std::string reason = reason::OK, int version = version::V1_1);
 };
 
 /**
