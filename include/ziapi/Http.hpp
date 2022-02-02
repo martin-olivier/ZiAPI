@@ -43,7 +43,7 @@ struct Response {
 
     std::string body;
 
-    void Bootstrap(int status_code = code::OK, std::string reason = reason::OK, int version = version::V1_1);
+    void Bootstrap(int status_code = CODE::OK, std::string reason = reason::OK, int version = VERSION::V1_1);
 };
 
 /**
