@@ -52,7 +52,7 @@ Then, let's implement the `ShouldPreProcess()`. This method is invoked to know i
 ```c++
 [[nodiscard]] bool ShouldPreProcess(const http::Context &ctx, const http::Request &req) const
 {
-    return req.method == http::method::GET;
+    return req.method == http::method::kGet;
 }
 ```
 
@@ -61,7 +61,7 @@ Great! Now our pre-processor will be called on all GET requests! Now let's add t
 ```c++
 void MyPreProcessor::PreProcess(http::Context &ctx, http::Request &req)
 {
-    req.method = http::method::POST;
+    req.method = http::method::kPost;
 }
 ```
 
