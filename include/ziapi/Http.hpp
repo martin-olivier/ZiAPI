@@ -2,8 +2,8 @@
 
 #include <any>
 #include <map>
-#include <unordered_map>
 #include <string>
+#include <unordered_map>
 
 #include "HttpConstants.hpp"
 
@@ -59,7 +59,7 @@ class IResponseInputQueue {
 public:
     virtual ~IResponseInputQueue() = default;
 
-    virtual std::pair<Request, Context> Pop() = 0;
+    virtual std::pair<Response, Context> Pop() = 0;
 
     [[nodiscard]] virtual std::size_t Size() const noexcept = 0;
 };
