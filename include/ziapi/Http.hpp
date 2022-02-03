@@ -2,6 +2,7 @@
 
 #include <any>
 #include <map>
+#include <optional>
 #include <string>
 #include <unordered_map>
 
@@ -14,7 +15,7 @@ namespace ziapi::http {
  */
 struct Request {
     /// For possible values of version checkout ziapi::http::version.
-    int version;
+    Version version;
 
     /// For possible values of method checkout ziapi::http::method.
     std::string method;
@@ -31,10 +32,10 @@ struct Request {
  */
 struct Response {
     /// For possible values of version checkout ziapi::http::version.
-    int version;
+    Version version;
 
     /// For possible values of version checkout ziapi::http::code.
-    int status_code;
+    Code status_code;
 
     /// For possible values of version checkout ziapi::http::reason.
     std::string reason;
@@ -43,7 +44,12 @@ struct Response {
 
     std::string body;
 
-    void Bootstrap(int status_code = code::kOK, std::string reason = reason::kOK, int version = version::kV1_1);
+    void Bootstrap(Code status_code = Code::kOK, std::string reason = reason::kOK, Version version = Version::kV1_1)
+    {
+        this->status_code = status_code;
+        this->reason = reason;
+        this->version = version;
+    }
 };
 
 /**
@@ -59,7 +65,7 @@ class IResponseInputQueue {
 public:
     virtual ~IResponseInputQueue() = default;
 
-    virtual std::pair<Request, Context> Pop() = 0;
+    [[nodiscard]] virtual std::optional<std::pair<Response, Context>> Pop() = 0;
 
     [[nodiscard]] virtual std::size_t Size() const noexcept = 0;
 };
