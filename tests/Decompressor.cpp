@@ -18,7 +18,7 @@ TEST(Decompressor, Decompression)
     DecompressorModule decompressor;
     ziapi::http::Context ctx;
     ziapi::http::Request req = {
-        11,                                      // version
+        ziapi::http::Version::kV1_1,             // version
         ziapi::http::method::kPost,              // method
         "/zipper",                               // target
         std::map<std::string, std::string>({}),  // fields
