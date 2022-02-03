@@ -2,6 +2,7 @@
 
 #include <optional>
 #include <string>
+#include <type_traits>
 #include <unordered_map>
 #include <variant>
 #include <vector>
@@ -28,10 +29,10 @@ using Null = std::nullptr_t;
 
 using String = std::string;
 
-using Array = std::vector<Node *>;
+using Array = std::vector<std::unique_ptr<Node>>;
 
 /// Datatype for json/yaml-like data
-using Dict = std::unordered_map<std::string, Node *>;
+using Dict = std::unordered_map<std::string, std::unique_ptr<Node>>;
 
 using NodeVariant = std::variant<Undefined, Null, bool, int, double, String, Array, Dict>;
 
@@ -40,10 +41,32 @@ public:
     using NodeVariant::NodeVariant;
 
     /// Used to construct a Node from a Dict
-    Node(const std::initializer_list<Dict::value_type> &values) : NodeVariant(Dict(values)){};
+    Node(std::initializer_list<Dict::value_type> values)
+    {
+        std::visit(
+            [&](auto &d) {
+                if constexpr (std::is_same_v<decltype(&d), Dict &>) {
+                    for (auto &pair : values) {
+                        d.try_emplace(std::move(pair));
+                    }
+                }
+            },
+            (NodeVariant &)*this);
+    };
 
     /// Used to construct a Node from an Array
-    Node(const std::initializer_list<Array::value_type> &values) : NodeVariant(std::vector(values)){};
+    Node(std::initializer_list<Array::value_type> values)
+    {
+        std::visit(
+            [&](auto &d) {
+                if constexpr (std::is_same_v<decltype(&d), Dict &>) {
+                    for (auto &pair : values) {
+                        d.try_emplace(std::move(pair));
+                    }
+                }
+            },
+            (NodeVariant &)*this);
+    };
 
     /// Used to construct a Node from a string
     Node(const char *str) : NodeVariant(std::string(str)){};
