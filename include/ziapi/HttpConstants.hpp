@@ -14,14 +14,12 @@ constexpr auto kHead = "HEAD";
 
 }  // namespace method
 
-namespace version {
-
-constexpr auto kV1 = 10;
-constexpr auto kV1_1 = 11;
-constexpr auto kV2 = 20;
-constexpr auto kV3 = 30;
-
-}  // namespace version
+enum class Version {
+    kV1 = 10,
+    kV1_1 = 11,
+    kV2 = 20,
+    kV3 = 30,
+};
 
 namespace header {
 
@@ -149,49 +147,47 @@ constexpr auto kHttpVersionNotSupported = "HTTP Version not supported";
 
 }  // namespace reason
 
-namespace code {
-
-constexpr auto kContinue = 100;
-constexpr auto kSwitchingProtocols = 101;
-constexpr auto kOK = 200;
-constexpr auto kCreated = 201;
-constexpr auto kAccepted = 202;
-constexpr auto kNonAuthoritativeInformation = 203;
-constexpr auto kNoContent = 204;
-constexpr auto kResetContent = 205;
-constexpr auto kPartialContent = 206;
-constexpr auto kMultipleChoices = 300;
-constexpr auto kMovedPermanently = 301;
-constexpr auto kFound = 302;
-constexpr auto kSeeOther = 303;
-constexpr auto kNotModified = 304;
-constexpr auto kUseProxy = 305;
-constexpr auto kTemporaryRedirect = 307;
-constexpr auto kBadRequest = 400;
-constexpr auto kUnauthorized = 401;
-constexpr auto kPaymentRequired = 402;
-constexpr auto kForbidden = 403;
-constexpr auto kNotFound = 404;
-constexpr auto kMethodNotAllowed = 405;
-constexpr auto kNotAcceptable = 406;
-constexpr auto kProxyAuthenticationRequired = 407;
-constexpr auto kRequestTimeOut = 408;
-constexpr auto kConflict = 409;
-constexpr auto kGone = 410;
-constexpr auto kLengthRequired = 411;
-constexpr auto kPreconditionFailed = 412;
-constexpr auto kRequestEntityTooLarge = 413;
-constexpr auto kRequestURITooLarge = 414;
-constexpr auto kUnsupportedMediaType = 415;
-constexpr auto kRequestedRangeNotSatisfiable = 416;
-constexpr auto kExpectationFailed = 417;
-constexpr auto kInternalServerError = 500;
-constexpr auto kNotImplemented = 501;
-constexpr auto kBadGateway = 502;
-constexpr auto kServiceUnavailable = 503;
-constexpr auto kGatewayTime_out = 504;
-constexpr auto kHttpVersionNotSupported = 505;
-
-}  // namespace code
+enum class Code {
+    kContinue = 100,
+    kSwitchingProtocols = 101,
+    kOK = 200,
+    kCreated = 201,
+    kAccepted = 202,
+    kNonAuthoritativeInformation = 203,
+    kNoContent = 204,
+    kResetContent = 205,
+    kPartialContent = 206,
+    kMultipleChoices = 300,
+    kMovedPermanently = 301,
+    kFound = 302,
+    kSeeOther = 303,
+    kNotModified = 304,
+    kUseProxy = 305,
+    kTemporaryRedirect = 307,
+    kBadRequest = 400,
+    kUnauthorized = 401,
+    kPaymentRequired = 402,
+    kForbidden = 403,
+    kNotFound = 404,
+    kMethodNotAllowed = 405,
+    kNotAcceptable = 406,
+    kProxyAuthenticationRequired = 407,
+    kRequestTimeOut = 408,
+    kConflict = 409,
+    kGone = 410,
+    kLengthRequired = 411,
+    kPreconditionFailed = 412,
+    kRequestEntityTooLarge = 413,
+    kRequestURITooLarge = 414,
+    kUnsupportedMediaType = 415,
+    kRequestedRangeNotSatisfiable = 416,
+    kExpectationFailed = 417,
+    kInternalServerError = 500,
+    kNotImplemented = 501,
+    kBadGateway = 502,
+    kServiceUnavailable = 503,
+    kGatewayTime_out = 504,
+    kHttpVersionNotSupported = 505,
+};
 
 }  // namespace ziapi::http

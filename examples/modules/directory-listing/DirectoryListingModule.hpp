@@ -60,7 +60,7 @@ public:
             res.body = ss.str();
             return;
         }
-        res.status_code = ziapi::http::code::kNotFound;
+        res.status_code = ziapi::http::Code::kNotFound;
         res.reason = ziapi::http::reason::kNotFound;
     }
 
