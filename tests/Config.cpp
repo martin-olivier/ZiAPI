@@ -54,7 +54,7 @@ TEST(Config, SimpleDict)
         {"modules_count", std::make_unique<Node>(10)},
     };
 
-    ASSERT_EQ(dict.AsDict()["modules_count"]->AsInt(), 10);
+    ASSERT_EQ(dict.AsDict().at("modules_count")->AsInt(), 10);
 }
 
 TEST(Config, NestedAccess)
