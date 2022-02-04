@@ -9,7 +9,7 @@
 
 Welcome to the **ZIAPI** repository which contains the interfaces and concrete implementations that make up our Epitech Zia project API proposal.
 
-**ZIAPI** was elected as the city-wide API for the **Paris and Marseille Region** in **2022**.
+**ZIAPI** was elected as the city-wide API for the **Paris and Marseille Regions** in **2022**.
 
 [**ZIAPI Official Website**](https://ziapi.vercel.app)  
 [**ZIAPI Official Discord**](https://discord.gg/CzKv6dGXmf)
