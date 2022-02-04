@@ -12,7 +12,7 @@ Welcome to the **ZIAPI** repository which contains the interfaces and concrete i
 **ZIAPI** was elected as the city-wide API for the **Paris Region** in **2022**.
 
 [**ZIAPI Official Website**](https://ziapi.vercel.app)  
-[**ZIAPI Official Discord**](https://discord.gg/ztptguX2sE)
+[**ZIAPI Official Discord**](https://discord.gg/CzKv6dGXmf)
 
 ## Documentation
 
