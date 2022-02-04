@@ -8,6 +8,7 @@
 #include <variant>
 #include <vector>
 
+#include "typename.hpp"
 namespace ziapi::config {
 
 enum Type {
@@ -42,13 +43,14 @@ public:
     using NodeVariant::NodeVariant;
 
     /// Used to construct a Node from a Dict
-    Node(std::initializer_list<Dict::value_type> values)
+    Node(std::initializer_list<Dict::value_type> values) : NodeVariant(Dict())
     {
         std::visit(
-            [&](auto &d) {
-                if constexpr (std::is_same_v<decltype(&d), Dict &>) {
+            [&](auto &d) mutable {
+                if constexpr (std::is_same_v<decltype(d), Dict &>) {
                     for (auto &pair : values) {
-                        d.try_emplace(std::move(pair));
+                        d.emplace(std::move(
+                            const_cast<std::remove_const_t<std::remove_reference_t<decltype(pair)>> &>(pair)));
                     }
                 }
             },
@@ -56,14 +58,16 @@ public:
     }
 
     /// Used to construct a Node from an Array
-    Node(std::initializer_list<Array::value_type> values)
+    Node(std::initializer_list<Array::value_type> values) : NodeVariant(Array())
     {
         std::visit(
-            [&](auto &d) {
-                if constexpr (std::is_same_v<decltype(&d), Array &>) {
-                    for (auto &pair : values) {
-                        d.try_emplace(std::move(pair));
+            [&](auto &d) mutable {
+                if constexpr (std::is_same_v<decltype(d), Array &>) {
+                    for (auto &&pair : values) {
+                        d.emplace_back(std::move(
+                            const_cast<std::remove_const_t<std::remove_reference_t<decltype(pair)>> &>(pair)));
                     }
+                    // } else {
                 }
             },
             (NodeVariant &)*this);
