@@ -34,7 +34,7 @@ public:
     [[nodiscard]] bool ShouldHandle(const ziapi::http::Context &ctx, const ziapi::http::Request &req) const override
     {
         /// We only want to handle GET requests.
-        return req.method == ziapi::http::method::GET;
+        return req.method == ziapi::http::method::kGet;
     }
 
     void Handle(ziapi::http::Context &ctx, const ziapi::http::Request &req, ziapi::http::Response &res) override
@@ -60,8 +60,8 @@ public:
             res.body = ss.str();
             return;
         }
-        res.status_code = ziapi::http::code::NOT_FOUND;
-        res.reason = ziapi::http::reason::NOT_FOUND;
+        res.status_code = ziapi::http::Code::kNotFound;
+        res.reason = ziapi::http::reason::kNotFound;
     }
 
 private:

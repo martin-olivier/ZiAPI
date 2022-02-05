@@ -18,8 +18,8 @@ TEST(Compressor, compressionRate)
     CompressorModule compressor;
     ziapi::http::Context ctx;
     ziapi::http::Response res = {
-        11,                                                      // Version
-        200,                                                     // Status code
+        ziapi::http::Version::kV1_1,                             // Version
+        ziapi::http::Code::kOK,                                  // Status code
         std::string("OK"),                                       // reason
         std::map<std::string, std::string>({}),                  // fields
         std::string("not compressed stuff blabla omg so long"),  // body

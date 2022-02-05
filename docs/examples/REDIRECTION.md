@@ -81,8 +81,8 @@ Let's now implement the `Handle()` method. We simply redirect each request to th
 
 void Handle(http::Context &, const http::Request &, http::Response &res)
 {
-    res.fields[ziapi::http::header::LOCATION] = redirection_route_;
-    res.status_code = ziapi::http::code::MOVED_PERMANENTLY;
+    res.fields[ziapi::http::header::kLocation] = redirection_route_;
+    res.status_code = ziapi::http::code::kMovedPermanently;
 }
 
 ...
