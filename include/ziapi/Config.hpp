@@ -1,14 +1,11 @@
 #pragma once
 
-#include <memory>
 #include <optional>
 #include <string>
-#include <type_traits>
 #include <unordered_map>
 #include <variant>
 #include <vector>
 
-#include "typename.hpp"
 namespace ziapi::config {
 
 enum Type {
@@ -31,10 +28,10 @@ using Null = std::nullptr_t;
 
 using String = std::string;
 
-using Array = std::vector<std::unique_ptr<Node>>;
+using Array = std::vector<Node *>;
 
 /// Datatype for json/yaml-like data
-using Dict = std::unordered_map<std::string, std::unique_ptr<Node>>;
+using Dict = std::unordered_map<std::string, Node *>;
 
 using NodeVariant = std::variant<Undefined, Null, bool, int, double, String, Array, Dict>;
 
@@ -43,59 +40,34 @@ public:
     using NodeVariant::NodeVariant;
 
     /// Used to construct a Node from a Dict
-    Node(std::initializer_list<Dict::value_type> values) : NodeVariant(Dict())
-    {
-        std::visit(
-            [&](auto &d) mutable {
-                if constexpr (std::is_same_v<decltype(d), Dict &>) {
-                    for (auto &pair : values) {
-                        d.emplace(std::move(
-                            const_cast<std::remove_const_t<std::remove_reference_t<decltype(pair)>> &>(pair)));
-                    }
-                }
-            },
-            (NodeVariant &)*this);
-    }
+    Node(const std::initializer_list<Dict::value_type> &values) : NodeVariant(Dict(values)){};
 
     /// Used to construct a Node from an Array
-    Node(std::initializer_list<Array::value_type> values) : NodeVariant(Array())
-    {
-        std::visit(
-            [&](auto &d) mutable {
-                if constexpr (std::is_same_v<decltype(d), Array &>) {
-                    for (auto &&pair : values) {
-                        d.emplace_back(std::move(
-                            const_cast<std::remove_const_t<std::remove_reference_t<decltype(pair)>> &>(pair)));
-                    }
-                    // } else {
-                }
-            },
-            (NodeVariant &)*this);
-    }
+    Node(const std::initializer_list<Array::value_type> &values) : NodeVariant(std::vector(values)){};
 
     /// Used to construct a Node from a string
     Node(const char *str) : NodeVariant(std::string(str)){};
 
     /// Shorthand, `node->AsDict()["something"]` become `node["something"]`
-    const Node &operator[](const char *key) const { return *AsDict().at(key); }
+    Node &operator[](const char *key) const { return *AsDict().at(key); }
 
     /// Shorthand, `node->AsDict()["something"]` become `node["something"]`
-    const Node &operator[](const std::string &key) const { return *AsDict().at(key); }
+    Node &operator[](const std::string &key) const { return *AsDict().at(key); }
 
     /// Shorthand, `node->AsArray()[5]` become `node[5]`
-    const Node &operator[](std::size_t index) const { return *AsArray().at(index); }
+    Node &operator[](std::size_t index) const { return *AsArray().at(index); }
 
     /// Casts the variant as a bool. Will throw if actual type differs.
     bool AsBool() const { return std::get<bool>(*this); }
 
     /// Casts the variant as a Dict. Will throw if actual type differs.
-    const Dict &AsDict() const { return std::get<Dict>(*this); }
+    Dict AsDict() const { return std::get<Dict>(*this); }
 
     /// Casts the variant as a String. Will throw if actual type differs.
     String AsString() const { return std::get<String>(*this); }
 
     /// Casts the variant as a Array. Will throw if actual type differs.
-    const Array &AsArray() const { return std::get<Array>(*this); }
+    Array AsArray() const { return std::get<Array>(*this); }
 
     /// Casts the variant as a int. Will throw if actual type differs.
     int AsInt() const { return std::get<int>(*this); }

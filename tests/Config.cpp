@@ -37,11 +37,15 @@ TEST(Config, SimpleBool)
 
 TEST(Config, SimpleArray)
 {
+    Node node_1(10);
+    Node node_2("Hello world");
+    Node node_3(14.5f);
     Node array({
-        std::make_unique<Node>(10),
-        std::make_unique<Node>("Hello world"),
-        std::make_unique<Node>(14.5f),
+        &node_1,
+        &node_2,
+        &node_3,
     });
+
     ASSERT_EQ(array.AsArray()[0]->AsInt(), 10);
     ASSERT_EQ(array.AsArray()[1]->AsString(), "Hello world");
     ASSERT_EQ(array.AsArray()[2]->AsDouble(), 14.5f);
@@ -51,22 +55,23 @@ TEST(Config, SimpleDict)
 {
     Node modules_count(10);
     Node dict = {
-        {"modules_count", std::make_unique<Node>(10)},
+        {"modules_count", &modules_count},
     };
 
-    ASSERT_EQ(dict.AsDict().at("modules_count")->AsInt(), 10);
+    ASSERT_EQ(dict.AsDict()["modules_count"]->AsInt(), 10);
 }
 
 TEST(Config, NestedAccess)
 {
+    Node root("/var/www");
     Node root_node({
-        {"root", std::make_unique<Node>("/var/www")},
+        {"root", &root},
     });
     Node modules_node({
-        {"directoryListing", std::make_unique<Node>(std::move(root_node))},
+        {"directoryListing", &root_node},
     });
     Node cfg({
-        {"modules", std::make_unique<Node>(std::move(modules_node))},
+        {"modules", &modules_node},
     });
 
     ASSERT_EQ(cfg["modules"]["directoryListing"]["root"].AsString(), "/var/www");
