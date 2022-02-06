@@ -2,7 +2,7 @@
 
 ![Banner](docs/assets/project_banner.png)
 
-[![ZiAPI](https://img.shields.io/badge/ZiAPI-v2.1.0-blue.svg)](https://github.com/martin-olivier/ZiAPI/releases/tag/v2.1.0)
+[![ZiAPI](https://img.shields.io/badge/ZiAPI-v2.2.0-blue.svg)](https://github.com/martin-olivier/ZiAPI/releases/tag/v2.2.0)
 [![CPP Version](https://img.shields.io/badge/C++-17_and_above-darkgreen.svg)](https://isocpp.org/)
 [![Discord](https://img.shields.io/discord/934852777136513075)](https://discord.gg/ztptguX2sE)
 [![workflow](https://github.com/martin-olivier/ZiAPI/actions/workflows/CI.yml/badge.svg)](https://github.com/martin-olivier/ZiAPI/actions/workflows/CI.yml)
@@ -38,7 +38,7 @@ include(ExternalProject)
 ExternalProject_Add(
     ziapi
     GIT_REPOSITORY  https://github.com/martin-olivier/ZiAPI.git
-    GIT_TAG         v2.1.0
+    GIT_TAG         v2.2.0
     INSTALL_COMMAND ""
     TEST_COMMAND    ""
 )
