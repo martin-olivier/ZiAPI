@@ -55,6 +55,9 @@ jobs:
             - name: Install Valgrind
               run: sudo apt install -y valgrind
 
+            - name: Checkout submodules
+              run: git submodule update --init --recursive
+
             - name: Generate Tests Build File
               run: cmake . -B build_tests -DUNIT_TESTS=ON -DCMAKE_BUILD_TYPE=Debug
 
