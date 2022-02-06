@@ -4,7 +4,7 @@
 
 [![ZiAPI](https://img.shields.io/badge/ZiAPI-v2.2.0-blue.svg)](https://github.com/martin-olivier/ZiAPI/releases/tag/v2.2.0)
 [![CPP Version](https://img.shields.io/badge/C++-17_and_above-darkgreen.svg)](https://isocpp.org/)
-[![Discord](https://img.shields.io/discord/934852777136513075)](https://discord.gg/ztptguX2sE)
+[![Discord](https://img.shields.io/discord/934852777136513075)](https://discord.gg/CzKv6dGXmf)
 [![workflow](https://github.com/martin-olivier/ZiAPI/actions/workflows/CI.yml/badge.svg)](https://github.com/martin-olivier/ZiAPI/actions/workflows/CI.yml)
 
 Welcome to the **ZIAPI** repository which contains the interfaces and concrete implementations that make up our Epitech Zia project API proposal.
@@ -57,7 +57,7 @@ endif()
 
 ## Contact
 
-Feel free to submit any issues on our GitHub repository or ask questions on our [Discord](https://discord.gg/ztptguX2sE)
+Feel free to submit any issues on our GitHub repository or ask questions on our [Discord](https://discord.gg/CzKv6dGXmf)
 
 ## Authors
 
