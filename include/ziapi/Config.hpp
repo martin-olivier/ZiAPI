@@ -40,6 +40,26 @@ struct Node : public NodeVariant {
 public:
     using NodeVariant::NodeVariant;
 
+    static Node FromArray(const std::initializer_list<Node> &values)
+    {
+        Array arr;
+
+        for (auto &value : values) {
+            arr.push_back(std::make_shared<Node>(value));
+        }
+        return arr;
+    }
+
+    static Node FromDict(const std::initializer_list<std::pair<std::string, Node>> &values)
+    {
+        Dict dict;
+
+        for (auto &value : values) {
+            dict[value.first] = std::make_shared<Node>(value.second);
+        }
+        return dict;
+    }
+
     /// Used to construct a Node from a Dict
     Node(const std::initializer_list<Dict::value_type> &values) : NodeVariant(Dict(values)){};
 

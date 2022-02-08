@@ -9,9 +9,9 @@ public:
         // Don't need anything to configure in this implementation
     }
 
-    [[nodiscard]] ziapi::Version GetVersion() const noexcept override { return ziapi::Version{1, 0}; }
+    [[nodiscard]] ziapi::Version GetVersion() const noexcept override { return ziapi::Version{3, 0, 0}; }
 
-    [[nodiscard]] ziapi::Version GetCompatibleApiVersion() const noexcept override { return ziapi::Version{1, 0}; }
+    [[nodiscard]] ziapi::Version GetCompatibleApiVersion() const noexcept override { return ziapi::Version{3, 0, 0}; }
 
     [[nodiscard]] const char *GetName() const noexcept override { return "DecompressorModule"; }
 

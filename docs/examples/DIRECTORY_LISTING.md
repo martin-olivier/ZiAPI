@@ -26,9 +26,9 @@ class DirectoryListingModule : public ziapi::IHandlerModule {
 public:
     void Init(const ziapi::config::Node &cfg) override {}
 
-    [[nodiscard]] ziapi::Version GetVersion() const noexcept override { return {1, 0}; }
+    [[nodiscard]] ziapi::Version GetVersion() const noexcept override { return {3, 0, 0}; }
 
-    [[nodiscard]] ziapi::Version GetCompatibleApiVersion() const noexcept override { return {1, 0}; }
+    [[nodiscard]] ziapi::Version GetCompatibleApiVersion() const noexcept override { return {3, 0, 0}; }
 
     [[nodiscard]] const char *GetName() const noexcept override { return "DirectoryListing"; }
 
