@@ -71,7 +71,7 @@ public:
 };
 
 /**
- *  IRequestOutputQueue is a consumer-only container for HTTP responses.
+ *  IRequestOutputQueue is a consumer-only container for HTTP requests.
  */
 class IRequestOutputQueue {
 public:
