@@ -10,34 +10,12 @@
 
 namespace ziapi::http {
 
-struct Version {
-    Version(int major, int minor) : major(major), minor(minor) {}
-
-    inline bool operator==(const Version &other) const noexcept { return major == other.major && minor == other.minor; }
-
-    inline bool operator!=(const Version &other) const noexcept { return !(*this == other); }
-
-    inline bool operator>(const Version &other) const noexcept { return (*this >= other) && (*this != other); }
-
-    inline bool operator<(const Version &other) const noexcept { return !(*this > other) && other != *this; }
-
-    inline bool operator>=(const Version &other) const noexcept
-    {
-        return (major == other.major ? minor == other.minor ? true : minor > other.minor : major > other.major);
-    }
-
-    inline bool operator<=(const Version &other) const noexcept { return (*this < other) || (*this == other); }
-
-    unsigned int major;
-    unsigned int minor;
-};
-
 /**
  *  Struct that represents an HTTP request message
  */
 struct Request {
-    /// For possible values of version checkout ziapi::http::version.
-    Version version;
+    /// For possible values of version checkout ziapi::http::Version.
+    unsigned int version;
 
     /// For possible values of method checkout ziapi::http::method.
     std::string method;
@@ -53,8 +31,8 @@ struct Request {
  *  Struct that represents an HTTP response message
  */
 struct Response {
-    /// For possible values of version checkout ziapi::http::version.
-    Version version;
+    /// For possible values of version checkout ziapi::http::Version.
+    unsigned int version;
 
     /// For possible values of version checkout ziapi::http::code.
     Code status_code;
