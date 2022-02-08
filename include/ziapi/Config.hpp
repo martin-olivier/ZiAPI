@@ -40,7 +40,8 @@ struct Node : public NodeVariant {
 public:
     using NodeVariant::NodeVariant;
 
-    static Node FromArray(const std::initializer_list<Node> &values)
+    /// Simpler way to construct a node from a Array, it instantiate std::shared_ptr by itself
+    static Node MakeArray(const std::initializer_list<Node> &values)
     {
         Array arr;
 
@@ -50,7 +51,8 @@ public:
         return arr;
     }
 
-    static Node FromDict(const std::initializer_list<std::pair<std::string, Node>> &values)
+    /// Simpler way to construct a node from a Dict, it instantiate std::shared_ptr by itself
+    static Node MakeDict(const std::initializer_list<std::pair<std::string, Node>> &values)
     {
         Dict dict;
 

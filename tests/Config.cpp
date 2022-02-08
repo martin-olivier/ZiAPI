@@ -37,7 +37,7 @@ TEST(Config, SimpleBool)
 
 TEST(Config, SimpleArray)
 {
-    auto array = Node::FromArray({10, "Hello world", 14.5f});
+    auto array = Node::MakeArray({10, "Hello world", 14.5f});
 
     ASSERT_EQ(array.AsArray()[0]->AsInt(), 10);
     ASSERT_EQ(array.AsArray()[1]->AsString(), "Hello world");
@@ -47,15 +47,15 @@ TEST(Config, SimpleArray)
 TEST(Config, SimpleDict)
 {
     Node modules_count(10);
-    auto dict = Node::FromDict({{"modules_count", modules_count}});
+    auto dict = Node::MakeDict({{"modules_count", modules_count}});
 
     ASSERT_EQ(dict.AsDict()["modules_count"]->AsInt(), 10);
 }
 
 TEST(Config, NestedAccess)
 {
-    auto cfg = Node::FromDict({
-        {"modules", Node::FromDict({{"directoryListing", Node::FromDict({{"root", "/var/www"}})}})},
+    auto cfg = Node::MakeDict({
+        {"modules", Node::MakeDict({{"directoryListing", Node::MakeDict({{"root", "/var/www"}})}})},
     });
 
     ASSERT_EQ(cfg["modules"]["directoryListing"]["root"].AsString(), "/var/www");

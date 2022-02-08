@@ -45,20 +45,31 @@ using Node = ziapi::config::Node;
 
 Node obj(
     {
-        {"sources", new Node({
-            new Node("/bin/ls"),
-            new Node(10),
-            new Node(nullptr),
-            new Node(10.5)
+        {"sources", std::make_shared<Node>({
+            std::make_shared<Node>("/bin/ls"),
+            std::make_shared<Node>(10),
+            std::make_shared<Node>(nullptr),
+            std::make_shared<Node>(10.5)
             })
         },
-        {"modules", new Node({
-            {"directoryListing", new Node({
-                {"root", new Node("/var/www")}
+        {"modules", std::make_shared<Node>({
+            {"directoryListing", std::make_shared<Node>({
+                {"root", std::make_shared<Node>("/var/www")}
             })}
         })}
     }
 );
+// or
+
+auto obj = Node::MakeDict({
+    {"sources", Node::MakeArray({ "/bin/ls", 10, nullptr, 10.5 })},
+    {"modules", Node::MakeDict({
+        {"directoryListing", Node::MakeDict({
+            {"root", "/var/www"}
+        })}
+    })}
+})
+
 ```
 #
 ## Data Types
@@ -72,7 +83,7 @@ example of a json containing an `undefined`
 ```
 transcription with our `Config.hpp`
 ```cpp
-new ziapi::config::Node(ziapi::config::Undefined{})
+ziapi::config::Node(ziapi::config::Undefined{})
 ```
 
 
@@ -85,7 +96,7 @@ null
 ```
 transcription with our `Config.hpp`
 ```cpp
-new ziapi::config::Node(nullptr)
+ziapi::config::Node(nullptr)
 ```
 
 ### bool
@@ -97,7 +108,7 @@ true
 ```
 transcription with our `Config.hpp`
 ```cpp
-new ziapi::config::Node(true)
+ziapi::config::Node(true)
 ```
 
 
@@ -110,7 +121,7 @@ example of a json containing an `int`
 ```
 transcription with our `Config.hpp`
 ```cpp
-new ziapi::config::Node(5)
+ziapi::config::Node(5)
 ```
 
 
@@ -124,7 +135,7 @@ example of a json containing a `double`
 
 transcription with our `Config.hpp`
 ```cpp
-new ziapi::config::Node(4.2)
+ziapi::config::Node(4.2)
 ```
 
 
@@ -137,7 +148,7 @@ example of a json containing an `String`
 ```
 transcription with our `Config.hpp`
 ```cpp
-new ziapi::config::Node("Hello World!")
+ziapi::config::Node("Hello World!")
 ```
 
 
@@ -153,11 +164,15 @@ transcription with our `Config.hpp`
 ```cpp
 using Node = ziapi::config::Node;
 
-new Node({
-    new Node("Hello"),
-    new Node("World"),
-    new Node("!")
-})
+Node({
+    std::make_shared<Node>("Hello"),
+    std::make_shared<Node>("World"),
+    std::make_shared<Node>("!")
+});
+
+// or
+
+Node::MakeArray({ "Hello", "World", "!" });
 ```n
 
 ### Dict
@@ -177,11 +192,21 @@ transcription with our `Config.hpp`
 ```cpp
 using Node = ziapi::config::Node;
 
-new Node({
-    {"age", new Node(19)},
-    {"first_name", new Node("Charlie")},
-    {"last_name", new Node("Chou")},
-    {"is_sexy", new Node(true)}
+Node({
+    {"age", std::make_shared<Node>(19)},
+    {"first_name", std::make_shared<Node>("Charlie")},
+    {"last_name", std::make_shared<Node>("Chou")},
+    {"is_sexy", std::make_shared<Node>(true)}
 })
+
+// or
+
+Node::MakeDict({
+    {"age", 19},
+    {"first_name", "Charlie"},
+    {"last_name", "Chou"},
+    {"is_sexy", true},
+})
+
 ```
 
