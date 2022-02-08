@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <optional>
 #include <string>
 #include <unordered_map>
@@ -28,10 +29,10 @@ using Null = std::nullptr_t;
 
 using String = std::string;
 
-using Array = std::vector<Node *>;
+using Array = std::vector<std::shared_ptr<Node>>;
 
 /// Datatype for json/yaml-like data
-using Dict = std::unordered_map<std::string, Node *>;
+using Dict = std::unordered_map<std::string, std::shared_ptr<Node>>;
 
 using NodeVariant = std::variant<Undefined, Null, bool, int, double, String, Array, Dict>;
 
@@ -39,11 +40,27 @@ struct Node : public NodeVariant {
 public:
     using NodeVariant::NodeVariant;
 
-    /// Used to construct a Node from a Dict
-    Node(const std::initializer_list<Dict::value_type> &values) : NodeVariant(Dict(values)){};
+    /// Simpler way to construct a node from a Array, it instantiate std::shared_ptr by itself
+    static Node MakeArray(const std::initializer_list<Node> &values)
+    {
+        Array arr;
 
-    /// Used to construct a Node from an Array
-    Node(const std::initializer_list<Array::value_type> &values) : NodeVariant(std::vector(values)){};
+        for (auto &value : values) {
+            arr.push_back(std::make_shared<Node>(value));
+        }
+        return arr;
+    }
+
+    /// Simpler way to construct a node from a Dict, it instantiate std::shared_ptr by itself
+    static Node MakeDict(const std::initializer_list<std::pair<std::string, Node>> &values)
+    {
+        Dict dict;
+
+        for (auto &value : values) {
+            dict[value.first] = std::make_shared<Node>(value.second);
+        }
+        return dict;
+    }
 
     /// Used to construct a Node from a string
     Node(const char *str) : NodeVariant(std::string(str)){};

@@ -14,7 +14,7 @@ namespace ziapi::http {
  *  Struct that represents an HTTP request message
  */
 struct Request {
-    /// For possible values of version checkout ziapi::http::version.
+    /// For possible values of version checkout ziapi::http::Version.
     Version version;
 
     /// For possible values of method checkout ziapi::http::method.
@@ -31,7 +31,7 @@ struct Request {
  *  Struct that represents an HTTP response message
  */
 struct Response {
-    /// For possible values of version checkout ziapi::http::version.
+    /// For possible values of version checkout ziapi::http::Version.
     Version version;
 
     /// For possible values of version checkout ziapi::http::code.
@@ -44,11 +44,11 @@ struct Response {
 
     std::string body;
 
-    void Bootstrap(Code status_code = Code::kOK, std::string reason = reason::kOK, Version version = Version::kV1_1)
+    void Bootstrap(Code status_code_ = Code::kOK, std::string reason_ = reason::kOK, Version version_ = Version::kV1_1)
     {
-        this->status_code = status_code;
-        this->reason = reason;
-        this->version = version;
+        status_code = status_code_;
+        reason = reason_;
+        version = version_;
     }
 };
 
@@ -71,7 +71,7 @@ public:
 };
 
 /**
- *  IRequestOutputQueue is a consumer-only container for HTTP responses.
+ *  IRequestOutputQueue is a consumer-only container for HTTP requests.
  */
 class IRequestOutputQueue {
 public:

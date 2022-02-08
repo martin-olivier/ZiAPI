@@ -26,9 +26,9 @@ class DirectoryListingModule : public ziapi::IHandlerModule {
 public:
     void Init(const ziapi::config::Node &cfg) override {}
 
-    [[nodiscard]] ziapi::Version GetVersion() const noexcept override { return {1, 0}; }
+    [[nodiscard]] ziapi::Version GetVersion() const noexcept override { return {3, 0, 0}; }
 
-    [[nodiscard]] ziapi::Version GetCompatibleApiVersion() const noexcept override { return {1, 0}; }
+    [[nodiscard]] ziapi::Version GetCompatibleApiVersion() const noexcept override { return {3, 0, 0}; }
 
     [[nodiscard]] const char *GetName() const noexcept override { return "DirectoryListing"; }
 
@@ -60,7 +60,7 @@ Well, we can add the path to this directory as a variable of our config file and
 void Init(const ziapi::config::Node &cfg) override
 {
     /// In our config, we can specify which folder our module serves.
-    root_ = cfg.AsDict()["modules"]->AsDict()["directoryListing"]->AsDict()["root"]->AsString();
+    root_ = cfg["modules"]["directoryListing"]["root"].AsString();
 }
 
 ...

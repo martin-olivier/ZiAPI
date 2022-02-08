@@ -11,7 +11,7 @@ public:
     void Init(const ziapi::config::Node &cfg) override
     {
         /// We'll load from the configuration where to redirect to!
-        redirection_route_ = cfg.AsDict()["modules"]->AsDict()["redirection"]->AsDict()["route"]->AsString();
+        redirection_route_ = cfg["modules"]["redirection"]["route"];
     }
 
     void Handle(ziapi::http::Context &ctx, const ziapi::http::Request &req, ziapi::http::Response &res) override
@@ -34,9 +34,9 @@ public:
         return 0.9f;
     }
 
-    [[nodiscard]] ziapi::Version GetVersion() const noexcept { return {0, 1}; }
+    [[nodiscard]] ziapi::Version GetVersion() const noexcept { return {3, 0, 0}; }
 
-    [[nodiscard]] ziapi::Version GetCompatibleApiVersion() const noexcept { return {0, 1}; }
+    [[nodiscard]] ziapi::Version GetCompatibleApiVersion() const noexcept { return {3, 0, 0}; }
 
     [[nodiscard]] const char *GetName() const noexcept { return "Redirection Module"; }
 

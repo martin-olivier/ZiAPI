@@ -11,6 +11,7 @@ General documentation pages will help you understand the general concepts of the
 - [Getting started](general/GETTING_STARTED.md)
 - [Why choose ZIAPI](general/WHY_US.md)
 - [Modules](general/MODULES.md)
+- [ZIAPI Standards](general/STANDARDS.md)
 - [Contributing](general/CONTRIBUTING.md)
 
 ## Guides
@@ -19,6 +20,7 @@ Guides are step by step instructions on how to do pretty much anything with the 
 
 - [Install and build](guides/INSTALL_AND_BUILD.md)
 - [Module 101](guides/MODULES_101.md)
+- [The config object](guides/CONFIG.md)
 - [Implementing a handler module](guides/IMPLEMENT_HANDLER.md)
 - [Implementing a pre-processor module](guides/IMPLEMENT_PREPROCESSOR.md)
 - [Implementing a post-processor module](guides/IMPLEMENT_POSTPROCESSOR.md)
@@ -30,3 +32,4 @@ Module examples are code tutorials on how to build a variety of modules.
 
 - [Logger Module Tutorial](examples/LOGGER.md)
 - [Directory Listing Module Tutorial](examples/DIRECTORY_LISTING.md)
+- [Redirection Module Tutorial](examples/REDIRECTION.md)

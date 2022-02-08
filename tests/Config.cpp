@@ -16,7 +16,7 @@ TEST(Config, SimpleInt)
 
 TEST(Config, SimpleString)
 {
-    Node node(String("Hello world"));
+    Node node("Hello world");
 
     ASSERT_EQ(node.AsString(), "Hello world");
 }
@@ -37,41 +37,24 @@ TEST(Config, SimpleBool)
 
 TEST(Config, SimpleArray)
 {
-    Node node_1(10);
-    Node node_2("Hello world");
-    Node node_3(14.5f);
-    Node array({
-        &node_1,
-        &node_2,
-        &node_3,
-    });
+    auto array = Node::MakeArray({10, "Hello world", 14.5f});
 
-    ASSERT_EQ(array.AsArray()[0]->AsInt(), 10);
-    ASSERT_EQ(array.AsArray()[1]->AsString(), "Hello world");
-    ASSERT_EQ(array.AsArray()[2]->AsDouble(), 14.5f);
+    ASSERT_EQ(array[(std::size_t)0].AsInt(), 10);
+    ASSERT_EQ(array[1].AsString(), "Hello world");
+    ASSERT_EQ(array[2].AsDouble(), 14.5f);
 }
 
 TEST(Config, SimpleDict)
 {
-    Node modules_count(10);
-    Node dict = {
-        {"modules_count", &modules_count},
-    };
+    auto dict = Node::MakeDict({{"modules_count", 10}});
 
-    ASSERT_EQ(dict.AsDict()["modules_count"]->AsInt(), 10);
+    ASSERT_EQ(dict["modules_count"].AsInt(), 10);
 }
 
 TEST(Config, NestedAccess)
 {
-    Node root("/var/www");
-    Node root_node({
-        {"root", &root},
-    });
-    Node modules_node({
-        {"directoryListing", &root_node},
-    });
-    Node cfg({
-        {"modules", &modules_node},
+    auto cfg = Node::MakeDict({
+        {"modules", Node::MakeDict({{"directoryListing", Node::MakeDict({{"root", "/var/www"}})}})},
     });
 
     ASSERT_EQ(cfg["modules"]["directoryListing"]["root"].AsString(), "/var/www");

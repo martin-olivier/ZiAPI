@@ -42,7 +42,7 @@ include(ExternalProject)
 ExternalProject_Add(
     ziapi
     GIT_REPOSITORY  https://github.com/martin-olivier/ZiAPI.git
-    GIT_TAG         v2.2.0
+    GIT_TAG         v3.0.0
     INSTALL_COMMAND ""
     TEST_COMMAND    ""
 )
@@ -82,9 +82,9 @@ public:
 
     void Init(const ziapi::config::Node &) override {}
 
-    ziapi::Version GetVersion() const noexcept override { return {1, 0}; }
+    ziapi::Version GetVersion() const noexcept override { return {3, 0, 0}; }
     
-    ziapi::Version GetCompatibleApiVersion() const noexcept override { return {1, 0}; }
+    ziapi::Version GetCompatibleApiVersion() const noexcept override { return {3, 0, 0}; }
 
     [[nodiscard]] virtual const char *GetName() const noexcept override { return "module_name"; }
 
