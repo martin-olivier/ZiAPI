@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <optional>
 #include <string>
 #include <unordered_map>
@@ -28,10 +29,10 @@ using Null = std::nullptr_t;
 
 using String = std::string;
 
-using Array = std::vector<Node *>;
+using Array = std::vector<std::shared_ptr<Node>>;
 
 /// Datatype for json/yaml-like data
-using Dict = std::unordered_map<std::string, Node *>;
+using Dict = std::unordered_map<std::string, std::shared_ptr<Node>>;
 
 using NodeVariant = std::variant<Undefined, Null, bool, int, double, String, Array, Dict>;
 

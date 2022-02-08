@@ -37,13 +37,10 @@ TEST(Config, SimpleBool)
 
 TEST(Config, SimpleArray)
 {
-    Node node_1(10);
-    Node node_2("Hello world");
-    Node node_3(14.5f);
     Node array({
-        &node_1,
-        &node_2,
-        &node_3,
+        std::make_shared<Node>(10),
+        std::make_shared<Node>("Hello world"),
+        std::make_shared<Node>(14.5f),
     });
 
     ASSERT_EQ(array.AsArray()[0]->AsInt(), 10);
@@ -55,7 +52,7 @@ TEST(Config, SimpleDict)
 {
     Node modules_count(10);
     Node dict = {
-        {"modules_count", &modules_count},
+        {"modules_count", std::make_shared<Node>(modules_count)},
     };
 
     ASSERT_EQ(dict.AsDict()["modules_count"]->AsInt(), 10);
@@ -65,13 +62,13 @@ TEST(Config, NestedAccess)
 {
     Node root("/var/www");
     Node root_node({
-        {"root", &root},
+        {"root", std::make_shared<Node>(root)},
     });
     Node modules_node({
-        {"directoryListing", &root_node},
+        {"directoryListing", std::make_shared<Node>(root_node)},
     });
     Node cfg({
-        {"modules", &modules_node},
+        {"modules", std::make_shared<Node>(modules_node)},
     });
 
     ASSERT_EQ(cfg["modules"]["directoryListing"]["root"].AsString(), "/var/www");
