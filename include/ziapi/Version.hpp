@@ -6,7 +6,7 @@ namespace ziapi {
  *  Semantic versioning structure with a major and a minor version
  */
 struct Version {
-    Version(int major, int minor, int patch) : major(major), minor(minor), patch(patch) {}
+    Version(int major_, int minor_, int patch_) : major(major_), minor(minor_), patch(patch_) {}
 
     inline bool operator==(const Version &other) const noexcept
     {
