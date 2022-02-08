@@ -43,19 +43,16 @@ TEST(Version, greater)
     ziapi::Version a{1, 0, 3};
     ziapi::Version b{1, 0, 3};
 
-    std::cout << (a > b) << std::endl;
     ASSERT_FALSE(a > b);
 
     a = ziapi::Version{1, 1, 2};
     b = ziapi::Version{1, 1, 0};
 
-    std::cout << (a > b) << std::endl;
     ASSERT_TRUE(a > b);
 
     a = ziapi::Version{2, 0, 2};
     b = ziapi::Version{3, 1, 2};
 
-    std::cout << (a > b) << std::endl;
     ASSERT_FALSE(a > b);
 }
 
