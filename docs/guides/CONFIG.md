@@ -2,9 +2,9 @@
 
 In this guide we will learn how to use our configuration, to setup all of your modules easily.
 
-## `Node` class
+## The `Node` object
 
-First, let's take a look at the `Node` definition
+First, let's take a look at the definition of `ziapi::config::Node`.
 
 ```cpp
 using NodeVariant = std::variant<Undefined, Null, bool, int, double, String, Array, Dict>;
@@ -17,7 +17,8 @@ The `std::variant` declines all the possible data types available in JSON, YAML,
 
 Let's look at a simple example:
 
-Imagine you have something like
+Imagine you have a configuration file of the following form:
+
 ```json
 {
     "sources": ["/bin/ls", 10, null, 10.5],
@@ -28,7 +29,9 @@ Imagine you have something like
     }
 }
 ```
-or
+
+Or its YAML equivalent
+
 ```yaml
 sources:
   - "/bin/ls"
@@ -39,7 +42,9 @@ modules:
   directoryListing:
     root: /var/www
 ```
-You could generate it like so
+
+You could represent it using a `ziapi::config::Node` like so
+
 ```cpp
 using Node = ziapi::config::Node;
 
@@ -59,7 +64,8 @@ Node obj(
         })}
     }
 );
-// or
+
+// Or using helper static methods
 
 auto obj = Node::MakeDict({
     {"sources", Node::MakeArray({ "/bin/ls", 10, nullptr, 10.5 })},
@@ -71,113 +77,115 @@ auto obj = Node::MakeDict({
 })
 
 ```
-#
+
 ## Data Types
 
-### Undefined
+### `Undefined`
 
-example of a json containing an `undefined`
+The `Undefined` data type represents an empty configuration, much like an empty file.
 
-```json
-
-```
-transcription with our `Config.hpp`
 ```cpp
 ziapi::config::Node(ziapi::config::Undefined{})
 ```
 
+### `Null`
 
-### Null
-
-example of a json containing a `null`
+The `Null` data type represents a boolean value. So the following JSON:
 
 ```json
 null
 ```
-transcription with our `Config.hpp`
+
+Would translate to
+
 ```cpp
 ziapi::config::Node(nullptr)
 ```
 
-### bool
+### `bool`
 
-example of a json containing a `bool`
+The `bool` data type represents a boolean value. So the following JSON:
 
 ```json
 true
 ```
-transcription with our `Config.hpp`
+
+Would translate to
+
 ```cpp
 ziapi::config::Node(true)
 ```
 
+### `int`
 
-### int
-
-example of a json containing an `int`
+The `int` data type represents an integer value. So the following JSON:
 
 ```json
 5
 ```
-transcription with our `Config.hpp`
+
+Would translate to
+
 ```cpp
 ziapi::config::Node(5)
 ```
 
+### `double`
 
-### double
-
-example of a json containing a `double`
+The `double` data type represents a floating point value. So the following JSON:
 
 ```json
 4.2
 ```
 
-transcription with our `Config.hpp`
+Would translate to
+
 ```cpp
 ziapi::config::Node(4.2)
 ```
 
+### `String`
 
-### String
-
-example of a json containing an `String`
+The `String` data type represents a string value. So the following JSON:
 
 ```json
 "Hello World!"
 ```
-transcription with our `Config.hpp`
+
+Would translate to
+
 ```cpp
 ziapi::config::Node("Hello World!")
 ```
 
 
-### Array
+### `Array`
 
-example of a json containing an `Array`
+The `Array` data type represents an array of values. So the following JSON:
 
 ```json
 ["Hello", "World", "!"]
 ```
 
-transcription with our `Config.hpp`
+Would translate to
+
 ```cpp
-using Node = ziapi::config::Node;
-
-Node({
-    std::make_shared<Node>("Hello"),
-    std::make_shared<Node>("World"),
-    std::make_shared<Node>("!")
+ziapi::config::Node({
+    std::make_shared<ziapi::config::Node>("Hello"),
+    std::make_shared<ziapi::config::Node>("World"),
+    std::make_shared<ziapi::config::Node>("!")
 });
+```
 
-// or
+Which is equivalent to
 
-Node::MakeArray({ "Hello", "World", "!" });
-```n
+```c++
+ziapi::config::Node::MakeArray({ "Hello", "World", "!" });
+```
 
-### Dict
+### `Dict`
 
-example of a json containing a `Dict`
+The `Dict` data type represents a dictionary of values. So the following JSON:
 
 ```json
 {
@@ -188,25 +196,24 @@ example of a json containing a `Dict`
 }
 ```
 
-transcription with our `Config.hpp`
+Would translate to
+
 ```cpp
-using Node = ziapi::config::Node;
-
-Node({
-    {"age", std::make_shared<Node>(19)},
-    {"first_name", std::make_shared<Node>("Charlie")},
-    {"last_name", std::make_shared<Node>("Chou")},
-    {"is_sexy", std::make_shared<Node>(true)}
+ziapi::config::Node({
+    {"age", std::make_shared<ziapi::config::Node>(19)},
+    {"first_name", std::make_shared<ziapi::config::Node>("Charlie")},
+    {"last_name", std::make_shared<ziapi::config::Node>("Chou")},
+    {"is_sexy", std::make_shared<ziapi::config::Node>(true)}
 })
+```
 
-// or
+Which is equivalent to
 
-Node::MakeDict({
+```c++
+ziapi::config::Node::MakeDict({
     {"age", 19},
     {"first_name", "Charlie"},
     {"last_name", "Chou"},
     {"is_sexy", true},
 })
-
 ```
-

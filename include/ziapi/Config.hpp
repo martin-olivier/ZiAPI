@@ -62,12 +62,6 @@ public:
         return dict;
     }
 
-    /// Used to construct a Node from a Dict
-    Node(const std::initializer_list<Dict::value_type> &values) : NodeVariant(Dict(values)){};
-
-    /// Used to construct a Node from an Array
-    Node(const std::initializer_list<Array::value_type> &values) : NodeVariant(std::vector(values)){};
-
     /// Used to construct a Node from a string
     Node(const char *str) : NodeVariant(std::string(str)){};
 

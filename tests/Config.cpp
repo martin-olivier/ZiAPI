@@ -16,7 +16,7 @@ TEST(Config, SimpleInt)
 
 TEST(Config, SimpleString)
 {
-    Node node(String("Hello world"));
+    Node node("Hello world");
 
     ASSERT_EQ(node.AsString(), "Hello world");
 }
