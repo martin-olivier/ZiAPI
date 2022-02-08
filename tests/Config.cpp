@@ -46,8 +46,7 @@ TEST(Config, SimpleArray)
 
 TEST(Config, SimpleDict)
 {
-    Node modules_count(10);
-    auto dict = Node::MakeDict({{"modules_count", modules_count}});
+    auto dict = Node::MakeDict({{"modules_count", 10}});
 
     ASSERT_EQ(dict["modules_count"].AsInt(), 10);
 }
