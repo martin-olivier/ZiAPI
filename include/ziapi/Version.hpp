@@ -21,15 +21,9 @@ struct Version {
 
     inline bool operator>=(const Version &other) const noexcept
     {
-        return (
-            major == other.major
-                ? minor == other.minor 
-                    ? patch == other.patch 
-                        ? true 
-                        : patch > other.patch
-                    : minor > other.minor
-                : major > other.major 
-        );
+        return (major == other.major
+                    ? minor == other.minor ? patch == other.patch ? true : patch > other.patch : minor > other.minor
+                    : major > other.major);
     }
 
     inline bool operator<=(const Version &other) const noexcept { return (*this < other) || (*this == other); }

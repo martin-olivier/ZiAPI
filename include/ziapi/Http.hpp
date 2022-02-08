@@ -10,6 +10,28 @@
 
 namespace ziapi::http {
 
+struct Version {
+    Version(int major, int minor) : major(major), minor(minor) {}
+
+    inline bool operator==(const Version &other) const noexcept { return major == other.major && minor == other.minor; }
+
+    inline bool operator!=(const Version &other) const noexcept { return !(*this == other); }
+
+    inline bool operator>(const Version &other) const noexcept { return (*this >= other) && (*this != other); }
+
+    inline bool operator<(const Version &other) const noexcept { return !(*this > other) && other != *this; }
+
+    inline bool operator>=(const Version &other) const noexcept
+    {
+        return (major == other.major ? minor == other.minor ? true : minor > other.minor : major > other.major);
+    }
+
+    inline bool operator<=(const Version &other) const noexcept { return (*this < other) || (*this == other); }
+
+    unsigned int major;
+    unsigned int minor;
+};
+
 /**
  *  Struct that represents an HTTP request message
  */
