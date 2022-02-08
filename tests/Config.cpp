@@ -39,9 +39,9 @@ TEST(Config, SimpleArray)
 {
     auto array = Node::MakeArray({10, "Hello world", 14.5f});
 
-    ASSERT_EQ(array.AsArray()[0]->AsInt(), 10);
-    ASSERT_EQ(array.AsArray()[1]->AsString(), "Hello world");
-    ASSERT_EQ(array.AsArray()[2]->AsDouble(), 14.5f);
+    ASSERT_EQ(array[(std::size_t)0].AsInt(), 10);
+    ASSERT_EQ(array[1].AsString(), "Hello world");
+    ASSERT_EQ(array[2].AsDouble(), 14.5f);
 }
 
 TEST(Config, SimpleDict)
@@ -49,7 +49,7 @@ TEST(Config, SimpleDict)
     Node modules_count(10);
     auto dict = Node::MakeDict({{"modules_count", modules_count}});
 
-    ASSERT_EQ(dict.AsDict()["modules_count"]->AsInt(), 10);
+    ASSERT_EQ(dict["modules_count"].AsInt(), 10);
 }
 
 TEST(Config, NestedAccess)
