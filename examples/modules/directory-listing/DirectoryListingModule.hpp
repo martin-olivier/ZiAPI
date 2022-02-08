@@ -11,7 +11,7 @@ public:
         /// In our config, we can specify which folder our module serves.
         /// We fetch the "modules.directoryListing.root" variable from the config
         /// as a string.
-        root_ = cfg.AsDict()["modules"]->AsDict()["directoryListing"]->AsDict()["root"]->AsString();
+        root_ = cfg["modules"]["directoryListing"]["root"].AsString();
     }
 
     [[nodiscard]] ziapi::Version GetVersion() const noexcept override { return {3, 0, 0}; }

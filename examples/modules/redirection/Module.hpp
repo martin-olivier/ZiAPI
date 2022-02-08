@@ -11,7 +11,7 @@ public:
     void Init(const ziapi::config::Node &cfg) override
     {
         /// We'll load from the configuration where to redirect to!
-        redirection_route_ = cfg.AsDict()["modules"]->AsDict()["redirection"]->AsDict()["route"]->AsString();
+        redirection_route_ = cfg["modules"]["redirection"]["route"];
     }
 
     void Handle(ziapi::http::Context &ctx, const ziapi::http::Request &req, ziapi::http::Response &res) override

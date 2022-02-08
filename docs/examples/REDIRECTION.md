@@ -55,7 +55,7 @@ Let's load from the config the route to which we will redirect requests. We'll s
 void Init(const Config &cfg)
 {
     /// We'll load from the configuration where to redirect to!
-    redirection_route_ = cfg.AsDict()["modules"]->AsDict()["redirection"]->AsDict()["route"]->AsString();
+    redirection_route_ = cfg["modules"]["redirection"]["route"];
 }
 
 ...

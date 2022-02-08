@@ -60,7 +60,7 @@ Well, we can add the path to this directory as a variable of our config file and
 void Init(const ziapi::config::Node &cfg) override
 {
     /// In our config, we can specify which folder our module serves.
-    root_ = cfg.AsDict()["modules"]->AsDict()["directoryListing"]->AsDict()["root"]->AsString();
+    root_ = cfg["modules"]["directoryListing"]["root"].AsString();
 }
 
 ...
