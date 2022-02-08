@@ -15,7 +15,7 @@ namespace ziapi::http {
  */
 struct Request {
     /// For possible values of version checkout ziapi::http::Version.
-    unsigned int version;
+    Version version;
 
     /// For possible values of method checkout ziapi::http::method.
     std::string method;
@@ -32,7 +32,7 @@ struct Request {
  */
 struct Response {
     /// For possible values of version checkout ziapi::http::Version.
-    unsigned int version;
+    Version version;
 
     /// For possible values of version checkout ziapi::http::code.
     Code status_code;
