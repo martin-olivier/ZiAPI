@@ -47,6 +47,8 @@ You could represent it using a `ziapi::config::Node` like so
 
 ```cpp
 using Node = ziapi::config::Node;
+using Dict = ziapi::config::Dict;
+using Array = ziapi::config::Array;
 
 Node obj(
     {
@@ -75,7 +77,31 @@ auto obj = Node::MakeDict({
         })}
     })}
 })
+```
+### More informations about Dict and Array helper functions
+```cpp
+// You can also give the helper methods a vector representing your array or dictionnary
+// The helper functions will automatically transform your contained Nodes into shared_ptr   
 
+std::vector<std::pair<std::string, Node>> dictionnary_vector;
+// ... Fill the dictionnary vector
+Node dictionnary_node = Node::MakeDict(dictionnary_vector)
+
+std::vector<Node> array_vector;
+// ... Fill the array vector
+Node array_node = Node::MakeArray(array_vector)
+
+
+// You can of course build them from the Node base types
+// In this case, you're responsible of giving the values as shared_ptr and converting the final variable as a Node
+
+Dict dictionnary;
+dictionnary["modules_count"] = std::make_shared<Node>(10);
+Node dictionnary_node(dictionnary);
+
+Array arr;
+arr.emplace_back(std::make_shared("/bin/ls"));
+Node array_node(arr);
 ```
 
 ## Data Types
@@ -170,17 +196,20 @@ The `Array` data type represents an array of values. So the following JSON:
 Would translate to
 
 ```cpp
-ziapi::config::Node({
+ziapi::config::Array arr({
     std::make_shared<ziapi::config::Node>("Hello"),
     std::make_shared<ziapi::config::Node>("World"),
     std::make_shared<ziapi::config::Node>("!")
 });
+
+ziapi::config::Node arr_node(arr);
 ```
 
 Which is equivalent to
 
 ```c++
-ziapi::config::Node::MakeArray({ "Hello", "World", "!" });
+auto array_node = ziapi::config::Node::MakeArray({ "Hello", "World", "!" }); 
+// vector<Node> can also be passed as a parameter
 ```
 
 ### `Dict`
@@ -199,21 +228,23 @@ The `Dict` data type represents a dictionary of values. So the following JSON:
 Would translate to
 
 ```cpp
-ziapi::config::Node({
+ziapi::config::Dict dict({
     {"age", std::make_shared<ziapi::config::Node>(19)},
     {"first_name", std::make_shared<ziapi::config::Node>("Charlie")},
     {"last_name", std::make_shared<ziapi::config::Node>("Chou")},
     {"is_sexy", std::make_shared<ziapi::config::Node>(true)}
 })
+
+ziapi::config::Node node_dict(dict);
 ```
 
 Which is equivalent to
 
 ```c++
-ziapi::config::Node::MakeDict({
+auto node_dict = ziapi::config::Node::MakeDict({
     {"age", 19},
     {"first_name", "Charlie"},
     {"last_name", "Chou"},
     {"is_sexy", true},
-})
+}) // vector<std::string, Node> can also be passed as a parameter
 ```
