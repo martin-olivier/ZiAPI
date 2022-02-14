@@ -17,13 +17,13 @@ struct Request {
     /// For possible values of version checkout ziapi::http::Version.
     Version version;
 
-    /// For possible values of method checkout ziapi::http::method.
-    std::string method;
-
     /// The request target contains the route and the query parameters.
     /// The route is simply the path of the request, like `/users/profile`.
     /// The query parameters are the parameters of the request, like `?username=toto&age=18`.
     std::string target;
+
+    /// For possible values of method checkout ziapi::http::method.
+    std::string method;
 
     std::map<std::string, std::string> fields;
 
