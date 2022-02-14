@@ -83,7 +83,7 @@ auto obj = Node::MakeDict({
 // You can also give the helper methods a vector representing your array or dictionnary
 // The helper functions will automatically transform your contained Nodes into shared_ptr   
 
-std::vector<std::pair<std::string, Node>> dictionnary_vector;
+std::unordered_map<std::string, Node> dictionnary_vector;
 // ... Fill the dictionnary vector
 Node dictionnary_node = Node::MakeDict(dictionnary_vector)
 

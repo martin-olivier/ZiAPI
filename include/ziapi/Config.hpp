@@ -74,7 +74,7 @@ public:
     }
 
     /// Constructs a Dict node from a vector, it instantiates an std::shared_ptr for each value
-    static Node MakeDict(const std::vector<std::pair<std::string, Node>> &values)
+    static Node MakeDict(const std::unordered_map<std::string, Node> &values)
     {
         Dict dict;
 

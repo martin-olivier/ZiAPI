@@ -83,7 +83,7 @@ TEST(Config, VectorConstructArray)
 
 TEST(Config, VectorConstructDict)
 {
-    std::vector<std::pair<std::string, Node>> vec{{"ten", 10}, {"string", "value"}, {"float", 1.f}, {"null", nullptr}};
+    std::unordered_map<std::string, Node> vec{{"ten", 10}, {"string", "value"}, {"float", 1.f}, {"null", nullptr}};
     Node n = Node::MakeDict(vec);
 
     ASSERT_EQ(n["ten"].AsInt(), 10);
