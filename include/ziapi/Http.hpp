@@ -25,7 +25,7 @@ struct Request {
     /// For possible values of method checkout ziapi::http::method.
     std::string method;
 
-    std::map<std::string, std::string> fields;
+    std::map<std::string, std::string> header;
 
     std::string body;
 };
