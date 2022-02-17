@@ -21,10 +21,10 @@ TEST(Compressor, compressionRate)
         ziapi::http::Version::kV1_1,                             // Version
         ziapi::http::Code::kOK,                                  // Status code
         std::string("OK"),                                       // reason
-        std::map<std::string, std::string>({}),                  // fields
+        std::map<std::string, std::string>({}),                  // headers
         std::string("not compressed stuff blabla omg so long"),  // body
     };
-    res.fields.insert(std::make_pair<std::string, std::string>("Content-Type", "application/json"));
+    res.headers.insert(std::make_pair<std::string, std::string>("Content-Type", "application/json"));
 
     if (compressor.ShouldPostProcess(ctx, res)) {
         compressor.PostProcess(ctx, res);

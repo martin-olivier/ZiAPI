@@ -31,7 +31,7 @@ public:
     [[nodiscard]] bool ShouldPreProcess(const ziapi::http::Context &, const ziapi::http::Request &req) const override
     {
         // Only use if compressed header is set
-        return req.fields.at("compressed") == std::string("true");
+        return req.headers.at("compressed") == std::string("true");
     }
 
 private:

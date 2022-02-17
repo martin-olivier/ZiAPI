@@ -21,11 +21,11 @@ TEST(Decompressor, Decompression)
         ziapi::http::Version::kV1_1,             // version
         ziapi::http::method::kPost,              // method
         "/zipper",                               // target
-        std::map<std::string, std::string>({}),  // fields
+        std::map<std::string, std::string>({}),  // hedears
         std::string("0101010110101"),            // body
     };
 
-    req.fields.insert(std::make_pair<std::string, std::string>("compressed", "true"));
+    req.headers.insert(std::make_pair<std::string, std::string>("compressed", "true"));
 
     if (decompressor.ShouldPreProcess(ctx, req)) {
         decompressor.PreProcess(ctx, req);

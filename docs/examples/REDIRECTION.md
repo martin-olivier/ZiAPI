@@ -16,7 +16,7 @@ We'll then get the following response:
 ```
 HTTP/1.1 301 Moved Permanently
 Location: www.google.com
-``` 
+```
 
 ## Tutorial
 
@@ -37,9 +37,9 @@ public:
 
     [[nodiscard]] const char *GetDescription() const noexcept { return "Redirects the request to another location."; }
 
-    [[nodiscard]] double GetHandlerPriority() const noexcept { 
+    [[nodiscard]] double GetHandlerPriority() const noexcept {
         // Directions should be treated in priority
-        return 0.9; 
+        return 0.9;
     }
 
     void Handle(ziapi::http::Context &ctx, const ziapi::http::Request &req, ziapi::http::Response &res) override {}
@@ -81,7 +81,7 @@ Let's now implement the `Handle()` method. We simply redirect each request to th
 
 void Handle(http::Context &, const http::Request &, http::Response &res)
 {
-    res.fields[ziapi::http::header::kLocation] = redirection_route_;
+    res.headers[ziapi::http::header::kLocation] = redirection_route_;
     res.status_code = ziapi::http::code::kMovedPermanently;
 }
 

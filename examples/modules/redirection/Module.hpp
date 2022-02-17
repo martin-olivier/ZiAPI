@@ -18,7 +18,7 @@ public:
     {
         /// Now we just say that the resource was moved permenatly and we indicate the new
         /// location with the redirection route.
-        res.fields[ziapi::http::header::kLocation] = redirection_route_;
+        res.headers[ziapi::http::header::kLocation] = redirection_route_;
         res.status_code = ziapi::http::Code::kMovedPermanently;
     }
 

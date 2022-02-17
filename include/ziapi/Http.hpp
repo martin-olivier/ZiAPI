@@ -43,7 +43,7 @@ struct Response {
     /// For possible values of version checkout ziapi::http::reason.
     std::string reason;
 
-    std::map<std::string, std::string> fields;
+    std::map<std::string, std::string> headers;
 
     std::string body;
 
