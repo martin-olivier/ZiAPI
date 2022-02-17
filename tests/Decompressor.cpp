@@ -9,8 +9,8 @@ TEST(Decompressor, UtilsInfo)
     ASSERT_EQ(std::string(decompressor.GetName()), std::string("DecompressorModule"));
     ASSERT_EQ(std::string(decompressor.GetDescription()),
               std::string("Decompress the response body before sending it to the module pipeline"));
-    ASSERT_EQ(decompressor.GetCompatibleApiVersion(), (ziapi::Version{3, 0, 0}));
-    ASSERT_EQ(decompressor.GetVersion(), (ziapi::Version{3, 0, 0}));
+    ASSERT_EQ(decompressor.GetCompatibleApiVersion(), (ziapi::Version{3, 1, 0}));
+    ASSERT_EQ(decompressor.GetVersion(), (ziapi::Version{3, 1, 0}));
 }
 
 TEST(Decompressor, Decompression)

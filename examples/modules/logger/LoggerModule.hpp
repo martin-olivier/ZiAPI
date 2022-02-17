@@ -8,9 +8,9 @@ class LoggerModule : virtual public ziapi::IPreProcessorModule, public ziapi::IP
 public:
     void Init(const ziapi::config::Node &config) {}
 
-    [[nodiscard]] ziapi::Version GetVersion() const noexcept override { return {3, 0, 0}; }
+    [[nodiscard]] ziapi::Version GetVersion() const noexcept override { return {3, 1, 0}; }
 
-    [[nodiscard]] ziapi::Version GetCompatibleApiVersion() const noexcept override { return {3, 0, 0}; }
+    [[nodiscard]] ziapi::Version GetCompatibleApiVersion() const noexcept override { return {3, 1, 0}; }
 
     [[nodiscard]] const char *GetName() const noexcept override { return "LoggerModule"; }
 
