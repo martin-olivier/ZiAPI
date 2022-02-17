@@ -78,13 +78,13 @@ public:
     bool AsBool() const { return std::get<bool>(*this); }
 
     /// Casts the variant as a Dict. Will throw if actual type differs.
-    Dict AsDict() const { return std::get<Dict>(*this); }
+    const Dict &AsDict() const { return std::get<Dict>(*this); }
 
     /// Casts the variant as a String. Will throw if actual type differs.
-    String AsString() const { return std::get<String>(*this); }
+    const String &AsString() const { return std::get<String>(*this); }
 
     /// Casts the variant as a Array. Will throw if actual type differs.
-    Array AsArray() const { return std::get<Array>(*this); }
+    const Array &AsArray() const { return std::get<Array>(*this); }
 
     /// Casts the variant as a int. Will throw if actual type differs.
     int AsInt() const { return std::get<int>(*this); }
