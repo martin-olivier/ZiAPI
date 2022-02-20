@@ -34,9 +34,9 @@ public:
         return 0.9f;
     }
 
-    [[nodiscard]] ziapi::Version GetVersion() const noexcept { return {3, 0, 0}; }
+    [[nodiscard]] ziapi::Version GetVersion() const noexcept { return {3, 1, 0}; }
 
-    [[nodiscard]] ziapi::Version GetCompatibleApiVersion() const noexcept { return {3, 0, 0}; }
+    [[nodiscard]] ziapi::Version GetCompatibleApiVersion() const noexcept { return {3, 1, 0}; }
 
     [[nodiscard]] const char *GetName() const noexcept { return "Redirection Module"; }
 

@@ -71,6 +71,8 @@ public:
     [[nodiscard]] virtual std::optional<std::pair<Response, Context>> Pop() = 0;
 
     [[nodiscard]] virtual std::size_t Size() const noexcept = 0;
+
+    virtual void Wait() noexcept = 0;
 };
 
 /**
