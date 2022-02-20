@@ -40,7 +40,7 @@ struct Node : public NodeVariant {
 public:
     using NodeVariant::NodeVariant;
 
-    /// Simpler way to construct a node from a Array, it instantiate std::shared_ptr by itself
+    /// Simpler way to construct an Array node, it instantiates an std::shared_ptr for each value
     static Node MakeArray(const std::initializer_list<Node> &values)
     {
         Array arr;
@@ -51,13 +51,35 @@ public:
         return arr;
     }
 
-    /// Simpler way to construct a node from a Dict, it instantiate std::shared_ptr by itself
+    /// Constructs an Array node from a vector, it instantiates an std::shared_ptr for each value
+    static Node MakeArray(const std::vector<Node> &values)
+    {
+        Array arr;
+
+        for (auto &value : values) {
+            arr.push_back(std::make_shared<Node>(value));
+        }
+        return arr;
+    }
+
+    /// Simpler way to construct a Dict node, it instantiates an std::shared_ptr for each value
     static Node MakeDict(const std::initializer_list<std::pair<std::string, Node>> &values)
     {
         Dict dict;
 
         for (auto &value : values) {
             dict[value.first] = std::make_shared<Node>(value.second);
+        }
+        return dict;
+    }
+
+    /// Constructs a Dict node from a vector, it instantiates an std::shared_ptr for each value
+    static Node MakeDict(const std::unordered_map<std::string, Node> &values)
+    {
+        Dict dict;
+
+        for (auto &[key, value] : values) {
+            dict[key] = std::make_shared<Node>(value);
         }
         return dict;
     }

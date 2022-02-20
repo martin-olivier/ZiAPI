@@ -70,3 +70,24 @@ TEST(Config, OperatorBool)
     ASSERT_EQ(null.operator bool(), false);
     ASSERT_EQ(string.operator bool(), true);
 }
+
+TEST(Config, VectorConstructArray)
+{
+    std::vector<Node> vec{10, "value", 1.f};
+    Node n = Node::MakeArray(vec);
+
+    ASSERT_EQ(n[(std::size_t)0].AsInt(), 10);
+    ASSERT_EQ(n[1].AsString(), "value");
+    ASSERT_EQ(n[2].AsDouble(), 1.f);
+}
+
+TEST(Config, VectorConstructDict)
+{
+    std::unordered_map<std::string, Node> vec{{"ten", 10}, {"string", "value"}, {"float", 1.f}, {"null", nullptr}};
+    Node n = Node::MakeDict(vec);
+
+    ASSERT_EQ(n["ten"].AsInt(), 10);
+    ASSERT_EQ(n["string"].AsString(), "value");
+    ASSERT_EQ(n["float"].AsDouble(), 1.f);
+    ASSERT_EQ(n["null"].IsNull(), true);
+}
