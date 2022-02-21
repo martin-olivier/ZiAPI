@@ -99,6 +99,7 @@ constexpr auto kVary = "Vary";
 constexpr auto kWarning = "Warning";
 constexpr auto kWWWAuthenticate = "WWW-Authenticate";
 constexpr auto kXFrameOptions = "X-Frame-Options";
+constexpr auto kKeepAlive= "Keep-Alive";
 
 }  // namespace header
 
