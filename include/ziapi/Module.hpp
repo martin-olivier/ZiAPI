@@ -74,7 +74,8 @@ public:
     /**
      *  Whether this module's PostProcess should be called on the response
      */
-    [[nodiscard]] virtual bool ShouldPostProcess(const http::Context &ctx, const http::Response &res) const = 0;
+    [[nodiscard]] virtual bool ShouldPostProcess(const http::Context &ctx, const http::Request &req,
+                                                 const http::Response &res) const = 0;
 };
 
 /**

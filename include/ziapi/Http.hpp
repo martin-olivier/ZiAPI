@@ -72,6 +72,8 @@ public:
 
     [[nodiscard]] virtual std::size_t Size() const noexcept = 0;
 
+    // Wait is used to wait until something is available in the queue and return once that's the case.
+    // It is a blocking call
     virtual void Wait() noexcept = 0;
 };
 

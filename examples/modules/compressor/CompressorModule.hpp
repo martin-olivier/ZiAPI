@@ -26,7 +26,8 @@ public:
         return 1.0f;
     }
 
-    [[nodiscard]] bool ShouldPostProcess(const ziapi::http::Context &, const ziapi::http::Response &) const override
+    [[nodiscard]] bool ShouldPostProcess(const ziapi::http::Context &, const ziapi::http::Request &,
+                                         const ziapi::http::Response &) const override
     {
         // Compressor will always be used as it's always useful
         return true;

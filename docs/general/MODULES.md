@@ -84,7 +84,7 @@ The `GetPostProcessorPriority()` method returns the priority of the module betwe
 The `ShouldPostProcess()` method returns `true` if this module's PostProcess should be called on the response. For example you can choose that your module will only post-process responses with a status code over `399` to log them to the console!
 
 ```c++
-[[nodiscard]] virtual bool ShouldPostProcess(const http::Context &ctx, const http::Response &res) const = 0;
+[[nodiscard]] virtual bool ShouldPostProcess(const http::Context &ctx, const http::Request &req, const http::Response &res) const = 0;
 ```
 
 ## `IHandlerModule`

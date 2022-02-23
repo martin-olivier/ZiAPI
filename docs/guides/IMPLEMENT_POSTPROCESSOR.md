@@ -13,7 +13,7 @@ public:
 
     [[nodiscard]] virtual double GetPostProcessorPriority() const noexcept = 0;
 
-    [[nodiscard]] virtual bool ShouldPostProcess(const http::Context &ctx, const http::Response &res) const = 0;
+    [[nodiscard]] virtual bool ShouldPostProcess(const http::Context &ctx, const http::Request &req, const http::Response &res) const = 0;
 };
 ```
 
@@ -34,7 +34,7 @@ public:
 
     [[nodiscard]] double GetPostProcessorPriority() const noexcept override;
 
-    [[nodiscard]] bool ShouldPostProcess(const http::Context &ctx, const http::Response &res) const override;
+    [[nodiscard]] bool ShouldPostProcess(const http::Context &ctx, const http::Request &req, const http::Response &res) const override;
 };
 ```
 
@@ -50,7 +50,7 @@ Then, let's implement the `GetPostProcessorPriority()`. Our module doesn't have 
 Then, let's implement the `ShouldPostProcess()`. This method is invoked to know if our post-processor should be called for a specific request. We can return `true` if we want all requests to go through this post-processor but let's just say our post-processor only handles `status code` inferior to 400 for the sake of the example.
 
 ```c++
-[[nodiscard]] bool ShouldPostProcess(const http::Context &ctx, const http::Response &res) const
+[[nodiscard]] bool ShouldPostProcess(const http::Context &ctx, const http::Request &req, const http::Response &res) const
 {
     return res.status_code < 400;
 }
