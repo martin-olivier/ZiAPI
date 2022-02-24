@@ -43,7 +43,7 @@ public:
 
     [[nodiscard]] double GetPostProcessorPriority() const noexcept override { return 1; }
 
-    [[nodiscard]] bool ShouldPostProcess(const ziapi::http::Context &ctx, const ziapi::http::Response &res) const override
+    [[nodiscard]] bool ShouldPostProcess(const ziapi::http::Context &ctx, const ziapi::http::Request &req, const ziapi::http::Response &res) const override
     {
         return true;
     }

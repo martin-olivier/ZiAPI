@@ -16,7 +16,8 @@ TEST(Compressor, UtilsInfo)
 TEST(Compressor, compressionRate)
 {
     CompressorModule compressor;
-    ziapi::http::Context ctx;
+    ziapi::http::Context ctx{};
+    ziapi::http::Request req{};
     ziapi::http::Response res = {
         ziapi::http::Version::kV1_1,                             // Version
         ziapi::http::Code::kOK,                                  // Status code
@@ -26,7 +27,7 @@ TEST(Compressor, compressionRate)
     };
     res.headers.insert(std::make_pair<std::string, std::string>("Content-Type", "application/json"));
 
-    if (compressor.ShouldPostProcess(ctx, res)) {
+    if (compressor.ShouldPostProcess(ctx, req, res)) {
         compressor.PostProcess(ctx, res);
     }
     ASSERT_EQ(res.body, "not compressed stuf");
