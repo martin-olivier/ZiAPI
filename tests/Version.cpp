@@ -81,7 +81,7 @@ TEST(Version, greater_or_equal)
 
     ASSERT_TRUE(a >= b);
 
-    a = ziapi::Version{3, 1, 0};
+    a = ziapi::Version{4, 0, 0};
     b = ziapi::Version{1, 4, 0};
 
     ASSERT_TRUE(a >= b);
@@ -100,7 +100,7 @@ TEST(Version, less_or_equal)
     ASSERT_TRUE(a <= b);
 
     a = ziapi::Version{1, 1, 2};
-    b = ziapi::Version{3, 1, 0};
+    b = ziapi::Version{4, 0, 0};
 
     ASSERT_TRUE(a <= b);
 

@@ -9,8 +9,8 @@ TEST(Compressor, UtilsInfo)
     ASSERT_EQ(std::string(compressor.GetName()), std::string("CompressorModule"));
     ASSERT_EQ(std::string(compressor.GetDescription()),
               std::string("Compress the response body before sending it back to the network"));
-    ASSERT_EQ(compressor.GetCompatibleApiVersion(), (ziapi::Version{3, 1, 0}));
-    ASSERT_EQ(compressor.GetVersion(), (ziapi::Version{3, 1, 0}));
+    ASSERT_EQ(compressor.GetCompatibleApiVersion(), (ziapi::Version{4, 0, 0}));
+    ASSERT_EQ(compressor.GetVersion(), (ziapi::Version{4, 0, 0}));
 }
 
 TEST(Compressor, compressionRate)

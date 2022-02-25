@@ -29,9 +29,9 @@ class PhpCgiModule : public ziapi::IHandlerModule {
 public:
     void Init(const ziapi::config::Node &cfg) override {}
 
-    [[nodiscard]] Version GetVersion() const noexcept { return {3, 1, 0}; }
+    [[nodiscard]] Version GetVersion() const noexcept { return {4, 0, 0}; }
 
-    [[nodiscard]] Version GetCompatibleApiVersion() const noexcept { return {3, 1, 0}; }
+    [[nodiscard]] Version GetCompatibleApiVersion() const noexcept { return {4, 0, 0}; }
 
     [[nodiscard]] const char *GetName() const noexcept { return "Redirection Module"; }
 
