@@ -66,9 +66,11 @@ using Context = std::unordered_map<std::string, std::any>;
  */
 class IResponseInputQueue {
 public:
+    using ValueType = std::pair<Response, Context>;
+
     virtual ~IResponseInputQueue() = default;
 
-    [[nodiscard]] virtual std::optional<std::pair<Response, Context>> Pop() = 0;
+    [[nodiscard]] virtual std::optional<ValueType> Pop() = 0;
 
     [[nodiscard]] virtual std::size_t Size() const noexcept = 0;
 
@@ -82,9 +84,11 @@ public:
  */
 class IRequestOutputQueue {
 public:
+    using ValueType = std::pair<Request, Context>;
+
     virtual ~IRequestOutputQueue() = default;
 
-    virtual void Push(std::pair<Request, Context> &&req) = 0;
+    virtual void Push(ValueType &&req) = 0;
 
     [[nodiscard]] virtual std::size_t Size() const noexcept = 0;
 };
