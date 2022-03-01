@@ -72,7 +72,7 @@ The `ShouldPreProcess()` method returns `true` if this module's PreProcess metho
 The `PostProcess()` is the method invoked on a response after the handler is called. You can use post-processors to modify the response after it is generated (serializing the body, logging the response, etc...).
 
 ```c++
-virtual void PostProcess(http::Context &ctx, http::Response &res) = 0;
+virtual void PostProcess(http::Context &ctx, const http::Request &, http::Response &res) = 0;
 ```
 
 The `GetPostProcessorPriority()` method returns the priority of the module between zero and one. Post-processors with a higher priority are executed first!

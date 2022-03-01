@@ -66,6 +66,7 @@ Then, first thing we want is to store the timestamp when the request is received
 void PreProcess(ziapi::http::Context &ctx, ziapi::http::Request &req) override
 {
     ctx["timestamp"] = std::time(nullptr);
+    // This example is deprecated. The `PostProcess` method has access to the request since version 5.0.0.
     ctx["target"] = req.target;
     ctx["method"] = req.method;
 }
@@ -76,7 +77,7 @@ And now in the post-process we can just simply access our variables and use them
 ```cpp
 ...
 
-void PostProcess(ziapi::http::Context &ctx, ziapi::http::Response &res) override
+void PostProcess(ziapi::http::Context &ctx, const ziapi::http::Request &, ziapi::http::Response &res) override
 {
     std::stringstream ss;
 

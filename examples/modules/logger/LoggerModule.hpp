@@ -34,7 +34,7 @@ public:
         return true;
     }
 
-    void PostProcess(ziapi::http::Context &ctx, ziapi::http::Response &res) override
+    void PostProcess(ziapi::http::Context &ctx, const ziapi::http::Request &, ziapi::http::Response &res) override
     {
         std::stringstream ss;
 
@@ -54,6 +54,8 @@ public:
     void PreProcess(ziapi::http::Context &ctx, ziapi::http::Request &req) override
     {
         ctx["timestamp"] = std::time(nullptr);
+        /// This example is deprecrated. Storing the target and method is useless because the `PostProcess` method now
+        /// has access to the request object.
         ctx["target"] = req.target;
         ctx["method"] = req.method;
     }
