@@ -18,7 +18,10 @@ public:
         return "Compress the response body before sending it back to the network";
     }
 
-    void PostProcess(ziapi::http::Context &, ziapi::http::Response &res) override { res.body = CompressBody(res.body); }
+    void PostProcess(ziapi::http::Context &, const ziapi::http::Request &, ziapi::http::Response &res) override
+    {
+        res.body = CompressBody(res.body);
+    }
 
     [[nodiscard]] double GetPostProcessorPriority() const noexcept override
     {

@@ -63,7 +63,7 @@ public:
     /**
      *  Handler invoked during the post-processing pipeline after the handler.
      */
-    virtual void PostProcess(http::Context &ctx, http::Response &res) = 0;
+    virtual void PostProcess(http::Context &ctx, const http::Request &req, http::Response &res) = 0;
 
     /**
      *  Value between zero and one which states the module's priority of
