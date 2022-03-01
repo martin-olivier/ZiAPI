@@ -5,7 +5,7 @@
 #include "dylib/dylib.hpp"
 #include "ziapi/Logger.hpp"
 
-TEST(Module, example)
+TEST(Module, Example)
 {
     try {
         dylib lib("./module", dylib::extension);

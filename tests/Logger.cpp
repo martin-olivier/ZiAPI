@@ -27,7 +27,7 @@ public:
     }
 };
 
-TEST(Logger, info)
+TEST(Logger, Info)
 {
     OSRedirector os(std::cout);
 
@@ -37,7 +37,7 @@ TEST(Logger, info)
                 std::string::npos);
 }
 
-TEST(Logger, warning)
+TEST(Logger, Warning)
 {
     OSRedirector os(std::cout);
 
@@ -47,7 +47,7 @@ TEST(Logger, warning)
                 std::string::npos);
 }
 
-TEST(Logger, error)
+TEST(Logger, Error)
 {
     OSRedirector os(std::cerr);
 
@@ -57,7 +57,7 @@ TEST(Logger, error)
                 std::string::npos);
 }
 
-TEST(Logger, debug)
+TEST(Logger, Debug)
 {
     OSRedirector os(std::cout);
 
@@ -67,7 +67,7 @@ TEST(Logger, debug)
                 std::string::npos);
 }
 
-TEST(Logger, variadic)
+TEST(Logger, Variadic)
 {
     OSRedirector os(std::cout);
 

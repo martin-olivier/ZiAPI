@@ -28,7 +28,7 @@ TEST(Compressor, compressionRate)
     res.headers.insert(std::make_pair<std::string, std::string>("Content-Type", "application/json"));
 
     if (compressor.ShouldPostProcess(ctx, req, res)) {
-        compressor.PostProcess(ctx, res);
+        compressor.PostProcess(ctx, req, res);
     }
     ASSERT_EQ(res.body, "not compressed stuf");
 }

@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-TEST(Version, equal)
+TEST(Version, Equal)
 {
     ziapi::Version a{1, 0, 3};
     ziapi::Version b{1, 0, 3};
@@ -20,7 +20,7 @@ TEST(Version, equal)
     ASSERT_FALSE(a == b);
 }
 
-TEST(Version, not_equal)
+TEST(Version, NotEqual)
 {
     ziapi::Version a{1, 0, 0};
     ziapi::Version b{1, 0, 0};
@@ -38,7 +38,7 @@ TEST(Version, not_equal)
     ASSERT_TRUE(a != b);
 }
 
-TEST(Version, greater)
+TEST(Version, Greater)
 {
     ziapi::Version a{1, 0, 3};
     ziapi::Version b{1, 0, 3};
@@ -56,7 +56,7 @@ TEST(Version, greater)
     ASSERT_FALSE(a > b);
 }
 
-TEST(Version, less)
+TEST(Version, Less)
 {
     ziapi::Version a{1, 0, 1};
     ziapi::Version b{1, 0, 0};
@@ -74,7 +74,7 @@ TEST(Version, less)
     ASSERT_FALSE(a < b);
 }
 
-TEST(Version, greater_or_equal)
+TEST(Version, GreaterOrEqual)
 {
     ziapi::Version a{1, 0, 0};
     ziapi::Version b{1, 0, 0};
@@ -92,7 +92,7 @@ TEST(Version, greater_or_equal)
     ASSERT_FALSE(a >= b);
 }
 
-TEST(Version, less_or_equal)
+TEST(Version, LessOrEqual)
 {
     ziapi::Version a{1, 0, 0};
     ziapi::Version b{1, 0, 0};
