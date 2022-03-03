@@ -218,7 +218,7 @@ The `Dict` data type represents a dictionary of values. So the following JSON:
 
 ```json
 {
-    "age": 19,
+    "age": 20,
     "first_name": "Charlie",
     "last_name": "Chou",
     "is_sexy": true
@@ -229,7 +229,7 @@ Would translate to
 
 ```cpp
 ziapi::config::Dict dict({
-    {"age", std::make_shared<ziapi::config::Node>(19)},
+    {"age", std::make_shared<ziapi::config::Node>(20)},
     {"first_name", std::make_shared<ziapi::config::Node>("Charlie")},
     {"last_name", std::make_shared<ziapi::config::Node>("Chou")},
     {"is_sexy", std::make_shared<ziapi::config::Node>(true)}
@@ -242,7 +242,7 @@ Which is equivalent to
 
 ```c++
 auto node_dict = ziapi::config::Node::MakeDict({
-    {"age", 19},
+    {"age", 20},
     {"first_name", "Charlie"},
     {"last_name", "Chou"},
     {"is_sexy", true},
