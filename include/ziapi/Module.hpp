@@ -29,7 +29,7 @@ public:
  *  the contents of the response such as a directory listing module, a web
  *  server module, etc...
  */
-class IHandlerModule : public IModule {
+class IHandlerModule : virtual public IModule {
 public:
     virtual ~IHandlerModule() = default;
 
