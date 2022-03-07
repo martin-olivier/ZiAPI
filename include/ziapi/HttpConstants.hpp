@@ -99,7 +99,7 @@ constexpr auto kVary = "Vary";
 constexpr auto kWarning = "Warning";
 constexpr auto kWWWAuthenticate = "WWW-Authenticate";
 constexpr auto kXFrameOptions = "X-Frame-Options";
-constexpr auto kKeepAlive= "Keep-Alive";
+constexpr auto kKeepAlive = "Keep-Alive";
 
 }  // namespace header
 
@@ -129,8 +129,8 @@ constexpr auto kNotFound = "Not Found";
 constexpr auto kMethodNotAllowed = "Method Not Allowed";
 constexpr auto kNotAcceptable = "Not Acceptable";
 constexpr auto kProxyAuthenticationRequired = "Proxy Authentication Required";
-constexpr auto kRequesTtimOut = "Request Time-out";
-constexpr auto kConflicT = " Conflict";
+constexpr auto kRequestTimeOut = "Request Time-out";
+constexpr auto kConflict = " Conflict";
 constexpr auto kGone = "Gone";
 constexpr auto kLengthRequired = " Length Required";
 constexpr auto kPreconditionFailed = " Precondition Failed";
